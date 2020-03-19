@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author maxbu
+ * @author maxime.bulabois
  */
 public class FenetreGraphique extends JFrame{
 

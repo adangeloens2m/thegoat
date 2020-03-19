@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  */
 
 public class Jeu {
-    
+   
     private static int TILE_WIDTH = 32;
     private static int TILE_HEIGHT = 32;
 
