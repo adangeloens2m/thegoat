@@ -27,26 +27,11 @@ public class FenetreDeJeu {
     private static int longueurChamp = 30;
     private static int largeurChamp = 15;
     
-    private Jeu jeu;
-    private Timer timer;
-
+    private static GOAT uneGoat = new GOAT(5,5);
+    
     /**
      * @param args the command line arguments
      */
-    
-    
-    public FenetreDeJeu() {
-        this.jeu = new Jeu();
-        this.timer = new Timer(40, (ActionListener) this);
-        this.timer.start();
-    }
-    
-        //@Override
-    public void actionPerformed(ActionEvent e) {
-        this.jeu.miseAJour();
-        //this.jeu.rendu(contexteBuffer);
-    }
-    
     
     public static void main(String[] args) throws IOException {
 
@@ -81,7 +66,7 @@ public class FenetreDeJeu {
                 BufferedImage tile = tileSet.getSubimage(tileX, tileY, TILE_WIDTH, TILE_HEIGHT);
 
                 contexte.drawImage(tile, xFenetreG, yFenetreG, null);
-   
+                uneGoat.rendu(contexte);
                 }
         
             //fenetre.actualiser();
