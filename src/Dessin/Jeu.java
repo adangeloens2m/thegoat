@@ -43,12 +43,12 @@ public class Jeu {
                 }
             }
         }
-       mat[1][1]=35;
+        mat[1][1]=35;
       
         int xFenetreG = 0;
         int yFenetreG = 0;
         
-        FenetreGraphique fenetre = new FenetreGraphique("TheGoat", 40 * TILE_WIDTH, 20 * TILE_HEIGHT);
+        FenetreGraphique fenetre = new FenetreGraphique("TheGoat", (longueurChamp + 5) * TILE_WIDTH, (largeurChamp + 5) * TILE_HEIGHT);
         Graphics2D contexte = fenetre.getGraphics2D();
         
         for(int i = 0; i<largeurChamp; i++){
