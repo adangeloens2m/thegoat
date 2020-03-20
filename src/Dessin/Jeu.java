@@ -40,6 +40,7 @@ public class Jeu {
                 }
             }
         }
+       mat[10][10]=35;
       
         int xFenetreG = 0;
         int yFenetreG = 0;
