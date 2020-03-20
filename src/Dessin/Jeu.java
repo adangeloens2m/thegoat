@@ -20,6 +20,9 @@ public class Jeu {
 
     private static int TILES_PER_ROW = 20;
     private static int TILES_PER_COL = 20;
+    
+    private static int longueurChamp = 30;
+    private static int largeurChamp = 15;
 
     /**
      * @param args the command line arguments
@@ -29,7 +32,7 @@ public class Jeu {
 
         BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
 
-        int [][] mat = new int [19][90];
+        int [][] mat = new int [largeurChamp][longueurChamp];
         for (int i = 0 ; i<mat.length ; i++){
             for (int j = 0 ; j<mat[i].length ; j++) {
                 if(i==1){
@@ -40,16 +43,16 @@ public class Jeu {
                 }
             }
         }
-       mat[10][10]=35;
+       mat[1][1]=35;
       
         int xFenetreG = 0;
         int yFenetreG = 0;
         
-        FenetreGraphique fenetre = new FenetreGraphique("TheGoat", 100 * TILE_WIDTH, 20 * TILE_HEIGHT);
+        FenetreGraphique fenetre = new FenetreGraphique("TheGoat", 40 * TILE_WIDTH, 20 * TILE_HEIGHT);
         Graphics2D contexte = fenetre.getGraphics2D();
         
-        for(int i = 0; i<19; i++){
-            for(int j = 0; j<90 ; j++){
+        for(int i = 0; i<largeurChamp; i++){
+            for(int j = 0; j<longueurChamp ; j++){
                 xFenetreG = (j)*TILE_WIDTH;
                 yFenetreG = (i)*TILE_HEIGHT;
                 int tileNumber = mat [i][j];
