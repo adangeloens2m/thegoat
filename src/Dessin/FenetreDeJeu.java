@@ -1,13 +1,15 @@
-package Dessin;
+package dessin;
 
 import FenetreGraphique.FenetreGraphique;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 /**
  *
@@ -26,10 +28,25 @@ public class FenetreDeJeu {
     private static int largeurChamp = 15;
     
     private Jeu jeu;
+    private Timer timer;
 
     /**
      * @param args the command line arguments
      */
+    
+    
+    public FenetreDeJeu() {
+        this.jeu = new Jeu();
+        this.timer = new Timer(40, (ActionListener) this);
+        this.timer.start();
+    }
+    
+        //@Override
+    public void actionPerformed(ActionEvent e) {
+        this.jeu.miseAJour();
+        //this.jeu.rendu(contexteBuffer);
+    }
+    
     
     public static void main(String[] args) throws IOException {
 
@@ -72,4 +89,5 @@ public class FenetreDeJeu {
             }
         }
 
-    }
+
+}

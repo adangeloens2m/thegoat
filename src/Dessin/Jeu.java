@@ -22,11 +22,6 @@ public class Jeu {
     private GOAT uneGoat;
 
     public Jeu() {
-        try {
-           this.jardin = ImageIO.read(getClass().getClassLoader().getResource("resources/jardin.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
-        }
         this.uneGoat = new GOAT(5,5);
     }
 
@@ -35,7 +30,6 @@ public class Jeu {
     }
 
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.jardin, 0, 0, null);
         this.uneGoat.rendu(contexte); 
     }
 
