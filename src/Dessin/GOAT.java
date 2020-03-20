@@ -1,3 +1,5 @@
+package Dessin;
+
 
 import Dessin.FenetreDeJeu;
 import java.awt.Graphics2D;
@@ -15,7 +17,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author maxbu
+ * @author maxime.bulabois
  */
 public class GOAT {
     private int ligne, colonne;
@@ -23,13 +25,18 @@ public class GOAT {
     
     public GOAT(int ligne, int colonne){
         try {
-            this.apparence = ImageIO.read(getClass().getClassLoader().getResource(".png"));
+            this.apparence = ImageIO.read(getClass().getClassLoader().getResource("Apparence.png"));
         } catch (IOException ex) {
             Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.ligne = 20*ligne;
         this.colonne = 20*colonne;
     }
+    
+    public void miseAJour() {
+        
+    }
+
     
     public void rendu(Graphics2D contexte) {
         contexte.drawImage(this.apparence, (int) ligne, (int) colonne, null);

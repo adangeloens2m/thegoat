@@ -46,7 +46,7 @@ public class FenetreDeJeu {
                 }
             }
         }
-        mat[1][1]=35;
+        //mat[1][1]=35;
       
         int xFenetreG = 0;
         int yFenetreG = 0;
