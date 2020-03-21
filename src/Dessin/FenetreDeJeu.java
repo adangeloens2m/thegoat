@@ -68,7 +68,7 @@ public class FenetreDeJeu {
                 contexte.drawOval( 32*10 , 32*5 , 32 , 32);
                 }
         
-            //fenetre.actualiser();
+            fenetre.actualiser();
             
             }
         }
