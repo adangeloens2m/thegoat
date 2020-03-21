@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class Chrono implements Runnable {
 
     //Temps de pause (ms) entre 2 boucles
-    private final int PAUSE = 3;
+    private final int PAUSE = 2;
 
     @Override
     public void run() {
