@@ -27,7 +27,6 @@ public class FenetreDeJeu {
     private static int longueurChamp = 30;
     private static int largeurChamp = 15;
     
-    //private static GOAT uneGoat = new GOAT(5,5);
     
     /**
      * @param args the command line arguments
@@ -48,7 +47,7 @@ public class FenetreDeJeu {
                 }
             }
         }
-        //mat[1][1]=35;
+        //mat[5][10]=35;
       
         int xFenetreG = 0;
         int yFenetreG = 0;
@@ -66,7 +65,7 @@ public class FenetreDeJeu {
                 BufferedImage tile = tileSet.getSubimage(tileX, tileY, TILE_WIDTH, TILE_HEIGHT);
 
                 contexte.drawImage(tile, xFenetreG, yFenetreG, null);
-                //uneGoat.rendu(contexte);
+                contexte.drawOval( 32*10 , 32*5 , 32 , 32);
                 }
         
             //fenetre.actualiser();

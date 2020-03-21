@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +19,7 @@ import javax.imageio.ImageIO;
  *
  * @author maxime.bulabois
  */
-public class GOAT {
+public class GOAT  extends JFrame {
     private int ligne, colonne;
     private BufferedImage apparence;
     
@@ -38,6 +39,6 @@ public class GOAT {
 
     
     public void rendu(Graphics2D contexte) {
-        contexte.drawImage(this.apparence, (int) ligne, (int) colonne, null);
+        contexte.drawOval((int) ligne, (int) colonne, 20 , 20);
     }
 }
