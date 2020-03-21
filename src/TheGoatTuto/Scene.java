@@ -51,23 +51,28 @@ public class Scene extends JPanel {
     }
 
     //Méthodes
-    public void deplacementx() {
-        xGoat = xGoat + dx;
-    }
-    
-    public void deplacementy() {
-        yGoat = yGoat + dy;
-    }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D) g;
         
         deplacementx();
+        System.out.println(xGoat + " " + yGoat);
         deplacementy();
 
         g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
+    }
+    
+    public void deplacementx() {
+        if(xGoat + dx < 600){
+            xGoat = xGoat + dx;
+        }
+    }
+    
+    public void deplacementy() {
+        if(yGoat + dy < 480){
+            yGoat = yGoat + dy;
+        }
     }
 
     //Getters

@@ -29,7 +29,6 @@ public class Main {
         
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);
-        
     }
     
 }
