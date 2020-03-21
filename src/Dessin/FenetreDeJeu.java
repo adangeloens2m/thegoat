@@ -35,7 +35,7 @@ public class FenetreDeJeu {
     public static void main(String[] args) throws IOException {
 
         BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
-
+        
         int [][] mat = new int [largeurChamp][longueurChamp];
         for (int i = 0 ; i<mat.length ; i++){
             for (int j = 0 ; j<mat[i].length ; j++) {
@@ -43,7 +43,7 @@ public class FenetreDeJeu {
                     mat[i][j] = 184;
                 }
                 else{
-                    mat[i][j] = 21;  
+                    mat[i][j] = 21;
                 }
             }
         }
