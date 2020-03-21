@@ -7,6 +7,7 @@ package piege;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ public class Piege {
         }
     }
     
-    public void AffichePiege (){
+    public void AffichePiege () throws IOException{
         BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
 
         int [][] mat = new int [19][90];
