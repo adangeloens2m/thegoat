@@ -16,36 +16,75 @@ import javax.swing.JPanel;
  * @author Arnaud
  */
 public class Scene extends JPanel {
-    
+
     private ImageIcon icoFond;
     private Image imgFond1;
-    
+
     private ImageIcon icoGoat;
     private Image imgGoat;
+
+    private int xGoat;
+    private int dx;
     
-    private int xFond1;
-    
+    private int yGoat;
+    private int dy;
+
     //Constructeur
-    public Scene(){
+    public Scene() {
         super();
-        
-        this.xFond1 = -50;
+
+        this.xGoat = 0;
+        this.yGoat = 0;
+        this.dx = 0;
+        this.dy = 0;
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
-        this.imgGoat = this.icoGoat.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        }
-    
+        this.imgGoat = this.icoGoat.getImage().getScaledInstance(94, 102, Image.SCALE_SMOOTH);
+        
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+        this.addKeyListener(new Clavier());
+
+        Thread chronoEcran = new Thread(new Chrono());
+        chronoEcran.start();
+    }
+
     //Méthodes
+    public void deplacementx() {
+        xGoat = xGoat + dx;
+    }
     
-    public void paintComponent(Graphics g){
-        
+    public void deplacementy() {
+        yGoat = yGoat + dy;
+    }
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics g2 =  (Graphics2D) g;
+        Graphics g2 = (Graphics2D) g;
         
-        g2.drawImage(imgFond1, xFond1, 0, null);
-        g2.drawImage(imgGoat, 0, 0, null);
-        
-        
+        deplacementx();
+        deplacementy();
+
+        g2.drawImage(imgFond1, 0, 0, null);
+        g2.drawImage(imgGoat, xGoat, yGoat, null);
+    }
+
+    //Getters
+    public int getDx() {
+        return dx;
+    }
+
+    public int getDy() {
+        return dy;
+    }
+    
+    //Setters
+    public void setDx(int dx) {
+        this.dx = dx;
+    }
+
+    public void setDy(int dy) {
+        this.dy = dy;
     }
 }
