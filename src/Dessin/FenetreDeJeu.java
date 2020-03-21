@@ -69,7 +69,7 @@ public class FenetreDeJeu {
                 }
         
             fenetre.actualiser();
-            
+             
             }
         }
 
