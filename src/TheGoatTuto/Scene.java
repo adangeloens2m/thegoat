@@ -25,9 +25,13 @@ public class Scene extends JPanel {
 
     private int xGoat;
     private int dx;
-    
+
     private int yGoat;
     private int dy;
+    
+    private int xPiege;
+    
+    private int yPiege;
 
     //Constructeur
     public Scene() {
@@ -40,8 +44,8 @@ public class Scene extends JPanel {
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
-        this.imgGoat = this.icoGoat.getImage().getScaledInstance(94, 102, Image.SCALE_SMOOTH);
-        
+        this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
+
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
@@ -54,24 +58,27 @@ public class Scene extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D) g;
-        
+
         deplacementx();
-        System.out.println(xGoat + " " + yGoat);
         deplacementy();
 
         g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
     }
-    
+
     public void deplacementx() {
-        if(xGoat + dx < 600){
-            xGoat = xGoat + dx;
+        if (dx == 1) {
+            xGoat = Math.min(xGoat + dx, Main.scene.getWidth() - imgGoat.getWidth(null));
+        } else if (dx == -1) {
+            xGoat = Math.max(xGoat + dx, 0);
         }
     }
-    
+
     public void deplacementy() {
-        if(yGoat + dy < 480){
-            yGoat = yGoat + dy;
+        if (dy == 1) {
+            yGoat = Math.min(yGoat + dy, Main.scene.getHeight() - imgGoat.getHeight(null));
+        } else if (dy == -1) {
+            yGoat = Math.max(yGoat + dy, 0);
         }
     }
 
@@ -83,7 +90,11 @@ public class Scene extends JPanel {
     public int getDy() {
         return dy;
     }
-    
+
+    public int getyPiege() {
+        return yPiege;
+    }
+
     //Setters
     public void setDx(int dx) {
         this.dx = dx;
@@ -91,5 +102,9 @@ public class Scene extends JPanel {
 
     public void setDy(int dy) {
         this.dy = dy;
+    }
+
+    public void setyPiege(int yPiege) {
+        this.yPiege = yPiege;
     }
 }
