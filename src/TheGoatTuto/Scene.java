@@ -44,8 +44,6 @@ public class Scene extends JPanel {
 
 //        this.xGoat = 0;
 //        this.yGoat = 0;
-//        this.dx = 0;
-//        this.dy = 0;
         this.xBombe = -100;
         this.yBombe = -100;
         
@@ -72,9 +70,6 @@ public class Scene extends JPanel {
 
         deplacementx();
         deplacementy();
-        
-
-        System.out.println(xBombe + " " + yBombe);
         
         g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);

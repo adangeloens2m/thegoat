@@ -23,6 +23,7 @@ public class Main {
         fenetre.setSize(600, 480);
         fenetre.setLocationRelativeTo(null);
         fenetre.setResizable(true);
+        fenetre.setAlwaysOnTop(true);
         
         //Instanciation Scene
         scene = new Scene ();
