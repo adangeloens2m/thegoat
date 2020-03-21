@@ -21,10 +21,12 @@ public class Jeu {
     private int largeurChamp = 15;
     
     private int mat[][];
+    private int coorX;
+    private int coorY;
     private int valeurTile;
 
-    public void setMat(int longueurChamp, int largeurChamp, int valeurTile) {
-        mat[longueurChamp][largeurChamp] = valeurTile;
+    public void setMat(int coorX, int coorY, int valeurTile) {
+        mat[coorX][coorY] = valeurTile;
     }
     
     
