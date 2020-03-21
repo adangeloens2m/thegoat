@@ -29,8 +29,8 @@ public class GOAT  extends JFrame {
         } catch (IOException ex) {
             Logger.getLogger(FenetreDeJeu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.ligne = 20*ligne;
-        this.colonne = 20*colonne;
+        this.ligne = 32*ligne;
+        this.colonne = 32*colonne;
     }
     
     public void miseAJour() {
