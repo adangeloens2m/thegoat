@@ -8,6 +8,8 @@ package TheGoatTuto;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -23,32 +25,41 @@ public class Scene extends JPanel {
     private ImageIcon icoGoat;
     private Image imgGoat;
 
+    private ImageIcon icoBombe;
+    private Image imgBombe;
+
     private int xGoat;
     private int dx;
 
     private int yGoat;
     private int dy;
-    
-    private int xPiege;
-    
-    private int yPiege;
+
+    private int xBombe;
+
+    private int yBombe;
 
     //Constructeur
     public Scene() {
         super();
 
-        this.xGoat = 0;
-        this.yGoat = 0;
-        this.dx = 0;
-        this.dy = 0;
+//        this.xGoat = 0;
+//        this.yGoat = 0;
+//        this.dx = 0;
+//        this.dy = 0;
+        this.xBombe = -100;
+        this.yBombe = -100;
+        
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
+        icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
+        this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
+        this.addMouseListener(new Souris());
 
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start();
@@ -61,9 +72,13 @@ public class Scene extends JPanel {
 
         deplacementx();
         deplacementy();
+        
 
+        System.out.println(xBombe + " " + yBombe);
+        
         g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
+        g2.drawImage(imgBombe, xBombe, yBombe, null);
     }
 
     public void deplacementx() {
@@ -91,8 +106,12 @@ public class Scene extends JPanel {
         return dy;
     }
 
-    public int getyPiege() {
-        return yPiege;
+    public int getxBombe() {
+        return xBombe;
+    }
+
+    public int getyBombe() {
+        return yBombe;
     }
 
     //Setters
@@ -104,7 +123,11 @@ public class Scene extends JPanel {
         this.dy = dy;
     }
 
-    public void setyPiege(int yPiege) {
-        this.yPiege = yPiege;
+    public void setxBombe(int xPiege) {
+        this.xBombe = xPiege;
+    }
+
+    public void setyBombe(int yPiege) {
+        this.yBombe = yPiege;
     }
 }
