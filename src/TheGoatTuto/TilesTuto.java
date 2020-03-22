@@ -32,8 +32,18 @@ public class TilesTuto {
         mat = new int[largeurChamp][longueurChamp];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
-                if (i == 0 || i == largeurChamp - 1) {
+                if (j == 0) {
+                    mat[i][j] = 191;
+                } else if (j == longueurChamp - 1){
+                    mat[i][j] = 69;
+                }else if (i == 0 || i == largeurChamp - 1) {
                     mat[i][j] = 184;
+                } else if (i == 10 && j == 28) {
+                    mat[i][j] = 180;
+                } else if (i == 8 && j == 15) {
+                    mat[i][j] = 100;
+                } else if (i == 3 && j == 26) {
+                    mat[i][j] = 121;
                 } else {
                     mat[i][j] = 21;
                 }
