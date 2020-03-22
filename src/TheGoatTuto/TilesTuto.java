@@ -20,14 +20,9 @@ import javax.imageio.ImageIO;
 
 
 public class TilesTuto {
-// private static int TILE_WIDTH = 32;
-//    private static int TILE_HEIGHT = 32;
-//
-//    private static int TILES_PER_ROW = 20;
-//    private static int TILES_PER_COL = 20;
-    
-    private static int longueurChamp = 30;
-    private static int largeurChamp = 15;
+
+    public int longueurChamp = 30;
+    public int largeurChamp = 15;
 
     private int TILE_WIDTH = 32;
     private int TILE_HEIGHT = 32;
@@ -38,11 +33,21 @@ public class TilesTuto {
     private int[][] map;
     private BufferedImage tileSheet;
 
-    public TilesTuto(int[][] existingMap) {
-        map = new int[existingMap.length][existingMap[0].length];
-        for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[y].length; x++) {
-                map[y][x] = existingMap[y][x];
+    public TilesTuto() {
+//        map = new int[existingMap.length][existingMap[0].length];
+//        for (int y = 0; y < map.length; y++) {
+//            for (int x = 0; x < map[y].length; x++) {
+//                map[y][x] = existingMap[y][x];
+//            }
+//        }
+        int[][] mat = new int[largeurChamp][longueurChamp];
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                if (i == 1) {
+                    mat[i][j] = 184;
+                } else {
+                    mat[i][j] = 21;
+                }
             }
         }
         try {

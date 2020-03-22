@@ -54,18 +54,18 @@ public class Scene extends JPanel {
         this.xBombe = -100;
         this.yBombe = -100;
         
-        int[][] mat = new int[15][30];
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[i].length; j++) {
-                if (i == 1) {
-                    mat[i][j] = 184;
-                } else {
-                    mat[i][j] = 21;
-                }
-            }
-        }
+//        int[][] mat = new int[layer.largeurChamp][layer.longueurChamp];
+//        for (int i = 0; i < mat.length; i++) {
+//            for (int j = 0; j < mat[i].length; j++) {
+//                if (i == 1) {
+//                    mat[i][j] = 184;
+//                } else {
+//                    mat[i][j] = 21;
+//                }
+//            }
+//        }
         
-        layer = new TilesTuto(mat);
+        layer = new TilesTuto();
 
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
