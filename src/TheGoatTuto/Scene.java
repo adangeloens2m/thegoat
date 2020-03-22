@@ -64,7 +64,7 @@ public class Scene extends JPanel {
 //                }
 //            }
 //        }
-        
+//        
         layer = new TilesTuto();
 
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
