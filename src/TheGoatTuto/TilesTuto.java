@@ -56,12 +56,12 @@ public class TilesTuto {
                 g.drawImage(tileSheet,
                         x * TILE_WIDTH,
                         y * TILE_HEIGHT,
-                        (x * TILE_WIDTH) * TILE_WIDTH +  TILE_WIDTH,
-                        (y * TILE_HEIGHT) * TILE_HEIGHT + TILE_HEIGHT,
+                        (x * TILE_WIDTH) +  TILE_WIDTH,
+                        (y * TILE_HEIGHT) + TILE_HEIGHT,
                         index * TILE_WIDTH,
                         yOffset * TILE_HEIGHT,
-                        (index * TILE_WIDTH) + index * TILE_WIDTH,
-                        (yOffset * TILE_HEIGHT) + yOffset * TILE_HEIGHT,
+                        (index * TILE_WIDTH) + TILE_WIDTH,
+                        (yOffset * TILE_HEIGHT) + TILE_HEIGHT,
                         null);
             }
         }
