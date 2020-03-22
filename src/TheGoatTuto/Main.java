@@ -5,6 +5,7 @@
  */
 package TheGoatTuto;
 
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class Main {
 
     public static Scene scene;
     
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
         //Fenetre du jeu
         JFrame fenetre = new JFrame("TheGoatTuto");

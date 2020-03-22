@@ -10,6 +10,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -37,15 +40,21 @@ public class Scene extends JPanel {
     private int xBombe;
 
     private int yBombe;
+    
+    private Tiles layer;
 
     //Constructeur
-    public Scene() {
+    public Scene(){
         super();
 
 //        this.xGoat = 0;
 //        this.yGoat = 0;
         this.xBombe = -100;
         this.yBombe = -100;
+        
+        layer = new Tiles(new int[][]{
+            {184,184,0,184,0,0,184,0,0}
+        });
         
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
@@ -71,11 +80,11 @@ public class Scene extends JPanel {
         deplacementx();
         deplacementy();
         
-        g2.drawImage(imgFond1, 0, 0, null);
+        layer.DrawLayer(g2);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
     }
-
+    
     public void deplacementx() {
         if (dx == 1) {
             xGoat = Math.min(xGoat + dx, Main.scene.getWidth() - imgGoat.getWidth(null));
