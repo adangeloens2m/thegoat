@@ -54,7 +54,9 @@ public class Scene extends JPanel {
         this.xBombe = -100;
         this.yBombe = -100;
         
-        layer = new TilesTuto(new int[][]{{21,21}});
+        layer = new TilesTuto(new int[][]{
+            {21,21,21}
+        });
 
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
