@@ -51,9 +51,9 @@ public class TilesTuto {
         }
 
         try {
-            tileSet = ImageIO.read(new File("tileSet.png"));
+            tileSet = ImageIO.read(getClass().getResource("/images/tileSet.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Tiles.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
