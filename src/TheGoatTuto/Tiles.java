@@ -31,6 +31,8 @@ public class Tiles {
     private int longueurChamp = 30;
     private int largeurChamp = 15;
     
+    private BufferedImage image;
+    
 //    public Graphics2D fondDeJeu() throws IOException {
 //
 //        BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
@@ -71,9 +73,8 @@ public class Tiles {
         public BufferedImage fondDeJeu() throws IOException {
 
         BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
-        
-        BufferedImage fondDeJeu = new BufferedImage ((longueurChamp + 5)*TILE_WIDTH, (largeurChamp + 5)*TILE_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
-        
+        BufferedImage fondDeJeu = this.image;
+                //new BufferedImage ((longueurChamp + 5)*TILE_WIDTH, (largeurChamp + 5)*TILE_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
         int[][] mat = new int[largeurChamp][longueurChamp];
 
         for (int i = 0; i < mat.length; i++) {
@@ -88,9 +89,6 @@ public class Tiles {
 
         int xImage = 0;
         int yImage = 0;
-
-        //FenetreGraphique fenetre = new FenetreGraphique("TheGoat", (longueurChamp + 5) * TILE_WIDTH, (largeurChamp + 5) * TILE_HEIGHT);
-        //Graphics2D contexte = fenetre.getGraphics2D();
 
         Graphics2D contexte = fondDeJeu.createGraphics();
         
