@@ -26,8 +26,7 @@ public class Scene extends JPanel {
     private ImageIcon icoFond;
     private Image imgFond1;
     
-    private Tiles tile;
-    private BufferedImage tileFond;
+    private TilesTuto layer;
 
     private ImageIcon icoGoat;
     private Image imgGoat;
@@ -54,6 +53,10 @@ public class Scene extends JPanel {
 //        this.yGoat = 0;
         this.xBombe = -100;
         this.yBombe = -100;
+        
+        layer = new TilesTuto(new int[][]{
+            {21,21}
+        });
 
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
         this.imgFond1 = this.icoFond.getImage();
@@ -61,8 +64,6 @@ public class Scene extends JPanel {
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-        
-        this.tileFond = tile.image;
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -81,7 +82,8 @@ public class Scene extends JPanel {
         deplacementx();
         deplacementy();
         
-        g2.drawImage(tileFond, 0, 0, null);
+        layer.DrawLayer(g2);
+//        g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
     }
