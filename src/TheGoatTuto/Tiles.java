@@ -70,7 +70,7 @@ public class Tiles {
 //        return contexte;
 //    }
     
-        public BufferedImage fondDeJeu(){
+        public BufferedImage fondDeJeu() throws IOException{
 
         BufferedImage tileSet = null;
         try {
