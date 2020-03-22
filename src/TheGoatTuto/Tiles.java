@@ -70,9 +70,14 @@ public class Tiles {
 //        return contexte;
 //    }
     
-        public BufferedImage fondDeJeu() throws IOException {
+        public BufferedImage fondDeJeu(){
 
-        BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
+        BufferedImage tileSet = null;
+        try {
+            tileSet = ImageIO.read(new File("tileSet.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(Tiles.class.getName()).log(Level.SEVERE, null, ex);
+        }
         BufferedImage fondDeJeu = this.image;
                 //new BufferedImage ((longueurChamp + 5)*TILE_WIDTH, (largeurChamp + 5)*TILE_HEIGHT, BufferedImage.TYPE_4BYTE_ABGR);
         int[][] mat = new int[largeurChamp][longueurChamp];

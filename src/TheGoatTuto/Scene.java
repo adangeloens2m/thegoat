@@ -24,7 +24,10 @@ import javax.swing.JPanel;
 public class Scene extends JPanel {
 
     private ImageIcon icoFond;
-    private BufferedImage imgFond1;
+    private Image imgFond1;
+    
+    private Tiles tile;
+    private BufferedImage tileFond;
 
     private ImageIcon icoGoat;
     private Image imgGoat;
@@ -41,8 +44,7 @@ public class Scene extends JPanel {
     private int xBombe;
 
     private int yBombe;
-    
-    private Tiles layer;
+   
 
     //Constructeur
     public Scene(){
@@ -52,13 +54,15 @@ public class Scene extends JPanel {
 //        this.yGoat = 0;
         this.xBombe = -100;
         this.yBombe = -100;
-        
+
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
-        this.imgFond1 = layer.image;
+        this.imgFond1 = this.icoFond.getImage();
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        
+        this.tileFond = tile.image;
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -77,7 +81,7 @@ public class Scene extends JPanel {
         deplacementx();
         deplacementy();
         
-        g2.drawImage(imgFond1, 0, 0, null);
+        g2.drawImage(tileFond, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
     }
