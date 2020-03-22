@@ -41,7 +41,7 @@ public class Scene extends JPanel {
 
     private int yBombe;
     
-    private Tiles layer;
+    private TilesTuto layer;
 
     //Constructeur
     public Scene(){
@@ -52,7 +52,7 @@ public class Scene extends JPanel {
         this.xBombe = -100;
         this.yBombe = -100;
         
-        layer = new Tiles(new int[][]{
+        layer = new TilesTuto(new int[][]{
             {184,184,0,184,0,0,184,0,0}
         });
         
@@ -79,7 +79,7 @@ public class Scene extends JPanel {
 
         deplacementx();
         deplacementy();
-        //abcc
+        
         layer.DrawLayer(g2);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
