@@ -17,7 +17,17 @@ import javax.imageio.ImageIO;
  *
  * @author Arnaud
  */
+
+
 public class TilesTuto {
+// private static int TILE_WIDTH = 32;
+//    private static int TILE_HEIGHT = 32;
+//
+//    private static int TILES_PER_ROW = 20;
+//    private static int TILES_PER_COL = 20;
+    
+    private static int longueurChamp = 30;
+    private static int largeurChamp = 15;
 
     private int TILE_WIDTH = 32;
     private int TILE_HEIGHT = 32;
@@ -43,28 +53,42 @@ public class TilesTuto {
     }
 
     public void DrawLayer(Graphics g) {
-        for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[y].length; x++) {
-                int index = map[y][x];
-                int yOffset = 0;
+//        for (int y = 0; y < map.length; y++) {
+//            for (int x = 0; x < map[y].length; x++) {
+//                int index = map[y][x];
+//                int yOffset = 0;
+//
+//                if (index > (tileSheet.getWidth() / TILE_WIDTH) - 1) {
+//                    yOffset++;
+//                    index = index - (tileSheet.getWidth() / TILE_WIDTH);
+//                }
+//
+//                g.drawImage(tileSheet,
+//                        x * TILE_WIDTH,
+//                        y * TILE_HEIGHT,
+//                        (x * TILE_WIDTH) +  TILE_WIDTH,
+//                        (y * TILE_HEIGHT) + TILE_HEIGHT,
+//                        index * TILE_WIDTH,
+//                        yOffset * TILE_HEIGHT,
+//                        (index * TILE_WIDTH) + TILE_WIDTH,
+//                        (yOffset * TILE_HEIGHT) + TILE_HEIGHT,
+//                        null);
+//            }
+//        }
+        int xFenetreG = 0;
+        int yFenetreG = 0;
+        for (int i = 0; i < largeurChamp; i++) {
+            for (int j = 0; j < longueurChamp; j++) {
+                xFenetreG = (j) * TILE_WIDTH;
+                yFenetreG = (i) * TILE_HEIGHT;
+                int tileNumber = map[i][j];
+                int tileX = (tileNumber % TILES_PER_ROW) * TILE_WIDTH + tileNumber % TILES_PER_ROW + 1;
+                int tileY = (tileNumber / TILES_PER_ROW) * TILE_HEIGHT + tileNumber / TILES_PER_ROW + 1;
+                BufferedImage tile = tileSheet.getSubimage(tileX, tileY, TILE_WIDTH, TILE_HEIGHT);
 
-                if (index > (tileSheet.getWidth() / TILE_WIDTH) - 1) {
-                    yOffset++;
-                    index = index - (tileSheet.getWidth() / TILE_WIDTH);
-                }
-
-                g.drawImage(tileSheet,
-                        x * TILE_WIDTH,
-                        y * TILE_HEIGHT,
-                        (x * TILE_WIDTH) +  TILE_WIDTH,
-                        (y * TILE_HEIGHT) + TILE_HEIGHT,
-                        index * TILE_WIDTH,
-                        yOffset * TILE_HEIGHT,
-                        (index * TILE_WIDTH) + TILE_WIDTH,
-                        (yOffset * TILE_HEIGHT) + TILE_HEIGHT,
-                        null);
+                g.drawImage(tile, xFenetreG, yFenetreG, null);
             }
+
         }
     }
-
 }
