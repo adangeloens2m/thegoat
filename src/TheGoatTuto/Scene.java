@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
 public class Scene extends JPanel {
 
     private ImageIcon icoFond;
-    private Image imgFond1;
+    private BufferedImage imgFond1;
 
     private ImageIcon icoGoat;
     private Image imgGoat;
@@ -41,7 +42,7 @@ public class Scene extends JPanel {
 
     private int yBombe;
     
-    private TilesTuto layer;
+    private Tiles layer;
 
     //Constructeur
     public Scene(){
@@ -52,12 +53,8 @@ public class Scene extends JPanel {
         this.xBombe = -100;
         this.yBombe = -100;
         
-        layer = new TilesTuto(new int[][]{
-            {184,184,0,184,0,0,184,0,0}
-        });
-        
         icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
-        this.imgFond1 = this.icoFond.getImage();
+        this.imgFond1 = layer.image;
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
@@ -80,7 +77,7 @@ public class Scene extends JPanel {
         deplacementx();
         deplacementy();
         
-        layer.DrawLayer(g2);
+        g2.drawImage(imgFond1, 0, 0, null);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
     }

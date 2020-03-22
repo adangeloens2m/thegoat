@@ -31,7 +31,7 @@ public class Tiles {
     private int longueurChamp = 30;
     private int largeurChamp = 15;
     
-    private BufferedImage image;
+    public BufferedImage image;
     
 //    public Graphics2D fondDeJeu() throws IOException {
 //
