@@ -79,7 +79,7 @@ public class Scene extends JPanel {
 
         deplacementx();
         deplacementy();
-        
+        //abcc
         layer.DrawLayer(g2);
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
