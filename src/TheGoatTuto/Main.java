@@ -21,7 +21,7 @@ public class Main {
         //Fenetre du jeu
         JFrame fenetre = new JFrame("TheGoatTuto");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(600, 480);
+        fenetre.setSize(1000, 550);
         fenetre.setLocationRelativeTo(null);
         fenetre.setResizable(true);
         fenetre.setAlwaysOnTop(true);

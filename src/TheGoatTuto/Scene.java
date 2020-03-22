@@ -8,12 +8,6 @@ package TheGoatTuto;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -23,10 +17,10 @@ import javax.swing.JPanel;
  */
 public class Scene extends JPanel {
 
-    private ImageIcon icoFond;
-    private Image imgFond1;
+//    private ImageIcon icoFond;
+//    private Image imgFond1;
     
-    private TilesTuto layer;
+    private TilesTuto tileMap;
 
     private ImageIcon icoGoat;
     private Image imgGoat;
@@ -54,21 +48,10 @@ public class Scene extends JPanel {
         this.xBombe = -100;
         this.yBombe = -100;
         
-//        int[][] mat = new int[layer.largeurChamp][layer.longueurChamp];
-//        for (int i = 0; i < mat.length; i++) {
-//            for (int j = 0; j < mat[i].length; j++) {
-//                if (i == 1) {
-//                    mat[i][j] = 184;
-//                } else {
-//                    mat[i][j] = 21;
-//                }
-//            }
-//        }
-//        
-        layer = new TilesTuto();
+        tileMap = new TilesTuto(16, 33);
 
-        icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
-        this.imgFond1 = this.icoFond.getImage();
+//        icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
+//        this.imgFond1 = this.icoFond.getImage();
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
@@ -91,8 +74,8 @@ public class Scene extends JPanel {
         deplacementx();
         deplacementy();
         
-        layer.DrawLayer(g2);
-//        g2.drawImage(imgFond1, 0, 0, null);
+        tileMap.DrawLayer(g2);
+
         g2.drawImage(imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe, yBombe, null);
     }
