@@ -56,7 +56,7 @@ public class Scene extends JPanel {
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
+        
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
