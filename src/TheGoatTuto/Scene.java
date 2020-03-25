@@ -10,7 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-//a
+
 /**
  *
  * @author Arnaud
