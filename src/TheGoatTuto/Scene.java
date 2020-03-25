@@ -19,7 +19,6 @@ public class Scene extends JPanel {
 
 //    private ImageIcon icoFond;
 //    private Image imgFond1;
-    
     private TilesTuto tileMap;
 
     private ImageIcon icoGoat;
@@ -27,6 +26,7 @@ public class Scene extends JPanel {
 
     private ImageIcon icoBombe;
     private Image imgBombe;
+    private boolean bombeClic;
 
     private int xGoat;
     private int dx;
@@ -37,18 +37,19 @@ public class Scene extends JPanel {
     private int xBombe;
 
     private int yBombe;
-   
+
+    private int chrono;
 
     //Constructeur
-    public Scene(){
+    public Scene() {
         super();
 
 //        this.xGoat = 0;
 //        this.yGoat = 0;
         this.xBombe = -100;
         this.yBombe = -100;
-        
-        tileMap = new TilesTuto(16, 33);
+
+        tileMap = new TilesTuto(16, 100);
 
 //        icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
 //        this.imgFond1 = this.icoFond.getImage();
@@ -64,6 +65,7 @@ public class Scene extends JPanel {
 
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start();
+        chrono = 0;
     }
 
     //Méthodes
@@ -71,15 +73,21 @@ public class Scene extends JPanel {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D) g;
 
-        deplacementx();
-        deplacementy();
-        
         tileMap.DrawLayer(g2);
 
+        if (chrono == 10) {
+            tileMap.move();
+            chrono = 0;
+        }
+        chrono++;
+
         g2.drawImage(imgGoat, xGoat, yGoat, null);
-        g2.drawImage(imgBombe, xBombe, yBombe, null);
+        g2.drawImage(imgBombe, xBombe - tileMap.getxDynamique(), yBombe, null);
+
+        deplacementx();
+        deplacementy();
     }
-    
+
     public void deplacementx() {
         if (dx == 1) {
             xGoat = Math.min(xGoat + dx, Main.scene.getWidth() - imgGoat.getWidth(null));
@@ -128,5 +136,9 @@ public class Scene extends JPanel {
 
     public void setyBombe(int yPiege) {
         this.yBombe = yPiege;
+    }
+
+    public void setBombeClic(boolean bombeClic) {
+        this.bombeClic = bombeClic;
     }
 }
