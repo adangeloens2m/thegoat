@@ -24,16 +24,20 @@ public class TilesTuto {
 
     private int TILES_PER_ROW = 20;
     private int TILES_PER_COL = 20;
+    
+    private int longueurChamp;
+    private int largeurChamp;
 
     private int[][] mat;
     private BufferedImage tileSet;
 
     private int xDynamique;
-    private int chrono;
 
     public TilesTuto(int largeurChamp, int longueurChamp) {
         xDynamique = 0;
-        chrono = 0;
+        this.largeurChamp = largeurChamp;
+        this.longueurChamp = longueurChamp;
+        
         mat = new int[largeurChamp][longueurChamp];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
@@ -86,7 +90,12 @@ public class TilesTuto {
         xDynamique++;
     }
 
+    //Getters
     public int getxDynamique() {
         return xDynamique;
+    }
+    
+    public int getWidth(){
+        return longueurChamp * TILE_WIDTH;
     }
 }
