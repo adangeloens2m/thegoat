@@ -50,7 +50,7 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(16, 50);
 
-        Goat = new Goat(90 , 100);
+        //Goat = new Goat(90 , 100);
         
         bombe = new Bombe(-100, -100, "Arnaud");
         
