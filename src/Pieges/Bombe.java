@@ -27,6 +27,6 @@ public class Bombe extends Piege{
     }
     
     public void xSuivi(){
-        x = x - 1;
+        this.setX(this.getX() - 1);
     }
 }

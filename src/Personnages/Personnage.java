@@ -14,7 +14,7 @@ import TheGoatTuto.Main;
 public class Personnage {
 
     private int largeur, hauteur; //dimensions du perso
-    public int x, y; //position du perso
+    private int x, y; //position du perso
 
     public Personnage(int x, int y, int largeur, int hauteur) {
 

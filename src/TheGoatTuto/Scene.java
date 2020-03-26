@@ -26,7 +26,6 @@ public class Scene extends JPanel {
     public Goat goat;
     
     public Bombe bombe;
-    public int xSuiviBombe;
     
     //Constructeur
     public Scene() {
