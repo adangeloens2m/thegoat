@@ -24,19 +24,28 @@ public class TilesTuto {
 
     private int TILES_PER_ROW = 20;
     private int TILES_PER_COL = 20;
+    
+    private int longueurChamp;
+    private int largeurChamp;
 
     private int[][] mat;
     private BufferedImage tileSet;
 
+    private int xDynamique;
+
     public TilesTuto(int largeurChamp, int longueurChamp) {
+        xDynamique = 0;
+        this.largeurChamp = largeurChamp;
+        this.longueurChamp = longueurChamp;
+        
         mat = new int[largeurChamp][longueurChamp];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
                 if (j == 0) {
                     mat[i][j] = 191;
-                } else if (j == longueurChamp - 1){
+                } else if (j == longueurChamp - 1) {
                     mat[i][j] = 69;
-                }else if (i == 0 || i == largeurChamp - 1) {
+                } else if (i == 0 || i == largeurChamp - 1) {
                     mat[i][j] = 184;
                 } else if (i == 10 && j == 28) {
                     mat[i][j] = 180;
@@ -51,9 +60,9 @@ public class TilesTuto {
         }
 
         try {
-            tileSet = ImageIO.read(new File("tileSet.png"));
+            tileSet = ImageIO.read(getClass().getResource("/images/tileSet.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Tiles.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -64,16 +73,29 @@ public class TilesTuto {
                 int ligneTileSet = mat[j][i] / TILES_PER_ROW;
 
                 g.drawImage(tileSet,
-                        i * TILE_WIDTH,
+                        i * TILE_WIDTH - xDynamique,
                         j * TILE_HEIGHT,
-                        (i * TILE_WIDTH) + TILE_WIDTH,
-                        (j * TILE_HEIGHT) + TILE_HEIGHT,
+                        i * TILE_WIDTH + TILE_WIDTH - xDynamique,
+                        j * TILE_HEIGHT + TILE_HEIGHT,
                         colonneTileSet * TILE_WIDTH + 1,
                         ligneTileSet * TILE_HEIGHT + 1,
-                        (colonneTileSet * TILE_WIDTH) + TILE_WIDTH,
-                        (ligneTileSet * TILE_HEIGHT) + TILE_HEIGHT,
+                        colonneTileSet * TILE_WIDTH + TILE_WIDTH,
+                        ligneTileSet * TILE_HEIGHT + TILE_HEIGHT,
                         null);
             }
         }
+    }
+
+    public void move() {
+        xDynamique++;
+    }
+
+    //Getters
+    public int getxDynamique() {
+        return xDynamique;
+    }
+    
+    public int getWidth(){
+        return longueurChamp * TILE_WIDTH;
     }
 }

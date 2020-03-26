@@ -14,9 +14,11 @@ import java.awt.event.MouseEvent;
  */
 public class Souris extends MouseAdapter{
 
+    @Override
     public void mouseClicked(MouseEvent e) {
         Main.scene.setxBombe(e.getX());
         Main.scene.setyBombe(e.getY());
+        Main.scene.setBombeClic(true);
     }
 
 }

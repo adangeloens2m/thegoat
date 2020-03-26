@@ -17,9 +17,6 @@ import javax.swing.JPanel;
  */
 public class Scene extends JPanel {
 
-//    private ImageIcon icoFond;
-//    private Image imgFond1;
-    
     private TilesTuto tileMap;
 
     private ImageIcon icoGoat;
@@ -35,23 +32,23 @@ public class Scene extends JPanel {
     private int dy;
 
     private int xBombe;
+    private int xSuiviBombe;
 
     private int yBombe;
-   
+
+    private int timer;
+
+    private boolean bombeClic;
 
     //Constructeur
-    public Scene(){
+    public Scene() {
         super();
 
-//        this.xGoat = 0;
-//        this.yGoat = 0;
         this.xBombe = -100;
         this.yBombe = -100;
-        
-        tileMap = new TilesTuto(16, 33);
 
-//        icoFond = new ImageIcon(getClass().getResource("/images/grass.jpg"));
-//        this.imgFond1 = this.icoFond.getImage();
+        this.tileMap = new TilesTuto(16, 50);
+
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
@@ -67,32 +64,51 @@ public class Scene extends JPanel {
     }
 
     //Méthodes
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D) g;
 
-        deplacementx();
-        deplacementy();
-        
         tileMap.DrawLayer(g2);
 
         g2.drawImage(imgGoat, xGoat, yGoat, null);
-        g2.drawImage(imgBombe, xBombe, yBombe, null);
+        g2.drawImage(imgBombe, xBombe - xSuiviBombe, yBombe, null);
     }
-    
-    public void deplacementx() {
+
+    public void runMethodes() {
+        deplacementGoat();
+
+        if (timer == 25) {
+            //Méthodes ralenties
+            tileMap.move();
+            win();
+            if (bombeClic) {
+                xSuiviBombe++;
+            }
+            //
+            timer = 0;
+        }
+        timer++;
+    }
+
+    public void deplacementGoat() {
         if (dx == 1) {
             xGoat = Math.min(xGoat + dx, Main.scene.getWidth() - imgGoat.getWidth(null));
-        } else if (dx == -1) {
+        }
+        if (dx == -1) {
             xGoat = Math.max(xGoat + dx, 0);
+        }
+        if (dy == 1) {
+            yGoat = Math.min(yGoat + dy, Main.scene.getHeight() - imgGoat.getHeight(null));
+        }
+        if (dy == -1) {
+            yGoat = Math.max(yGoat + dy, 0);
         }
     }
 
-    public void deplacementy() {
-        if (dy == 1) {
-            yGoat = Math.min(yGoat + dy, Main.scene.getHeight() - imgGoat.getHeight(null));
-        } else if (dy == -1) {
-            yGoat = Math.max(yGoat + dy, 0);
+    public void win() {
+        if (xGoat + dx + tileMap.getxDynamique() == tileMap.getWidth()) {
+            System.out.println("You Won !!");
         }
     }
 
@@ -128,5 +144,9 @@ public class Scene extends JPanel {
 
     public void setyBombe(int yPiege) {
         this.yBombe = yPiege;
+    }
+
+    public void setBombeClic(boolean bombeClic) {
+        this.bombeClic = bombeClic;
     }
 }
