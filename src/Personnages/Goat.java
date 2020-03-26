@@ -39,6 +39,10 @@ public class Goat extends Personnage {
     public Image getImageGoat() {
         return imageGoat;
     }
+
+    public int getDx() {
+        return dx;
+    }
     
     //Setters
 
