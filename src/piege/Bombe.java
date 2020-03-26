@@ -16,18 +16,13 @@ public class Bombe extends Piege{
     private Image imgBombe;
     private ImageIcon icoBombe;
 
-    public Bombe(Image imgBombe, ImageIcon icoBombe, String type, int x, int y, String proprietaire, boolean actif) {
-        super(type, x, y, proprietaire, actif);
-        this.imgBombe = this.icoBombe.getImage();
-        this.icoBombe = new ImageIcon("/images/bombe.png");
+    public Bombe(int x, int y, String proprietaire) {
+        super(x, y, 30, 30, proprietaire, false);
+        this.icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
+        this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     }
 
     public Image getImgBombe() {
         return imgBombe;
     }
-    
-
-   
-    
-    
 }

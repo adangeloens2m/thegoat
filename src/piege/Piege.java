@@ -10,22 +10,40 @@ package piege;
  * @author achen
  */
 public class Piege {
-    private String type;
+    
     private int x;
     private int y;
+    
+    private int longueur;
+    private int largeur;
+    
     private String proprietaire;
+    
     private boolean actif;
 
-    public Piege(String type, int x, int y, String proprietaire, boolean actif) {
-        this.type = type;
+    public Piege(int x, int y, int largeur, int longueur, String proprietaire, boolean actif) {
         this.x = x;
         this.y = y;
+        this.longueur = longueur;
+        this.largeur = largeur;
         this.proprietaire = proprietaire;
         this.actif = actif;
     }
 
-    public String getType() {
-        return type;
+    public int getLongueur() {
+        return longueur;
+    }
+
+    public void setLongueur(int longueur) {
+        this.longueur = longueur;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(int largeur) {
+        this.largeur = largeur;
     }
 
     public int getX() {
@@ -44,9 +62,6 @@ public class Piege {
         return actif;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public void setX(int x) {
         this.x = x;

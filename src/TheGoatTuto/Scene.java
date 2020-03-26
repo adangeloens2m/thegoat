@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import piege.Bombe;
 
 /**
  *
@@ -38,25 +39,23 @@ public class Scene extends JPanel {
     private int yBombe;
 
     private int timer;
-
-    private boolean bombeClic;
     
-    private GOAT Goat;
+    public GOAT Goat;
+    
+    public Bombe bombe;
+    
     //Constructeur
     public Scene() {
         super();
-
-        this.xBombe = -100;
-        this.yBombe = -100;
 
         this.tileMap = new TilesTuto(16, 50);
 
         Goat = new GOAT(90 , 100);
         
+        bombe = new Bombe(-100, -100, "Arnaud");
+        
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
-        icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
-        this.imgBombe = this.icoBombe.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -76,7 +75,7 @@ public class Scene extends JPanel {
         tileMap.DrawLayer(g2);
 
         g2.drawImage(this.imgGoat, xGoat, yGoat, null);
-        g2.drawImage(imgBombe, xBombe - xSuiviBombe, yBombe, null);
+        g2.drawImage(this.bombe.getImgBombe(), this.bombe.getX() - xSuiviBombe, this.bombe.getY(), null);
     }
 
     public void runMethodes() {
@@ -86,7 +85,7 @@ public class Scene extends JPanel {
             //Méthodes ralenties
             tileMap.move();
             win();
-            if (bombeClic) {
+            if (bombe.isActif()) {
                 xSuiviBombe++;
             }
             //
@@ -148,9 +147,5 @@ public class Scene extends JPanel {
 
     public void setyBombe(int yPiege) {
         this.yBombe = yPiege;
-    }
-
-    public void setBombeClic(boolean bombeClic) {
-        this.bombeClic = bombeClic;
     }
 }
