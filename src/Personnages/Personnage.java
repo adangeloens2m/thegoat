@@ -15,8 +15,6 @@ public class Personnage {
     
     private int largeur, hauteur; //dimensions du perso
     private int x, y; //position du perso
-    private boolean marche;
-    private boolean versDroite;
     public int compteur; //compteur des pas du perso
     
     
@@ -27,8 +25,6 @@ public class Personnage {
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.compteur = 0;
-        this.marche = false;
-        this.versDroite = true;
     }
 
     //GETTERS
@@ -48,13 +44,6 @@ public class Personnage {
         return y;
     }
 
-    public boolean isMarche() {
-        return marche;
-    }
-
-    public boolean isVersDroite() {
-        return versDroite;
-    }
 
     public int getCompteur() {
         return compteur;
@@ -70,13 +59,6 @@ public class Personnage {
         this.y = y;
     }
 
-    public void setMarche(boolean marche) {
-        this.marche = marche;
-    }
-
-    public void setVersDroite(boolean versDroite) {
-        this.versDroite = versDroite;
-    }
 
     public void setCompteur(int compteur) {
         this.compteur = compteur;

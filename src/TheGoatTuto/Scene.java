@@ -5,13 +5,13 @@
  */
 package TheGoatTuto;
 
-import Personnages.GOAT;
+import Personnages.Goat;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import piege.Bombe;
+import Pieges.Bombe;
 
 /**
  *
@@ -40,7 +40,7 @@ public class Scene extends JPanel {
 
     private int timer;
     
-    public GOAT Goat;
+    public Goat Goat;
     
     public Bombe bombe;
     
@@ -50,7 +50,7 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(16, 50);
 
-        Goat = new GOAT(90 , 100);
+        Goat = new Goat(90 , 100);
         
         bombe = new Bombe(-100, -100, "Arnaud");
         
