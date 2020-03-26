@@ -34,7 +34,6 @@ public class Scene extends JPanel {
         this.tileMap = new TilesTuto(16, 50);
 
         this.goat = new Goat(0 , 0, "Arnaud", "goat");
-        goat.create();
         
         this.bombe = new Bombe(-100, -100, "Arnaud");
         
