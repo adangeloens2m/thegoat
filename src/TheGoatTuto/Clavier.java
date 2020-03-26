@@ -18,20 +18,20 @@ public class Clavier extends KeyAdapter{
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            Main.scene.setDx(1);
+            Main.scene.goat.setDx(1);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-            Main.scene.setDx(-1);
+            Main.scene.goat.setDx(-1);
         }else if (e.getKeyCode() == KeyEvent.VK_UP){
-            Main.scene.setDy(-1);
+            Main.scene.goat.setDy(-1);
         }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-            Main.scene.setDy(1);
+            Main.scene.goat.setDy(1);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        Main.scene.setDx(0);
-        Main.scene.setDy(0);
+        Main.scene.goat.setDx(0);
+        Main.scene.goat.setDy(0);
     }
     
 }
