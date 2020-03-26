@@ -5,58 +5,65 @@
  */
 package piege;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.imageio.ImageIO;
-import outil.OutilsJDBC;
-
 /**
  *
  * @author achen
  */
 public class Piege {
+    private String type;
+    private int x;
+    private int y;
+    private String proprietaire;
+    private boolean actif;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        try {
-
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
-
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM piege;");
-            ResultSet resultat = requete.executeQuery();
-            OutilsJDBC.afficherResultSet(resultat);
-
-            requete.close();
-            connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public Piege(String type, int x, int y, String proprietaire, boolean actif) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.proprietaire = proprietaire;
+        this.actif = actif;
     }
-    
-    public void AffichePiege () throws IOException{
-        BufferedImage tileSet = ImageIO.read(new File("tileSet.png"));
 
-        int [][] mat = new int [19][90];
-        for (int i = 0 ; i<mat.length ; i++){
-            for (int j = 0 ; j<mat[i].length ; j++) {
-                if(i==1){
-                    mat[i][j] = 184;
-                }
-                else{
-                    mat[i][j] = 21;  
-                }
-            }
-        }
-        mat[18][89]=220;
+    public String getType() {
+        return type;
     }
-    
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public String getProprietaire() {
+        return proprietaire;
+    }
+
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setProprietaire(String proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
+       
+
+
 }
