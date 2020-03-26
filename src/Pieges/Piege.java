@@ -11,8 +11,8 @@ package Pieges;
  */
 public class Piege {
     
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     
     private int longueur;
     private int largeur;

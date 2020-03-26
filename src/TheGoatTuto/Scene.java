@@ -21,19 +21,12 @@ public class Scene extends JPanel {
 
     private TilesTuto tileMap;
 
-    private int xGoat;
-    private int dx;
-
-    private int yGoat;
-    private int dy;
-
-    private int xSuiviBombe;
-
     private int timer;
     
     public Goat goat;
     
     public Bombe bombe;
+    public int xSuiviBombe;
     
     //Constructeur
     public Scene() {
@@ -68,6 +61,7 @@ public class Scene extends JPanel {
 
     public void runMethodes() {
         goat.deplacement();
+        
 
         if (timer == 25) {
             //Méthodes ralenties
@@ -83,7 +77,7 @@ public class Scene extends JPanel {
     }
 
     public void win() {
-        if (xGoat + dx + tileMap.getxDynamique() == tileMap.getWidth()) {
+        if (goat.getX() + goat.getDx() + tileMap.getxDynamique() == tileMap.getWidth()) {
             System.out.println("You Won !!");
         }
     }
