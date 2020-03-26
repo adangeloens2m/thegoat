@@ -25,4 +25,8 @@ public class Bombe extends Piege{
     public Image getImgBombe() {
         return imgBombe;
     }
+    
+    public void xSuivi(){
+        x = x - 1;
+    }
 }

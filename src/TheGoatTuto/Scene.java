@@ -56,7 +56,7 @@ public class Scene extends JPanel {
         tileMap.DrawLayer(g2);
 
         g2.drawImage(goat.getImageGoat(), goat.getX(), goat.getY(), null);
-        g2.drawImage(bombe.getImgBombe(), bombe.getX() - xSuiviBombe, bombe.getY(), null);
+        g2.drawImage(bombe.getImgBombe(), bombe.getX(), bombe.getY(), null);
     }
 
     public void runMethodes() {
@@ -68,7 +68,7 @@ public class Scene extends JPanel {
             tileMap.move();
             win();
             if (bombe.isActif()) {
-                xSuiviBombe++;
+                bombe.xSuivi();
             }
             //
             timer = 0;
