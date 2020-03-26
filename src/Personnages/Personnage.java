@@ -15,13 +15,15 @@ public class Personnage {
 
     private int largeur, hauteur; //dimensions du perso
     private int x, y; //position du perso
+    private String pseudo;
 
-    public Personnage(int x, int y, int largeur, int hauteur) {
+    public Personnage(int x, int y, int largeur, int hauteur, String pseudo) {
 
         this.x = x;
         this.y = y;
         this.largeur = largeur;
         this.hauteur = hauteur;
+        this.pseudo = pseudo;
     }
 
     //Methodes
@@ -42,6 +44,10 @@ public class Personnage {
 
     public int getY() {
         return y;
+    }
+
+    public String getPseudo() {
+        return pseudo;
     }
 
     //SETTERS

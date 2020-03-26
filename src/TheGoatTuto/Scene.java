@@ -23,19 +23,23 @@ public class Scene extends JPanel {
 
     private int timer;
     
+    private String pseudo;
+    
     public Goat goat;
     
     public Bombe bombe;
     
     //Constructeur
-    public Scene() {
+    public Scene(String pseudo) {
         super();
+        this.pseudo = pseudo;
 
         this.tileMap = new TilesTuto(16, 50);
 
-        this.goat = new Goat(0 , 0, "Arnaud", "goat");
+        this.goat = new Goat(0 , 0, pseudo, "goat");
+        goat.create();
         
-        this.bombe = new Bombe(-100, -100, "Arnaud");
+        this.bombe = new Bombe(-100, -100, pseudo);
         
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -82,6 +86,9 @@ public class Scene extends JPanel {
     }
 
     //Getters
-
+    public String getPseudo() {
+        return pseudo;
+    }
+    
     //Setters
 }
