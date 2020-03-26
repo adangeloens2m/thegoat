@@ -5,6 +5,7 @@
  */
 package TheGoatTuto;
 
+import Personnages.GOAT;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -39,7 +40,8 @@ public class Scene extends JPanel {
     private int timer;
 
     private boolean bombeClic;
-
+    
+    private GOAT Goat;
     //Constructeur
     public Scene() {
         super();
@@ -49,6 +51,8 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(16, 50);
 
+        Goat = new GOAT(90 , 100);
+        
         icoGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imgGoat = this.icoGoat.getImage().getScaledInstance(90, 100, Image.SCALE_SMOOTH);
         icoBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
@@ -71,7 +75,7 @@ public class Scene extends JPanel {
 
         tileMap.DrawLayer(g2);
 
-        g2.drawImage(imgGoat, xGoat, yGoat, null);
+        g2.drawImage(this.imgGoat, xGoat, yGoat, null);
         g2.drawImage(imgBombe, xBombe - xSuiviBombe, yBombe, null);
     }
 
