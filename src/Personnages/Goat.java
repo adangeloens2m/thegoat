@@ -29,7 +29,7 @@ public class Goat extends Personnage {
 
     //CONSTRUCTEUR
     public Goat(int x, int y, String pseudo, String skin) {
-        super(x, y, 80, 80);
+        super(x, y, 80, 80, skin);
         this.pseudo = pseudo;
         this.iconGoat = new ImageIcon(getClass().getResource("/images/" + skin + ".png"));
         this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
@@ -58,16 +58,16 @@ public class Goat extends Personnage {
     //Methodes
         public void deplacement() {
         if (dx == 1) {
-            x = Math.min(x + dx, Main.scene.getWidth() - imageGoat.getWidth(null));
+            this.setX(Math.min(this.getX() + dx, Main.scene.getWidth() - imageGoat.getWidth(null)));
         }
         if (dx == -1) {
-            x = Math.max(x + dx, 0);
+            this.setX(Math.max(this.getX() + dx, 0));
         }
         if (dy == 1) {
-            y = Math.min(y + dy, Main.scene.getHeight() - imageGoat.getHeight(null));
+            this.setY(Math.min(this.getY() + dy, Main.scene.getHeight() - imageGoat.getHeight(null)));
         }
         if (dy == -1) {
-            y = Math.max(y + dy, 0);
+           this.setY(Math.max(this.getY() + dy, 0));
         }
     }
 }
