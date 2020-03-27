@@ -31,17 +31,17 @@ public class Clavier extends KeyAdapter {
                 requete.setInt(1, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                requete.setInt(2, 10);
+                requete.setInt(2, 100);
             } else {
                 requete.setInt(2, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                requete.setInt(3, 10);
+                requete.setInt(3, 100);
             } else {
                 requete.setInt(3, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                requete.setInt(4, 10);
+                requete.setInt(4, 100);
             } else {
                 requete.setInt(4, 0);
             }
