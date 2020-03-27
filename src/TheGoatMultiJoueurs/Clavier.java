@@ -45,8 +45,8 @@ public class Clavier extends KeyAdapter {
             } else {
                 requete.setInt(4, 0);
             }
-
             requete.setString(5, Main.scene.getPseudo());
+            
             requete.executeUpdate();
 
             requete.close();
