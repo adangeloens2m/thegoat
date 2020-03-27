@@ -17,17 +17,37 @@ import java.sql.SQLException;
  *
  * @author Arnaud
  */
-public class Clavier extends KeyAdapter{
+public class Clavier extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            try {
+        try {
 
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
 
-            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = x + 1 WHERE pseudo = ?");
-            requete.setString(1, Main.scene.getPseudo());
+            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                requete.setInt(1, 1);
+            } else {
+                requete.setInt(1, 0);
+            }
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                requete.setInt(2, 1);
+            } else {
+                requete.setInt(2, 0);
+            }
+            if (e.getKeyCode() == KeyEvent.VK_UP) {
+                requete.setInt(3, 1);
+            } else {
+                requete.setInt(3, 0);
+            }
+            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                requete.setInt(4, 1);
+            } else {
+                requete.setInt(4, 0);
+            }
+
+            requete.setString(5, Main.scene.getPseudo());
             requete.executeUpdate();
 
             requete.close();
@@ -35,52 +55,6 @@ public class Clavier extends KeyAdapter{
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-             try {
-
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-
-            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = x - 1 WHERE pseudo = ?");
-            requete.setString(1, Main.scene.getPseudo());
-            requete.executeUpdate();
-
-            requete.close();
-            connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        }else if (e.getKeyCode() == KeyEvent.VK_UP){
-             try {
-
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-
-            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET y = y - 1 WHERE pseudo = ?");
-            requete.setString(1, Main.scene.getPseudo());
-            requete.executeUpdate();
-
-            requete.close();
-            connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        }else if (e.getKeyCode() == KeyEvent.VK_DOWN){
-             try {
-
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-
-            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET y = y + 1 WHERE pseudo = ?");
-            requete.setString(1, Main.scene.getPseudo());
-            requete.executeUpdate();
-
-            requete.close();
-            connexion.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
         }
     }
 }
