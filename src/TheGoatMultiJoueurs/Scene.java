@@ -49,19 +49,18 @@ public class Scene extends JPanel {
     }
 
     //Méthodes
-//    @Override
-//    public void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        Graphics g2 = (Graphics2D) g;
-//
-//        tileMap.DrawLayer(g2);
-//
-//        ArrayList sqlData = SQL();
-//        for (int i = 0; i < sqlData.size(); i = i + 3) {
-//            g2.drawString((String) sqlData.get(i), (int) sqlData.get(i + 1), (int) sqlData.get(i + 2));
-//            g2.drawImage(imageGoat, (int) sqlData.get(i + 1), (int) sqlData.get(i + 2), null);
-//        }
-//    }
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        tileMap.DrawLayer(g);
+
+        ArrayList sqlData = SQL();
+        for (int i = 0; i < sqlData.size(); i = i + 3) {
+            g.drawString((String) sqlData.get(i), (int) sqlData.get(i + 1), (int) sqlData.get(i + 2));
+            g.drawImage(imageGoat, (int) sqlData.get(i + 1), (int) sqlData.get(i + 2), null);
+        }
+    }
 
     public void runMethodes() {
         System.out.println(SQL());
