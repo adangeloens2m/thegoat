@@ -5,6 +5,7 @@
  */
 package TheGoatMultiJoueurs;
 
+import Pieges.Bombe;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -28,6 +29,8 @@ public class Scene extends JPanel {
     private ImageIcon iconGoat;
 
     private String pseudo;
+    
+    public Bombe bombe;
 
     //Constructeur
     public Scene(String pseudo) {

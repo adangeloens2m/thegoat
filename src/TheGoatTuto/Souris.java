@@ -26,7 +26,7 @@ public class Souris extends MouseAdapter{
         Main.scene.bombe.setY(e.getY());
         Main.scene.bombe.setActif(true);
         
-        if (){
+        //if (){
             try {
 
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
