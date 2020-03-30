@@ -26,8 +26,13 @@ public class Souris extends MouseAdapter {
         try {
 
             Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-
-            PreparedStatement requete = connexion.prepareStatement("SELECT * FROM piege");
+            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = ?, y = ?, actif = ? WHERE pseudo = ?");
+            
+            
+            //*****Poser une bombe*****//
+            
+            
+            
             requete.executeUpdate();
 
             requete.close();
