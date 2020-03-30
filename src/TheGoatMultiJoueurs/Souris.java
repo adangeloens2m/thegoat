@@ -51,6 +51,10 @@ public class Souris extends MouseAdapter {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
+        Main.scene.bombe.setX(e.getX());
+        Main.scene.bombe.setY(e.getY());
+        Main.scene.bombe.setActif(true);
     }
    
     
