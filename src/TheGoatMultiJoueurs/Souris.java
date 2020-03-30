@@ -23,21 +23,31 @@ public class Souris extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        try {
+        Main.scene.bombe.setX(e.getX());
+        Main.scene.bombe.setY(e.getY());
+        Main.scene.bombe.setActif(true);
+        
+        if (){
+            try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-            PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = ?, y = ?, actif = ? WHERE pseudo = ?");
-            
-            
-            //*****Poser une bombe*****//
-            
-            
-            
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
+
+                  // commande pour supprimer si besoin des lignes de la table piège 
+//                PreparedStatement requete = connexion.prepareStatement("DELETE FROM piege WHERE id = 1");
+//                requete.executeUpdate();
+//                requete.close();
+                               
+            // commande pour insérer l'utilisation d'un nouveau piège dans la table
+            PreparedStatement requete = connexion.prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
+            requete.setInt(1, 9);
+            requete.setString(2, "bombe");
+            requete.setInt(3, 1);
+            requete.setInt(4, 1);
+            requete.setString(5, "Max");
+            requete.setBoolean(6, true);
             requete.executeUpdate();
-
             requete.close();
-            connexion.close();
-
+                                
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
