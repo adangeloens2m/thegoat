@@ -5,7 +5,11 @@
  */
 package Pieges;
 
+import Personnages.Goat;
+import TheGoatMultiJoueurs.ConnexionBDD;
 import java.awt.Image;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 
 /**
@@ -28,5 +32,21 @@ public class Bombe extends Piege{
     
     public void xSuivi(){
         this.setX(this.getX() - 1);
+    }
+    
+    public void explosion(Goat goat){
+        if (this.getX() == goat.getX() && this.getY() == goat.getY()){
+            try {
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = ? WHERE type = ? AND x = ? AND y = ?");
+                requete.setBoolean(1, false);
+                requete.setString(2,"bombe");
+                requete.setInt(3,this.getX());
+                requete.setInt(4,this.getY());
+                requete.executeUpdate();
+                requete.close();
+            }catch (SQLException ex) {
+                ex.printStackTrace();
+        }
+    }
     }
 }

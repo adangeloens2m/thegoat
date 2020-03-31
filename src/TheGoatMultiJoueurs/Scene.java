@@ -75,7 +75,7 @@ public class Scene extends JPanel {
             g.drawImage(imageBombe, (int) dataPiege.get(i+1), (int) dataPiege.get(i+2), null);
         }
     }
-
+    
     public void runMethodes() {
         win();
     }
