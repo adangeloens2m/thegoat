@@ -29,7 +29,7 @@ public class Souris extends MouseAdapter {
         
             try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
 
                   // commande pour supprimer si besoin des lignes de la table piège 
 //                PreparedStatement requete = connexion.prepareStatement("DELETE FROM piege WHERE id = 1");

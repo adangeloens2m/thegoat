@@ -22,7 +22,7 @@ public class Clavier extends KeyAdapter {
     public void keyPressed(KeyEvent e) {
         try {
 
-            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
+            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
 
             PreparedStatement requete = connexion.prepareStatement("UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
