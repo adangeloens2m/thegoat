@@ -5,13 +5,10 @@
  */
 package TheGoatMultiJoueurs;
 
-import Pieges.Bombe;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,8 +29,6 @@ public class Scene extends JPanel {
     private ImageIcon iconBombe;
     
     private String pseudo;
-    
-    public Bombe bombe;
 
     //Constructeur
     public Scene(String pseudo) {
@@ -72,8 +67,8 @@ public class Scene extends JPanel {
         }
 
         for (int i = 0; i < dataPiege.size(); i = i + 3) {
-            //g.drawString((String) dataPiege.get(i), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
-            g.drawImage(imageBombe, bombe.getX(), bombe.getY(), null);
+            g.drawString((String) dataPiege.get(i), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
+            g.drawImage(imageBombe, (int) dataPiege.get(i+1), (int) dataPiege.get(i+2), null);
         }
     }
 
