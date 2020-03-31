@@ -73,7 +73,7 @@ public class Scene extends JPanel {
 
         for (int i = 0; i < dataPiege.size(); i = i + 3) {
             //g.drawString((String) dataPiege.get(i), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
-            g.drawImage(imageBombe, (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2), null);
+            g.drawImage(imageBombe, bombe.getX(), bombe.getY(), null);
         }
     }
 
