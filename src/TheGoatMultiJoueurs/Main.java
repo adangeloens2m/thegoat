@@ -26,7 +26,7 @@ public class Main {
         fenetre.setAlwaysOnTop(true);
         
         //Instanciation Scene
-        scene = new Scene ("Maxime");
+        scene = new Scene ("Arnaud", "loup");
         
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);

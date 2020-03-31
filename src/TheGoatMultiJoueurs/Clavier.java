@@ -18,40 +18,43 @@ public class Clavier extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        try {
 
-            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
+        if (Main.scene.getPersonnage() == "goat") {
 
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                requete.setInt(1, 10);
-            } else {
-                requete.setInt(1, 0);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                requete.setInt(2, 10);
-            } else {
-                requete.setInt(2, 0);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                requete.setInt(3, 10);
-            } else {
-                requete.setInt(3, 0);
-            }
-            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                requete.setInt(4, 10);
-            } else {
-                requete.setInt(4, 0);
-            }
-            requete.setString(5, Main.scene.getPseudo());
-            
-            requete.executeUpdate();
+            try {
 
-            requete.close();
-            //connexion.close();
+                //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    requete.setInt(1, 10);
+                } else {
+                    requete.setInt(1, 0);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    requete.setInt(2, 10);
+                } else {
+                    requete.setInt(2, 0);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    requete.setInt(3, 10);
+                } else {
+                    requete.setInt(3, 0);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    requete.setInt(4, 10);
+                } else {
+                    requete.setInt(4, 0);
+                }
+                requete.setString(5, Main.scene.getPseudo());
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+                requete.executeUpdate();
+
+                requete.close();
+                //connexion.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

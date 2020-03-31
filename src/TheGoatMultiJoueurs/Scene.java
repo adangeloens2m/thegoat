@@ -29,11 +29,14 @@ public class Scene extends JPanel {
     private ImageIcon iconBombe;
     
     private String pseudo;
+    
+    private String personnage;
 
     //Constructeur
-    public Scene(String pseudo) {
+    public Scene(String pseudo, String personnage) {
         super();
         this.pseudo = pseudo;
+        this.personnage = personnage;
 
         this.tileMap = new TilesTuto(16, 50);
 
@@ -74,13 +77,16 @@ public class Scene extends JPanel {
     }
 
     public void runMethodes() {
-        System.out.println(dataGoat());
-        //win();
+        win();
     }
 
     //Getters
     public String getPseudo() {
         return pseudo;
+    }
+
+    public String getPersonnage() {
+        return personnage;
     }
 
     /////////////////SQL//////////////////
@@ -129,23 +135,20 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
-//    public void win() {
-//        try {
-//
-//            Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat", "etudiant", "YTDTvj9TR3CDYCmP");
-//
-//            PreparedStatement requete = connexion.prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x = 500");
-//            requete.setString(1, pseudo);
-//            ResultSet resultat = requete.executeQuery();
-//            while (resultat.next()) {
-//                System.out.println("You Won The Game!!");
-//            }
-//
-//            requete.close();
-//            connexion.close();
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    public void win() {
+        try {
+
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x = 500");
+            requete.setString(1, pseudo);
+            ResultSet resultat = requete.executeQuery();
+            while (resultat.next()) {
+                System.out.println("You Won The Game!!");
+            }
+
+            requete.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
