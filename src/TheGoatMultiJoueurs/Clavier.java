@@ -7,8 +7,6 @@ package TheGoatMultiJoueurs;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,22 +24,22 @@ public class Clavier extends KeyAdapter {
 
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                requete.setInt(1, 100);
+                requete.setInt(1, 10);
             } else {
                 requete.setInt(1, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                requete.setInt(2, 100);
+                requete.setInt(2, 10);
             } else {
                 requete.setInt(2, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                requete.setInt(3, 100);
+                requete.setInt(3, 10);
             } else {
                 requete.setInt(3, 0);
             }
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                requete.setInt(4, 100);
+                requete.setInt(4, 10);
             } else {
                 requete.setInt(4, 0);
             }
