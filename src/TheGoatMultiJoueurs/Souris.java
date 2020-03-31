@@ -45,7 +45,7 @@ public class Souris extends MouseAdapter {
             requete.setString(5, "Max");
             requete.setBoolean(6, true);
             requete.executeUpdate();
-            //requete.close();
+            requete.close();
                                 
         } catch (SQLException ex) {
             ex.printStackTrace();

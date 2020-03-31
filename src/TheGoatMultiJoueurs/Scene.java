@@ -27,7 +27,10 @@ public class Scene extends JPanel {
 
     private Image imageGoat;
     private ImageIcon iconGoat;
-
+    
+    private Image imageBombe;
+    private ImageIcon iconBombe;
+    
     private String pseudo;
     
     public Bombe bombe;
@@ -42,6 +45,9 @@ public class Scene extends JPanel {
         this.iconGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
         this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 
+        this.iconBombe = new ImageIcon(getClass().getResource("/images/bombe.png"));
+        this.imageBombe = this.iconBombe.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
@@ -57,15 +63,22 @@ public class Scene extends JPanel {
 
         tileMap.DrawLayer(g);
 
-        ArrayList sqlData = SQL();
-        for (int i = 0; i < sqlData.size(); i = i + 3) {
-            g.drawString((String) sqlData.get(i), (int) sqlData.get(i + 1), (int) sqlData.get(i + 2));
-            g.drawImage(imageGoat, (int) sqlData.get(i + 1), (int) sqlData.get(i + 2), null);
+        ArrayList dataGoat = dataGoat();
+        ArrayList dataPiege = dataPiege();
+
+        for (int i = 0; i < dataGoat.size(); i = i + 3) {
+            g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
+            g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
+        }
+
+        for (int i = 0; i < dataPiege.size(); i = i + 3) {
+            //g.drawString((String) dataPiege.get(i), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
+            g.drawImage(imageBombe, (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2), null);
         }
     }
 
     public void runMethodes() {
-        System.out.println(SQL());
+        System.out.println(dataGoat());
         //win();
     }
 
@@ -75,7 +88,7 @@ public class Scene extends JPanel {
     }
 
     /////////////////SQL//////////////////
-    public ArrayList SQL() {
+    public ArrayList dataGoat() {
         ArrayList sqlResult = new ArrayList();
         try {
 
@@ -85,6 +98,29 @@ public class Scene extends JPanel {
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 sqlResult.add(resultat.getString("pseudo"));
+                sqlResult.add(resultat.getInt("x"));
+                sqlResult.add(resultat.getInt("y"));
+            }
+            requete.close();
+            //connexion.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sqlResult;
+    }
+    
+    
+    public ArrayList dataPiege() {
+        ArrayList sqlResult = new ArrayList();
+        try {
+
+            //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
+
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y, proprietaire FROM piege");
+            ResultSet resultat = requete.executeQuery();
+            while (resultat.next()) {
+                sqlResult.add(resultat.getString("proprietaire"));
                 sqlResult.add(resultat.getInt("x"));
                 sqlResult.add(resultat.getInt("y"));
             }
