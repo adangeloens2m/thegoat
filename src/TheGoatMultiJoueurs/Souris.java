@@ -35,13 +35,15 @@ public class Souris extends MouseAdapter {
             // commande pour insérer l'utilisation d'un nouveau piège dans la table
             
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES ?,?,?,?,?,?");
-            requete.setInt(1, 9);
+            requete.setInt(1, 3);
             requete.setString(2, "bombe");
-            requete.setInt(3, 1);
-            requete.setInt(4, 1);
-            requete.setString(5, "Max");
+            requete.setInt(3, e.getX());
+            requete.setInt(4, e.getY());
+            requete.setString(5, Main.scene.getPseudo());
             requete.setBoolean(6, true);
+            System.out.println(requete);
             requete.executeUpdate();
+
             requete.close();
                                 
         } catch (SQLException ex) {

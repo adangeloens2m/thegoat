@@ -46,6 +46,7 @@ public class Scene extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
+        this.addMouseListener(new Souris());
 
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start();
