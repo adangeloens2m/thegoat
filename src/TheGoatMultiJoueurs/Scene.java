@@ -159,7 +159,7 @@ public class Scene extends JPanel {
         try {
 
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-                    + "WHERE goat.x = piege.x AND goat.y = piege.y");
+                    + "WHERE goat.x + 40 = piege.x + 10 AND goat.y + 50 = piege.y + 20");
 
             ResultSet resultat = requete.executeQuery();
             
