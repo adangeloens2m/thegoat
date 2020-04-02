@@ -74,10 +74,13 @@ public class Scene extends JPanel {
             g.drawString((String) dataPiege.get(i), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
             g.drawImage(imageBombe, (int) dataPiege.get(i+1), (int) dataPiege.get(i+2), null);
         }
+        
+        System.out.println(dataGoat);
     }
     
     public void runMethodes() {
         win();
+        collision();
     }
 
     //Getters
@@ -164,16 +167,14 @@ public class Scene extends JPanel {
                 String pseudo = resultat.getString("pseudo");
                 String proprietaire = resultat.getString("proprietaire");
                 
-                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET x = x - 200, y = y - 200, nbVie = nbVie - 1 WHERE pseudo = ?");
-                requete.setString(1, pseudo);
+//                requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 WHERE pseudo = ?");
+//                requete.setString(1, pseudo);
                 
-                System.out.println(pseudo + "killed by" + proprietaire);
-                
-                requete1.close();
+                System.out.println(pseudo + " killed by " + proprietaire);  
             }
- 
-            requete.close();
 
+            requete.close();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
