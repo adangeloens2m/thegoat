@@ -151,4 +151,31 @@ public class Scene extends JPanel {
             ex.printStackTrace();
         }
     }
+    
+    public void collision(){
+        try {
+
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
+                    + "WHERE goat.x = piege.x AND goat.y = piege.y");
+
+            ResultSet resultat = requete.executeQuery();
+            
+            while (resultat.next()) {
+                String pseudo = resultat.getString("pseudo");
+                String proprietaire = resultat.getString("proprietaire");
+                
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET x = x - 200, y = y - 200, nbVie = nbVie - 1 WHERE pseudo = ?");
+                requete.setString(1, pseudo);
+                
+                System.out.println(pseudo + "killed by" + proprietaire);
+                
+                requete1.close();
+            }
+ 
+            requete.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

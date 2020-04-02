@@ -27,7 +27,8 @@ public class Souris extends MouseAdapter {
                 // commande pour supprimer si besoin des lignes de la table piège 
 //                PreparedStatement requete = connexion.prepareStatement("DELETE FROM piege WHERE id = 1");
 //                requete.executeUpdate();
-//                requete.close();                  
+//                requete.close();    
+
                 // commande pour insérer l'utilisation d'un nouveau piège dans la table
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
                 requete.setInt(1, 3);
