@@ -158,9 +158,12 @@ public class Scene extends JPanel {
     public void collision(){
         try {
 
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-                    + "WHERE goat.x + 40 = piege.x + 10 AND goat.y + 50 = piege.y + 20");
+            //PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
+            //        + "WHERE goat.x + 40 >= piege.x + 10 AND goat.x + 40 <= piege.x + 30 goat.y + 50 >= piege.y + 20");
 
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
+                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50");
+            
             ResultSet resultat = requete.executeQuery();
             
             while (resultat.next()) {
