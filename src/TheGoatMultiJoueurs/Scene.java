@@ -165,7 +165,8 @@ public class Scene extends JPanel {
             //*****Zone de detection ronde autour de la bombe*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
                     + "WHERE SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < 40");
-                        
+             
+            //*****Fonctionne pas*****//
 //            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 WHERE (SELECT pseudo, proprietaire FROM goat, piege "
 //                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50)");
             
