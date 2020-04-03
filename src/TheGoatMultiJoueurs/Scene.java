@@ -167,8 +167,8 @@ public class Scene extends JPanel {
                     + "WHERE SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < 40");
              
             //*****Fonctionne pas*****//
-//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 WHERE (SELECT pseudo, proprietaire FROM goat, piege "
-//                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50)");
+//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 FROM goat INNER JOIN piege "
+//                    + "WHERE SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < 40))");
             
             ResultSet resultat = requete.executeQuery();
             
@@ -176,8 +176,11 @@ public class Scene extends JPanel {
                 String pseudo = resultat.getString("pseudo");
                 String proprietaire = resultat.getString("proprietaire");
                 
-//                requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 WHERE pseudo = ?");
-//                requete.setString(1, pseudo);
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = x - 50 WHERE pseudo = ?");
+                requete1.setString(1, pseudo);
+                requete1.executeUpdate();
+                
+                requete1.close();
                 
                 System.out.println(pseudo + " killed by " + proprietaire);  
             }
