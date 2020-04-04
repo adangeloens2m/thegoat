@@ -6,7 +6,6 @@
 package TheGoatMultiJoueurs;
 
 import Pieges.Bombe;
-import Pieges.Piege;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -39,23 +38,23 @@ public class Scene extends JPanel {
         this.pseudo = pseudo;
         this.personnage = personnage;
 
-        this.bombe = new Bombe(0, 0, "", false);
+        this.bombe = new Bombe(0, 0, "", false); //Création de l'objet bombe
 
-        this.tileMap = new TilesTuto(16, 50);
+        this.tileMap = new TilesTuto(33, 16); //Création de la map
 
         this.iconGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
-        this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
 
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.addKeyListener(new Clavier());
-        this.addMouseListener(new Souris());
+        this.addKeyListener(new Clavier()); //Listener clavier
+        this.addMouseListener(new Souris()); //Listener souris
 
         Thread chronoEcran = new Thread(new Chrono());
-        chronoEcran.start();
+        chronoEcran.start(); //Boucle qui s'éxécute toutes les 3ms pour rafraichir le jeu
     }
 
-    //Méthodes
+    //Méthodes d'affichage des composant dans la fentre (appelée toutes les 3ms)
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -87,6 +86,7 @@ public class Scene extends JPanel {
         }
     }
 
+    //Méthodes annexes appelées toutes les 3ms
     public void runMethodes() {
         win();
     }
@@ -101,6 +101,7 @@ public class Scene extends JPanel {
     }
 
     /////////////////SQL//////////////////
+    //Méthode de récupération des données des goats dans une ArrayList
     public ArrayList dataGoat() {
         ArrayList sqlResult = new ArrayList();
 
@@ -120,6 +121,7 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
+    //Méthode de récupération des données des pièges dans une ArrayList
     public ArrayList dataPiege() {
         ArrayList sqlResult = new ArrayList();
 
@@ -142,11 +144,13 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
+    //Méthode d'annonce de victoire
     public void win() {
 
         try {
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x = 500");
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x > ?");
             requete.setString(1, pseudo);
+            requete.setInt(2, tileMap.getWidth());
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 System.out.println("You Won The Game!!");

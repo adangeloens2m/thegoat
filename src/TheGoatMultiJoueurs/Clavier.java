@@ -57,7 +57,7 @@ public class Clavier extends KeyAdapter {
         }
 
         //Remise à zero des tables
-        if (Main.scene.getPersonnage() == "admin" && e.getKeyCode() == KeyEvent.VK_R) {
+        if (/*Main.scene.getPersonnage() == "admin" &&*/ e.getKeyCode() == KeyEvent.VK_R) {
 
             try {
 

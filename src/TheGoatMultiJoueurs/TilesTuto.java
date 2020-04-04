@@ -32,11 +32,12 @@ public class TilesTuto {
 
     private int xDynamique;
 
-    public TilesTuto(int largeurChamp, int longueurChamp) {
+    public TilesTuto(int longueurChamp, int largeurChamp) {
         xDynamique = 0;
         this.largeurChamp = largeurChamp;
         this.longueurChamp = longueurChamp;
         
+        //Création de la matrice
         mat = new int[largeurChamp][longueurChamp];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
@@ -64,7 +65,8 @@ public class TilesTuto {
             Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //Disposition des tiles
     public void DrawLayer(Graphics g) {
         for (int j = 0; j < mat.length; j++) {
             for (int i = 0; i < mat[j].length; i++) {
@@ -95,6 +97,6 @@ public class TilesTuto {
     }
     
     public int getWidth(){
-        return longueurChamp * TILE_WIDTH;
+        return (longueurChamp - 1)* TILE_WIDTH;
     }
 }

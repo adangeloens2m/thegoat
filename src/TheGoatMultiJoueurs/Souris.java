@@ -5,6 +5,7 @@
  */
 package TheGoatMultiJoueurs;
 
+import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
@@ -19,30 +20,31 @@ public class Souris extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
 
+        // commande pour insérer l'utilisation d'un nouveau piège dans la table
         if (Main.scene.getPersonnage() == "loup") {
 
-            try {
+            if (e.getButton() == MouseEvent.BUTTON1) {
 
-                //Connection connexion = DriverManager.getConnection("jdbc:mysql://nemrod.ens2m.fr:3306/20192020_s2_vs2_tp1_goat?serverTimezone=UTC", "goat", "9FdqUt5uXibSkOF8");
-                // commande pour supprimer si besoin des lignes de la table piège 
-//                PreparedStatement requete = connexion.prepareStatement("DELETE FROM piege WHERE id = 1");
-//                requete.executeUpdate();
-//                requete.close();    
+                try {
 
-                // commande pour insérer l'utilisation d'un nouveau piège dans la table
-                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
-                requete.setInt(1, 3);
-                requete.setString(2, "bombe");
-                requete.setInt(3, e.getX());
-                requete.setInt(4, e.getY());
-                requete.setString(5, Main.scene.getPseudo());
-                requete.setBoolean(6, true);
-                requete.executeUpdate();
+                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
+                    requete.setInt(1, 3);
+                    requete.setString(2, "bombe");
+                    requete.setInt(3, e.getX());
+                    requete.setInt(4, e.getY());
+                    requete.setString(5, Main.scene.getPseudo());
+                    requete.setBoolean(6, true);
+                    requete.executeUpdate();
 
-                requete.close();
+                    requete.close();
 
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            if (e.getButton() == MouseEvent.BUTTON2) {
+                System.out.println("CREER UNE BOITE DE DIALOGUE POUR CHOISIR UN PIEGE");
             }
         }
     }

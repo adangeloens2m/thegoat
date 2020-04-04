@@ -19,6 +19,7 @@ public class Chrono implements Runnable {
 
     @Override
     public void run() {
+        int i = 0;
         while (true) {
             Main.scene.repaint();
             Main.scene.runMethodes();
