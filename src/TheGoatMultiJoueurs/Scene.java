@@ -67,8 +67,9 @@ public class Scene extends JPanel {
 //        System.out.println(dataPiege);
 
         //Affichage des Goats
-        for (int i = 0; i < dataGoat.size(); i = i + 3) {
+        for (int i = 0; i < dataGoat.size(); i = i + 4) {
             g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
+            g.drawString((String) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
             g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
         }
 
@@ -107,12 +108,13 @@ public class Scene extends JPanel {
         ArrayList sqlResult = new ArrayList();
 
         try {
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y, pseudo FROM goat");
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y, pseudo, nbVie FROM goat");
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 sqlResult.add(resultat.getString("pseudo"));
                 sqlResult.add(resultat.getInt("x"));
                 sqlResult.add(resultat.getInt("y"));
+                sqlResult.add(resultat.getString("nbVie"));
             }
             requete.close();
 
