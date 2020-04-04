@@ -66,14 +66,15 @@ public class Scene extends JPanel {
 //        System.out.println(dataGoat);
 //        System.out.println(dataPiege);
 
-        //Goats
+        //Affichage des Goats
         for (int i = 0; i < dataGoat.size(); i = i + 3) {
             g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
             g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
         }
 
+        //Affichage des pieges
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
-            //Bombe
+            //Affichage des bombe
             if (dataPiege.get(i).equals("bombe")) {
                 bombe.setX((int) dataPiege.get(i + 1));
                 bombe.setY((int) dataPiege.get(i + 2));
