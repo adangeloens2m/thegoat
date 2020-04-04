@@ -19,6 +19,7 @@ public class Clavier extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        //Deplacement goat
         if (Main.scene.getPersonnage() == "goat") {
 
             try {
@@ -54,23 +55,44 @@ public class Clavier extends KeyAdapter {
                 ex.printStackTrace();
             }
         }
-        
-        if (e.getKeyCode() == KeyEvent.VK_R) {
+
+        //Remise à zero des tables
+        if (Main.scene.getPersonnage() == "admin" && e.getKeyCode() == KeyEvent.VK_R) {
 
             try {
 
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("DELETE FROM piege");
-                
+
                 requete.executeUpdate();
-                
+
                 requete.close();
-                
-                
-                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = 5");
-                
+
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("DELETE FROM goat");
+
                 requete1.executeUpdate();
-                
+
                 requete1.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        //Faire apparaître sa goat
+        if (Main.scene.getPersonnage() == "goat" && e.getKeyCode() == KeyEvent.VK_P) {
+
+            try {
+
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?,?)");
+                requete.setInt(1, 1);
+                requete.setString(2, Main.scene.getPseudo());
+                requete.setInt(3, 0);
+                requete.setInt(4, 200);
+                requete.setInt(5, 5);
+                requete.setString(6, "Bleu");
+                requete.executeUpdate();
+
+                requete.close();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
