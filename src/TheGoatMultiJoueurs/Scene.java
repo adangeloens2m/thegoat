@@ -176,7 +176,7 @@ public class Scene extends JPanel {
                 String pseudo = resultat.getString("pseudo");
                 String proprietaire = resultat.getString("proprietaire");
                 
-                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = x - 50 WHERE pseudo = ?");
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = x - 30 WHERE pseudo = ? AND nbVie > 0");
                 requete1.setString(1, pseudo);
                 requete1.executeUpdate();
                 
