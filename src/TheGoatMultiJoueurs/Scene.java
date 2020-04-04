@@ -38,8 +38,8 @@ public class Scene extends JPanel {
         super();
         this.pseudo = pseudo;
         this.personnage = personnage;
-        
-        this.bombe = new Bombe(0,0,"",false);
+
+        this.bombe = new Bombe(0, 0, "", false);
 
         this.tileMap = new TilesTuto(16, 50);
 
@@ -67,6 +67,7 @@ public class Scene extends JPanel {
 //        System.out.println(dataGoat);
 //        System.out.println(dataPiege);
 
+        //Goats
         for (int i = 0; i < dataGoat.size(); i = i + 3) {
             g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
             g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
@@ -74,21 +75,20 @@ public class Scene extends JPanel {
 
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
             //Bombe
-            if(dataPiege.get(i).equals("bombe")) {
-                    bombe.setX((int) dataPiege.get(i + 1));
-                    bombe.setY((int) dataPiege.get(i + 2)); //y
-                    bombe.setProprietaire((String) dataPiege.get(i + 3));
-                    bombe.setActif((boolean) dataPiege.get(i + 4));
-            g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
-            g.drawImage(bombe.getImage(),  bombe.getX(), bombe.getY(), null);
+            if (dataPiege.get(i).equals("bombe")) {
+                bombe.setX((int) dataPiege.get(i + 1));
+                bombe.setY((int) dataPiege.get(i + 2));
+                bombe.setProprietaire((String) dataPiege.get(i + 3));
+                bombe.setActif((boolean) dataPiege.get(i + 4));
+                bombe.collision();
+                g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
+                g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
             }
-            //BombeDeclenchement
         }
     }
 
     public void runMethodes() {
         win();
-        collision();
     }
 
     //Getters
@@ -150,41 +150,6 @@ public class Scene extends JPanel {
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 System.out.println("You Won The Game!!");
-            }
-
-            requete.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void collision() {
-        try {
-
-            //*****Zone de detection carrée autour de la bombe*****//
-//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-//                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50");
-            //*****Zone de detection ronde autour de la bombe*****//
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-                    + "WHERE SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < 40");
-
-            //*****Fonctionne pas*****//
-//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1 FROM goat INNER JOIN piege "
-//                    + "WHERE SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < 40))");
-            ResultSet resultat = requete.executeQuery();
-
-            while (resultat.next()) {
-                String pseudo = resultat.getString("pseudo");
-                String proprietaire = resultat.getString("proprietaire");
-
-                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = x - 30 WHERE pseudo = ? AND nbVie > 0");
-                requete1.setString(1, pseudo);
-                requete1.executeUpdate();
-
-                requete1.close();
-
-                System.out.println(pseudo + " killed by " + proprietaire);
             }
 
             requete.close();
