@@ -55,6 +55,7 @@ public class Clavier extends KeyAdapter {
                 ex.printStackTrace();
             }
         }
+        
         if (e.getKeyCode() == KeyEvent.VK_R) {
 
             try {
