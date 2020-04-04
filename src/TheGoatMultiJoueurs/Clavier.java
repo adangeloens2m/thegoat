@@ -22,9 +22,8 @@ public class Clavier extends KeyAdapter {
         if (Main.scene.getPersonnage() == "goat") {
 
             try {
-                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat, piege "
-                        + "SET goat.x = goat.x + ?, goat.x = goat.x - ?, goat.y = goat.y - ?, goat.y = goat.y + ? "
-                        + "WHERE pseudo = ?");
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                        "UPDATE goat SET x = x + ?, x = x - ?, y = y - ?, y = y + ? WHERE pseudo = ?");
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     requete.setInt(1, 1);
                 } else {
@@ -47,7 +46,7 @@ public class Clavier extends KeyAdapter {
                 }
                 requete.setString(5, Main.scene.getPseudo());
 
-                requete.executeUpdate();
+                System.out.println(requete);
 
                 requete.close();
 
