@@ -26,7 +26,7 @@ public class Clavier extends KeyAdapter {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE goat, piege "
                         + "SET goat.x = goat.x + ?, goat.x = goat.x - ?, goat.y = goat.y - ?, goat.y = goat.y + ?, piege.nbVie = ? WHERE pseudo = ?");
                 
-                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("DELETE FROM piege");
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("DELETE * FROM piege");
                 
                 if (e.getKeyCode() == KeyEvent.VK_R){
                     requete.setInt(5, 5);
