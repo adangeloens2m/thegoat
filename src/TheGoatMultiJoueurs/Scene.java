@@ -42,7 +42,7 @@ public class Scene extends JPanel {
         this.pseudo = pseudo;
         this.personnage = personnage;
         
-        this.bombe = new Bombe(1,1,"MAx",true);
+        this.bombe = new Bombe(1,1,"Max",true);
 
         this.tileMap = new TilesTuto(16, 50);
 
