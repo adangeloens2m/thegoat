@@ -22,8 +22,8 @@ public class Souris extends MouseAdapter{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Main.scene.bombe.setX(e.getX());
-        Main.scene.bombe.setY(e.getY());
+//        Main.scene.bombe.setX(e.getX());
+//        Main.scene.bombe.setY(e.getY());
         Main.scene.bombe.setActif(true);
         
         //if (){

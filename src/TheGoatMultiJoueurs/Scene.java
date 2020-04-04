@@ -27,9 +27,6 @@ public class Scene extends JPanel {
     private Image imageGoat;
     private ImageIcon iconGoat;
 
-    private Image imageBombe;
-    private ImageIcon iconBombe;
-
     private String pseudo;
 
     private String personnage;
@@ -42,7 +39,7 @@ public class Scene extends JPanel {
         this.pseudo = pseudo;
         this.personnage = personnage;
         
-        this.bombe = new Bombe(1,1,"Max",true);
+        this.bombe = new Bombe(0,0,"",false);
 
         this.tileMap = new TilesTuto(16, 50);
 
@@ -76,6 +73,8 @@ public class Scene extends JPanel {
         }
 
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
+            System.out.println(dataPiege.get(i));
+            if(dataPiege.get(i).equals("bombe")) {
 //                    (String) dataPiege.get(i), //Type
 //                    (int) dataPiege.get(i + 1), //x
 //                    (int) dataPiege.get(i + 2), //y
@@ -83,7 +82,7 @@ public class Scene extends JPanel {
 //                    (boolean) dataPiege.get(i + 4)); // Actif
             g.drawString((String) dataPiege.get(i + 3), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2));
             g.drawImage(bombe.getImage(), (int) dataPiege.get(i + 1), (int) dataPiege.get(i + 2), null);
-            
+            }
         }
     }
 
