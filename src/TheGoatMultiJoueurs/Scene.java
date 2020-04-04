@@ -74,7 +74,7 @@ public class Scene extends JPanel {
 
         //Affichage des pieges
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
-            //Affichage des bombe
+            //Affichage des bombes
             if (dataPiege.get(i).equals("bombe")) {
                 bombe.setX((int) dataPiege.get(i + 1));
                 bombe.setY((int) dataPiege.get(i + 2));
