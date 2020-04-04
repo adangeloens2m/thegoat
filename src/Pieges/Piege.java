@@ -11,31 +11,21 @@ package Pieges;
  */
 public class Piege {
     
-    private int x;
-    private int y;
-    
-    private int longueur;
     private int largeur;
+    private int hauteur;
     
     private String proprietaire;
     
+    private String type;
+    
     private boolean actif;
 
-    public Piege(int x, int y, int largeur, int longueur, String proprietaire, boolean actif) {
-        this.x = x;
-        this.y = y;
-        this.longueur = longueur;
+    public Piege(String type, int largeur, int hauteur, String proprietaire, boolean actif) {
+        this.type = type;
         this.largeur = largeur;
+        this.hauteur = hauteur;
         this.proprietaire = proprietaire;
         this.actif = actif;
-    }
-
-    public int getLongueur() {
-        return longueur;
-    }
-
-    public void setLongueur(int longueur) {
-        this.longueur = longueur;
     }
 
     public int getLargeur() {
@@ -46,39 +36,35 @@ public class Piege {
         this.largeur = largeur;
     }
 
-    public int getX() {
-        return x;
+    public int getHauteur() {
+        return hauteur;
     }
 
-    public int getY() {
-        return y;
+    public void setHauteur(int hauteur) {
+        this.hauteur = hauteur;
     }
 
     public String getProprietaire() {
         return proprietaire;
     }
 
-    public boolean isActif() {
-        return actif;
-    }
-
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public void setProprietaire(String proprietaire) {
         this.proprietaire = proprietaire;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isActif() {
+        return actif;
     }
 
     public void setActif(boolean actif) {
         this.actif = actif;
     }
-       
-
-
 }
