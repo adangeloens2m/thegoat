@@ -10,18 +10,23 @@ package Pieges;
  * @author achen
  */
 public class Piege {
-    
+
+    private String type;
+
+    private int x;
+    private int y;
+
     private int largeur;
     private int hauteur;
-    
-    private String proprietaire;
-    
-    private String type;
-    
+
+    String proprietaire;
+
     private boolean actif;
 
-    public Piege(String type, int largeur, int hauteur, String proprietaire, boolean actif) {
+    public Piege(String type, int x, int y, int largeur, int hauteur, String proprietaire, boolean actif) {
         this.type = type;
+        this.x = x;
+        this.y = y;
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.proprietaire = proprietaire;
@@ -66,5 +71,21 @@ public class Piege {
 
     public void setActif(boolean actif) {
         this.actif = actif;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

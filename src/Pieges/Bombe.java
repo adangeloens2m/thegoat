@@ -18,13 +18,13 @@ public class Bombe extends Piege {
     private Image image;
 
     public Bombe(int x, int y, String proprietaire, boolean actif) {
-        super("bombe",40, 40, proprietaire, true);
+        super("bombe",x, y, 40, 40, proprietaire, true);
         
         this.icon = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.image = this.icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
     }
 
-//    public void explosion(Goat goat) {
+//    public void explosion() {
 //        if (this.getX() == goat.getX() && this.getY() == goat.getY()) {
 //            try {
 //                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = ? WHERE type = ? AND x = ? AND y = ?");
@@ -42,5 +42,9 @@ public class Bombe extends Piege {
 
     public Image getImage() {
         return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
