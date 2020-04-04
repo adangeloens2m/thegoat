@@ -62,8 +62,15 @@ public class Clavier extends KeyAdapter {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("DELETE FROM piege");
                 
                 requete.executeUpdate();
-
+                
                 requete.close();
+                
+                
+                PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = 5");
+                
+                requete1.executeUpdate();
+                
+                requete1.close();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
