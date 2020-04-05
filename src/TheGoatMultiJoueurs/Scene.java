@@ -66,16 +66,6 @@ public class Scene extends JPanel {
 //        System.out.println(dataGoat);
 //        System.out.println(dataPiege);
 
-        //Affichage des Goats
-        for (int i = 0; i < dataGoat.size(); i = i + 4) {
-            int res = Integer.parseInt((String) dataGoat.get(i + 3));
-            if (res > 0){
-                g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
-                g.drawString((String) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
-                g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
-            }
-        }
-
         //Affichage des pieges
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
             //Affichage des bombes
@@ -85,13 +75,22 @@ public class Scene extends JPanel {
                 bombe.setProprietaire((String) dataPiege.get(i + 3));
                 bombe.setActif((boolean) dataPiege.get(i + 4));
                 bombe.collision();
-                if ((boolean) dataPiege.get(i + 4) == true){
+                if(bombe.isActif()){
                     g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                     g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
                 } else {
                     g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                     g.drawImage(bombe.getImage2(), bombe.getX(), bombe.getY(), null);
                 }
+            }
+        }
+        
+        //Affichage des Goats
+        for (int i = 0; i < dataGoat.size(); i = i + 4) {
+            if ((int) dataGoat.get(i + 3) > 0){
+                g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
+                g.drawString((int) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
+                g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
             }
         }
     }
@@ -122,7 +121,7 @@ public class Scene extends JPanel {
                 sqlResult.add(resultat.getString("pseudo"));
                 sqlResult.add(resultat.getInt("x"));
                 sqlResult.add(resultat.getInt("y"));
-                sqlResult.add(resultat.getString("nbVie"));
+                sqlResult.add(resultat.getInt("nbVie"));
             }
             requete.close();
 
