@@ -68,9 +68,12 @@ public class Scene extends JPanel {
 
         //Affichage des Goats
         for (int i = 0; i < dataGoat.size(); i = i + 4) {
-            g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
-            g.drawString((String) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
-            g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
+            int res = Integer.parseInt((String) dataGoat.get(i + 3));
+            if (res > 0){
+                g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
+                g.drawString((String) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
+                g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
+            }
         }
 
         //Affichage des pieges
