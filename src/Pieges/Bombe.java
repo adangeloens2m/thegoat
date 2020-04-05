@@ -24,7 +24,7 @@ public class Bombe extends Piege {
     private Image image2;
 
     public Bombe(int x, int y, String proprietaire, boolean actif) {
-        super("bombe", x, y, 40, 40, proprietaire, true);
+        super("bombe", x, y, 60, 60, proprietaire, true);
         
         this.icon = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.icon2 = new ImageIcon(getClass().getResource("/images/bombe2.png"));
