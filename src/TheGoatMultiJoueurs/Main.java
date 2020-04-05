@@ -26,7 +26,7 @@ public class Main {
         fenetre.setAlwaysOnTop(true);
         
         //Instanciation Scene
-        scene = new Scene ("Maxime", "goat");  //ENTRER SON PSEUDO ET SON RÔLE !
+        scene = new Scene ("paul", "goat");  //ENTRER SON PSEUDO ET SON RÔLE !
         
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);

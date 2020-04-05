@@ -85,8 +85,13 @@ public class Scene extends JPanel {
                 bombe.setProprietaire((String) dataPiege.get(i + 3));
                 bombe.setActif((boolean) dataPiege.get(i + 4));
                 bombe.collision();
-                g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
-                g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
+                if ((boolean) dataPiege.get(i + 4) == true){
+                    g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
+                    g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
+                } else {
+                    g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
+                    g.drawImage(bombe.getImage2(), bombe.getX(), bombe.getY(), null);
+                }
             }
         }
     }
