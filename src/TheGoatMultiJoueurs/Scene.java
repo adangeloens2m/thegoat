@@ -28,7 +28,6 @@ public class Scene extends JPanel {
 
     private String pseudo;
     private String personnage;
-    private String skin;
 
     private Bombe bombe;
 
@@ -39,8 +38,8 @@ public class Scene extends JPanel {
         this.personnage = personnage;
 
         //Entrer le joueur dans la BDD
-        if(personnage == "goat"){
-        try {
+        if (personnage == "goat") {
+            try {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?,?)");
                 requete.setInt(1, 1);
                 requete.setString(2, pseudo);
@@ -71,7 +70,7 @@ public class Scene extends JPanel {
                 ex.printStackTrace();
             }
         }
-        
+
         this.bombe = new Bombe(0, 0, "", false); //Création de l'objet bombe
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map
@@ -109,19 +108,14 @@ public class Scene extends JPanel {
                 bombe.setProprietaire((String) dataPiege.get(i + 3));
                 bombe.setActif((boolean) dataPiege.get(i + 4));
                 bombe.collision();
-                if(bombe.isActif()){
-                    g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
-                    g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
-                } else {
-                    g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
-                    g.drawImage(bombe.getImage2(), bombe.getX(), bombe.getY(), null);
-                }
+                g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
+                g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
             }
         }
-        
+
         //Affichage des Goats
         for (int i = 0; i < dataGoat.size(); i = i + 4) {
-            if ((int) dataGoat.get(i + 3) > 0){
+            if ((int) dataGoat.get(i + 3) > 0) {
                 g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
                 g.drawString((int) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
                 g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);

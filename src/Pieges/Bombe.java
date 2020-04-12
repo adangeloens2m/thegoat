@@ -24,7 +24,7 @@ public class Bombe extends Piege {
     private Image image2;
 
     public Bombe(int x, int y, String proprietaire, boolean actif) {
-        super("bombe", x, y, 60, 60, proprietaire, true);
+        super(x, y, 60, 60, proprietaire, true);
         
         this.icon = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.icon2 = new ImageIcon(getClass().getResource("/images/bombe2.png"));
@@ -64,7 +64,6 @@ public class Bombe extends Piege {
                 requete2.executeUpdate();
 
                 requete2.close();
-
             }
 
             requete.close();
@@ -75,11 +74,11 @@ public class Bombe extends Piege {
     }
 
     public Image getImage() {
-        return image;
-    }
-
-    public Image getImage2() {
-        return image2;
+        if(this.isActif()){
+            return image;
+        } else {
+            return image2;
+        }
     }
     
     public void setImage(Image image) {
