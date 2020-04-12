@@ -113,7 +113,7 @@ public class Scene extends JPanel {
             
             ImageIcon iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
             Image imageSelectionPiege = iconSelectionPiege.getImage();
-            g.drawImage(imageSelectionPiege, 400, 440, this);
+            g.drawImage(imageSelectionPiege, (401 + 46*this.indice), 440, this);
         }
         
 
