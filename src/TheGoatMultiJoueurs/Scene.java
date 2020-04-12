@@ -105,8 +105,12 @@ public class Scene extends JPanel {
         //Affichage de la barre des pièges
         if(personnage == "loup"){
             ImageIcon iconBarrePiege = new ImageIcon(getClass().getResource("/images/barrePiege.png"));
-            Image imageBarrePiege = iconBarrePiege.getImage();//.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            Image imageBarrePiege = iconBarrePiege.getImage();
             g.drawImage(imageBarrePiege, 400, 440, null);
+            
+            ImageIcon iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
+            Image imageSelectionPiege = iconSelectionPiege.getImage();
+            g.drawImage(imageSelectionPiege, 400, 440, this);
         }
         
 
