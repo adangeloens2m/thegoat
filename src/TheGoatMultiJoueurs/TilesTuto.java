@@ -48,11 +48,11 @@ public class TilesTuto {
                 } else if (i == 0 || i == largeurChamp - 1) {
                     mat[i][j] = 184;
                 } else if (i == 10 && j == 28) {
-                    mat[i][j] = 180;
+                    mat[i][j] = 15;
                 } else if (i == 8 && j == 15) {
-                    mat[i][j] = 100;
+                    mat[i][j] = 16;
                 } else if (i == 3 && j == 26) {
-                    mat[i][j] = 121;
+                    mat[i][j] = 35;
                 } else {
                     mat[i][j] = 21;
                 }
@@ -60,7 +60,7 @@ public class TilesTuto {
         }
 
         try {
-            tileSet = ImageIO.read(getClass().getResource("/images/tileSet.png"));
+            tileSet = ImageIO.read(getClass().getResource("/images/tileSet1.png"));
         } catch (IOException ex) {
             Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
