@@ -6,6 +6,7 @@
 package TheGoatMultiJoueurs;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,22 +15,29 @@ import javax.swing.JFrame;
 public class Main {
 
     public static Scene scene;
-    
-    public static void main(String[] args){
-        
+
+    public static void main(String[] args) {
+
         //Fenetre du jeu
-        JFrame fenetre = new JFrame("TheGoatMultiJoueur");
+        JFrame fenetre = new JFrame("TheGoatMultiJoueurs");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(1100, 560);
         fenetre.setLocationRelativeTo(null);
         fenetre.setResizable(false);
         fenetre.setAlwaysOnTop(true);
-        
+
+        //Boite de dialogue
+        String pseudo = JOptionPane.showInputDialog(fenetre, "Entrez votre pseudo", "The Goat", JOptionPane.QUESTION_MESSAGE);
+        String personnage = (String) JOptionPane.showInputDialog(fenetre, "Choisissez un rôle", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"goat", "loup"}, "goat");
+
+         if (pseudo.isBlank()) {
+            System.exit(0);
+        }
         //Instanciation Scene
-        scene = new Scene ("paul", "loup");  //ENTRER SON PSEUDO ET SON RÔLE !
-        
+        scene = new Scene(pseudo, personnage);
+
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);
     }
-    
+
 }

@@ -27,8 +27,8 @@ public class Scene extends JPanel {
     private ImageIcon iconGoat;
 
     private String pseudo;
-
     private String personnage;
+    private String skin;
 
     private Bombe bombe;
 
@@ -38,6 +38,40 @@ public class Scene extends JPanel {
         this.pseudo = pseudo;
         this.personnage = personnage;
 
+        //Entrer le joueur dans la BDD
+        if(personnage == "goat"){
+        try {
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?,?)");
+                requete.setInt(1, 1);
+                requete.setString(2, pseudo);
+                requete.setInt(3, 0);
+                requete.setInt(4, 200);
+                requete.setInt(5, 5);
+                requete.setString(6, "goat");
+                requete.executeUpdate();
+
+                requete.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            try {
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO loup VALUES (?,?,?,?,?)");
+                requete.setInt(1, 1);
+                requete.setString(2, pseudo);
+                requete.setInt(3, 0);
+                requete.setInt(4, 0);
+                requete.setInt(5, 0);
+                requete.executeUpdate();
+
+                requete.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
         this.bombe = new Bombe(0, 0, "", false); //Création de l'objet bombe
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map

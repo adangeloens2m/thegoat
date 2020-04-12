@@ -72,27 +72,12 @@ public class Clavier extends KeyAdapter {
                 requete1.executeUpdate();
 
                 requete1.close();
+                
+                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("DELETE FROM loup");
 
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+                requete2.executeUpdate();
 
-        //Faire apparaître sa goat
-        if (Main.scene.getPersonnage() == "goat" && e.getKeyCode() == KeyEvent.VK_P) {
-
-            try {
-
-                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?,?)");
-                requete.setInt(1, 1);
-                requete.setString(2, Main.scene.getPseudo());
-                requete.setInt(3, 0);
-                requete.setInt(4, 200);
-                requete.setInt(5, 5);
-                requete.setString(6, "Bleu");
-                requete.executeUpdate();
-
-                requete.close();
+                requete2.close();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
