@@ -160,7 +160,7 @@ public class Scene extends JPanel {
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x > ?");
             requete.setString(1, pseudo);
-            requete.setInt(2, tileMap.getWidth());
+            requete.setInt(2, tileMap.getWidth() - 40);
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 System.out.println("You Won The Game!!");
