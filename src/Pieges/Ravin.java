@@ -21,10 +21,10 @@ public class Ravin extends Piege {
     private Image image;
     
     public Ravin(int x, int y, String proprietaire) {
-        super(x, y, 60, 60, proprietaire, true);
+        super(x, y, 70, 70, proprietaire, true);
         
-//        this.icon = new ImageIcon(getClass().getResource("/images/ravin.png"));
-//        this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
+        this.icon = new ImageIcon(getClass().getResource("/images/trou.png"));
+        this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
     } 
     
     public void collision() {

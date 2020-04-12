@@ -6,6 +6,7 @@
 package TheGoatMultiJoueurs;
 
 import Pieges.Bombe;
+import Pieges.Ravin;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ public class Scene extends JPanel {
     private String personnage;
 
     private Bombe bombe;
+    private Ravin ravin;
     
     private int indice;
 
@@ -74,6 +76,7 @@ public class Scene extends JPanel {
         }
 
         this.bombe = new Bombe(0, 0, "", false); //Création de l'objet bombe
+        this.ravin = new Ravin(0, 0 , ""); //Création de l'objet ravin
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map
 
@@ -125,6 +128,14 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
+            } else if (dataPiege.get(i).equals("ravin")){
+                ravin.setX((int) dataPiege.get(i + 1));
+                ravin.setY((int) dataPiege.get(i + 2));
+                ravin.setProprietaire((String) dataPiege.get(i + 3));
+                ravin.setActif((boolean) dataPiege.get(i + 4));
+                ravin.collision();
+                g.drawString(ravin.getProprietaire(), ravin.getX(), ravin.getY());
+                g.drawImage(ravin.getImage(), ravin.getX(), ravin.getY(), null);
             }
         }
 
@@ -156,6 +167,7 @@ public class Scene extends JPanel {
         return indice;
     }
 
+    //Setters
     public void setIndice(int indice) {
         this.indice = this.indice + indice;
     }
