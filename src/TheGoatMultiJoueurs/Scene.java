@@ -99,6 +99,15 @@ public class Scene extends JPanel {
 //        System.out.println(dataGoat);
 //        System.out.println(dataPiege);
 
+
+        //Affichage de la barre des pièges
+        if(personnage == "loup"){
+            ImageIcon iconBarrePiege = new ImageIcon(getClass().getResource("/images/barrePiege.png"));
+            Image imageBarrePiege = iconBarrePiege.getImage();//.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            g.drawImage(imageBarrePiege, 400, 440, null);
+        }
+        
+
         //Affichage des pieges
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
             //Affichage des bombes
