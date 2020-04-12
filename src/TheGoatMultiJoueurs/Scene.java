@@ -30,6 +30,8 @@ public class Scene extends JPanel {
     private String personnage;
 
     private Bombe bombe;
+    
+    private int indice;
 
     //Constructeur
     public Scene(String pseudo, String personnage) {
@@ -146,6 +148,16 @@ public class Scene extends JPanel {
         return personnage;
     }
 
+    public int getIndice() {
+        return indice;
+    }
+
+    public void setIndice(int indice) {
+        this.indice = this.indice + indice;
+    }
+    
+    
+    
     /////////////////SQL//////////////////
     //Méthode de récupération des données des goats dans une ArrayList
     public ArrayList dataGoat() {

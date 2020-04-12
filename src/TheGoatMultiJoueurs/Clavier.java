@@ -15,7 +15,9 @@ import java.sql.SQLException;
  * @author Arnaud
  */
 public class Clavier extends KeyAdapter {
-
+    
+    private int indice = 0;
+    
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -54,7 +56,17 @@ public class Clavier extends KeyAdapter {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        }
+        } else if (Main.scene.getPersonnage() == "loup"){
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT){ //&& indice <= nombre de piege possible){
+                System.out.println(Main.scene.getIndice());
+                Main.scene.setIndice(1);
+                System.out.println(Main.scene.getIndice());
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT && indice >= 0){
+                System.out.println(Main.scene.getIndice());
+                Main.scene.setIndice(-1);
+                System.out.println(Main.scene.getIndice());
+            }
+        } 
 
         //Remise à zero des tables
         if (/*Main.scene.getPersonnage() == "admin" &&*/ e.getKeyCode() == KeyEvent.VK_R) {
