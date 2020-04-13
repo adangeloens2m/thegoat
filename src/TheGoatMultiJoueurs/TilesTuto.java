@@ -53,14 +53,20 @@ public class TilesTuto {
                     mat[i][j] = 16;
                 } else if (i == 3 && j == 26) {
                     mat[i][j] = 35;
-                } else {
+                } else if (i ==3 && j == 27){
+                    mat[i][j] = 36;
+                } else if (mat[i-1][j] == 35){
+                    mat[i][j] = 55;
+                }else if (mat[i-1][j] == 36){
+                    mat[i][j] = 56;
+                }else {
                     mat[i][j] = 21;
                 }
             }
         }
 
         try {
-            tileSet = ImageIO.read(getClass().getResource("/images/tileSet1.png"));
+            tileSet = ImageIO.read(getClass().getResource("/images/tileSet2.png"));
         } catch (IOException ex) {
             Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
