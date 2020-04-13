@@ -80,8 +80,4 @@ public class Bombe extends Piege {
             return image2;
         }
     }
-    
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }

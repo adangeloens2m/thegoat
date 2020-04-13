@@ -29,6 +29,7 @@ public class Scene extends JPanel {
 
     private String pseudo;
     private String personnage;
+    private String skin;
 
     private Bombe bombe;
     private Ravin ravin;
@@ -36,10 +37,11 @@ public class Scene extends JPanel {
     private int indice;
 
     //Constructeur
-    public Scene(String pseudo, String personnage) {
+    public Scene(String pseudo, String personnage, String skin) {
         super();
         this.pseudo = pseudo;
         this.personnage = personnage;
+        this.skin = skin;
 
         //Entrer le joueur dans la BDD
         if (personnage == "goat") {
@@ -50,7 +52,7 @@ public class Scene extends JPanel {
                 requete.setInt(3, 0);
                 requete.setInt(4, 200);
                 requete.setInt(5, 5);
-                requete.setString(6, "goat");
+                requete.setString(6, skin);
                 requete.executeUpdate();
 
                 requete.close();
@@ -169,11 +171,9 @@ public class Scene extends JPanel {
 
     //Setters
     public void setIndice(int indice) {
-        this.indice = this.indice + indice;
+        this.indice = indice;
     }
-    
-    
-    
+
     /////////////////SQL//////////////////
     //Méthode de récupération des données des goats dans une ArrayList
     public ArrayList dataGoat() {

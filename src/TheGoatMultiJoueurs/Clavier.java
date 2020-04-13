@@ -58,13 +58,17 @@ public class Clavier extends KeyAdapter {
             }
         } else if (Main.scene.getPersonnage() == "loup"){
             if (e.getKeyCode() == KeyEvent.VK_RIGHT){ //&& indice <= nombre de piege possible){
-                System.out.println(Main.scene.getIndice());
-                Main.scene.setIndice(1);
-                System.out.println(Main.scene.getIndice());
-            } else if (e.getKeyCode() == KeyEvent.VK_LEFT && indice >= 0){
-                System.out.println(Main.scene.getIndice());
-                Main.scene.setIndice(-1);
-                System.out.println(Main.scene.getIndice());
+//                System.out.println(Main.scene.getIndice());
+                Main.scene.setIndice((Main.scene.getIndice() + 1)%6);
+//                System.out.println(Main.scene.getIndice());
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+//                System.out.println(Main.scene.getIndice());
+                if(Main.scene.getIndice() == 0){
+                    Main.scene.setIndice(5);
+                } else {
+                Main.scene.setIndice(Main.scene.getIndice() - 1);
+                }
+//                System.out.println(Main.scene.getIndice());
             }
         } 
 

@@ -29,12 +29,15 @@ public class Main {
         //Boite de dialogue
         String pseudo = JOptionPane.showInputDialog(fenetre, "Entrez votre pseudo", "The Goat", JOptionPane.QUESTION_MESSAGE);
         String personnage = (String) JOptionPane.showInputDialog(fenetre, "Choisissez un rôle", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"goat", "loup"}, "goat");
-
+        String skin = "";
+        if(personnage == "goat"){
+            skin = (String) JOptionPane.showInputDialog(fenetre, "Choisissez un skin", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"goat", "bleu", "banc", "rouge"}, "goat");
+        }
          if (pseudo.isBlank()) {
             System.exit(0);
         }
         //Instanciation Scene
-        scene = new Scene(pseudo, personnage);
+        scene = new Scene(pseudo, personnage, skin);
 
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);
