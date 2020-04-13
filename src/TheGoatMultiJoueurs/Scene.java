@@ -15,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -24,8 +26,19 @@ public class Scene extends JPanel {
 
     private TilesTuto tileMap;
 
-    private Image imageGoat;
-    private ImageIcon iconGoat;
+    private ImageIcon iconRealGoat;
+    private Image imageRealGoat;
+    private ImageIcon iconRougeGoat;
+    private Image imageRougeGoat;
+    private ImageIcon iconBleueGoat;
+    private Image imageBleueGoat;
+    private ImageIcon iconVerteGoat;
+    private Image imageVerteGoat;
+    private ImageIcon iconJauneGoat;
+    private Image imageJauneGoat;
+    private ImageIcon iconBlancheGoat;
+    private Image imageBlancheGoat;
+    private Map<String, Image> imageMap;
 
     private String pseudo;
     private String personnage;
@@ -35,7 +48,7 @@ public class Scene extends JPanel {
     private Ravin ravin;
     
     private int indice;
-
+    
     //Constructeur
     public Scene(String pseudo, String personnage, String skin) {
         super();
@@ -82,9 +95,27 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map
 
-        this.iconGoat = new ImageIcon(getClass().getResource("/images/Goat"+skin+".png"));
-        this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
-
+        this.iconRealGoat = new ImageIcon(getClass().getResource("/images/RealGoat.png"));
+        this.imageRealGoat = this.iconRealGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconRougeGoat = new ImageIcon(getClass().getResource("/images/GoatRouge.png"));
+        this.imageRougeGoat = this.iconRougeGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconBleueGoat = new ImageIcon(getClass().getResource("/images/GoatBleue.png"));
+        this.imageBleueGoat = this.iconBleueGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconVerteGoat = new ImageIcon(getClass().getResource("/images/GoatVerte.png"));
+        this.imageVerteGoat = this.iconVerteGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconJauneGoat = new ImageIcon(getClass().getResource("/images/GoatJaune.png"));
+        this.imageJauneGoat = this.iconJauneGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconBlancheGoat = new ImageIcon(getClass().getResource("/images/GoatBlanche.png"));
+        this.imageBlancheGoat = this.iconBlancheGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        
+        this.imageMap = new HashMap<String, Image>();
+        imageMap.put("RealGoat", imageRealGoat);
+        imageMap.put("GoatRouge", imageRougeGoat);
+        imageMap.put("GoatBleue", imageBleueGoat);
+        imageMap.put("GoatVerte", imageVerteGoat);
+        imageMap.put("GoatJaune", imageJauneGoat);
+        imageMap.put("GoatBlanche", imageBlancheGoat);
+        
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier()); //Listener clavier
@@ -142,11 +173,11 @@ public class Scene extends JPanel {
         }
 
         //Affichage des Goats
-        for (int i = 0; i < dataGoat.size(); i = i + 4) {
+        for (int i = 0; i < dataGoat.size(); i = i + 5) {
             if ((int) dataGoat.get(i + 3) > 0) {
                 g.drawString((String) dataGoat.get(i), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2));
                 g.drawString((int) dataGoat.get(i + 3) + " VIES", (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2) + 80);
-                g.drawImage(imageGoat, (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
+                g.drawImage(imageMap.get((String) dataGoat.get(i + 4)), (int) dataGoat.get(i + 1), (int) dataGoat.get(i + 2), null);
             }
         }
     }
@@ -180,13 +211,14 @@ public class Scene extends JPanel {
         ArrayList sqlResult = new ArrayList();
 
         try {
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y, pseudo, nbVie FROM goat");
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM goat");
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 sqlResult.add(resultat.getString("pseudo"));
                 sqlResult.add(resultat.getInt("x"));
                 sqlResult.add(resultat.getInt("y"));
                 sqlResult.add(resultat.getInt("nbVie"));
+                sqlResult.add(resultat.getString("skin"));
             }
             requete.close();
 
