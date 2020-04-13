@@ -82,7 +82,7 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map
 
-        this.iconGoat = new ImageIcon(getClass().getResource("/images/goat.png"));
+        this.iconGoat = new ImageIcon(getClass().getResource("/images/Goat"+skin+".png"));
         this.imageGoat = this.iconGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
 
         this.setFocusable(true);
