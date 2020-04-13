@@ -31,11 +31,13 @@ public class Ravin extends Piege {
         try {
 
             //*****Zone de detection carrée autour de la bombe*****//
-//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-//                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50");
-            //*****Zone de detection ronde autour de la bombe*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-                    + "WHERE type = 'ravin' AND piege.actif AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '" + this.getLargeur() + "'");
+                    + "WHERE goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
+           
+            //*****Zone de detection ronde autour de la bombe*****//
+//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
+//                    + "WHERE type = 'ravin' AND piege.actif "
+//                    + "AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '" + this.getLargeur() + "'");
             ResultSet resultat = requete.executeQuery();
 
             while (resultat.next()) {
