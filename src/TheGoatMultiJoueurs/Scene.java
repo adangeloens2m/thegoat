@@ -77,7 +77,7 @@ public class Scene extends JPanel {
             }
         }
 
-        this.bombe = new Bombe(0, 0, "", false); //Création de l'objet bombe
+        this.bombe = new Bombe(0, 0, ""); //Création de l'objet bombe
         this.ravin = new Ravin(0, 0 , ""); //Création de l'objet ravin
 
         this.tileMap = new TilesTuto(33, 16); //Création de la map

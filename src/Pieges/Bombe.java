@@ -23,7 +23,7 @@ public class Bombe extends Piege {
     private Image image;
     private Image image2;
 
-    public Bombe(int x, int y, String proprietaire, boolean actif) {
+    public Bombe(int x, int y, String proprietaire) {
         super(x, y, 60, 60, proprietaire, true);
         
         this.icon = new ImageIcon(getClass().getResource("/images/bombe.png"));
@@ -40,7 +40,7 @@ public class Bombe extends Piege {
 //                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50");
             //*****Zone de detection ronde autour de la bombe*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
-                    + "WHERE piege.actif AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '"+this.getLargeur()+"'");
+                    + "WHERE type = 'bombe' AND piege.actif AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '"+this.getLargeur()+"'");
             ResultSet resultat = requete.executeQuery();
 
             while (resultat.next()) {
@@ -57,7 +57,7 @@ public class Bombe extends Piege {
 
                 System.out.println(pseudo + " killed by " + proprietaire);
 
-                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE proprietaire = ? AND x = ? AND y = ?");
+                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'bombe' AND proprietaire = ? AND x = ? AND y = ?");
                 requete2.setString(1, proprietaire);
                 requete2.setInt(2, coorx);
                 requete2.setInt(3, coory);
