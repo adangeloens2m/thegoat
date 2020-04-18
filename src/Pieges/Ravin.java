@@ -30,11 +30,11 @@ public class Ravin extends Piege {
     public void collision() {
         try {
 
-            //*****Zone de detection carrée autour de la bombe*****//
+            //*****Zone de detection carré*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
                     + "WHERE goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
            
-            //*****Zone de detection ronde autour de la bombe*****//
+            //*****Zone de detection ronde*****//
 //            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
 //                    + "WHERE type = 'ravin' AND piege.actif "
 //                    + "AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '" + this.getLargeur() + "'");

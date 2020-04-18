@@ -8,6 +8,7 @@ package TheGoatMultiJoueurs;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -48,9 +49,9 @@ public class Clavier extends KeyAdapter {
                     requete.setInt(4, 0);
                 }
                 requete.setString(5, Main.scene.getPseudo());
-
+                
                 requete.executeUpdate();
-
+                
                 requete.close();
 
             } catch (SQLException ex) {
