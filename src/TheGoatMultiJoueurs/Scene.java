@@ -164,7 +164,7 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
-            }if (dataPiege.get(i).equals("ravin")){
+            }else if (dataPiege.get(i).equals("ravin")){
                 ravin.setX((int) dataPiege.get(i + 1));
                 ravin.setY((int) dataPiege.get(i + 2));
                 ravin.setProprietaire((String) dataPiege.get(i + 3));
@@ -181,6 +181,11 @@ public class Scene extends JPanel {
                 if (personnage == "loup"){
                     g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
                     g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
+                } else {
+                    if (mine.isActif()== false){
+                        g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
+                        g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);                        
+                    }
                 }
 
         }}

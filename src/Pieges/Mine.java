@@ -28,7 +28,7 @@ public class Mine extends Piege{
         
         this.icon = new ImageIcon(getClass().getResource("/images/Mine.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
-        this.icon2 = new ImageIcon(getClass().getResource("/images/bombe2.png"));
+        this.icon2 = new ImageIcon(getClass().getResource("/images/Mine2.png"));
         this.image2 = this.icon2.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
     } 
     
@@ -41,7 +41,7 @@ public class Mine extends Piege{
 //                    + "WHERE goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
            
             //*****Zone de detection ronde*****//
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
                     + "WHERE type = 'mine' AND piege.actif "
                     + "AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 40 - piege.y - 20)*(goat.y + 40 - piege.y - 20)) < 25");
             ResultSet resultat = requete.executeQuery();
