@@ -19,13 +19,17 @@ import javax.swing.ImageIcon;
 public class Mine extends Piege{
     private ImageIcon icon;
     private Image image;
+    private ImageIcon icon2;
+    private Image image2;
     
     
     public Mine(int x, int y, String proprietaire) {
-        super(x, y, 100, 100, proprietaire, true);
+        super(x, y, 60, 60, proprietaire, true);
         
         this.icon = new ImageIcon(getClass().getResource("/images/Mine.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
+        this.icon2 = new ImageIcon(getClass().getResource("/images/bombe2.png"));
+        this.image2 = this.icon2.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
     } 
     
     
@@ -39,18 +43,28 @@ public class Mine extends Piege{
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
                     + "WHERE type = 'mine' AND piege.actif "
-                    + "AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 50 - piege.y - 20)*(goat.y + 50 - piege.y - 20)) < '" + this.getLargeur() + "'");
+                    + "AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 40 - piege.y - 20)*(goat.y + 40 - piege.y - 20)) < 25");
             ResultSet resultat = requete.executeQuery();
 
             while (resultat.next()) {
                 String pseudo = resultat.getString("pseudo");
                 String proprietaire = resultat.getString("proprietaire");
+                int coorx = resultat.getInt("x");
+                int coory = resultat.getInt("y");
                 
                 PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = 0 WHERE pseudo = ? AND nbVie > 0");
                 requete1.setString(1, pseudo);
                 requete1.executeUpdate();
 
                 requete1.close();
+                
+                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'mine' AND proprietaire = ? AND x = ? AND y = ?");
+                requete2.setString(1, proprietaire);
+                requete2.setInt(2, coorx);
+                requete2.setInt(3, coory);
+                requete2.executeUpdate();
+
+                requete2.close();
 
                 System.out.println(pseudo + " killed by " + proprietaire);
             }
@@ -63,7 +77,11 @@ public class Mine extends Piege{
     }
 
     public Image getImage() {
-        return image;
+        if(this.isActif()){
+            return image;
+        } else {
+            return image2;
+        }
     }
     
     

@@ -6,6 +6,7 @@
 package TheGoatMultiJoueurs;
 
 import Pieges.Bombe;
+import Pieges.Mine;
 import Pieges.Ravin;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -46,6 +47,7 @@ public class Scene extends JPanel {
 
     private Bombe bombe;
     private Ravin ravin;
+    private Mine mine;
     
     private int indice;
     
@@ -92,7 +94,8 @@ public class Scene extends JPanel {
 
         this.bombe = new Bombe(0, 0, ""); //Création de l'objet bombe
         this.ravin = new Ravin(0, 0 , ""); //Création de l'objet ravin
-
+        this.mine = new Mine(0, 0, ""); //Création de l'objet mine
+        
         this.tileMap = new TilesTuto(33, 16); //Création de la map
 
         this.iconRealGoat = new ImageIcon(getClass().getResource("/images/RealGoat.png"));
@@ -161,7 +164,7 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
-            } else if (dataPiege.get(i).equals("ravin")){
+            }if (dataPiege.get(i).equals("ravin")){
                 ravin.setX((int) dataPiege.get(i + 1));
                 ravin.setY((int) dataPiege.get(i + 2));
                 ravin.setProprietaire((String) dataPiege.get(i + 3));
@@ -169,8 +172,18 @@ public class Scene extends JPanel {
                 ravin.collision();
                 g.drawString(ravin.getProprietaire(), ravin.getX(), ravin.getY());
                 g.drawImage(ravin.getImage(), ravin.getX(), ravin.getY(), null);
-            }
-        }
+            }else if(dataPiege.get(i).equals("mine")){
+                mine.setX((int) dataPiege.get(i + 1));
+                mine.setY((int) dataPiege.get(i + 2));
+                mine.setProprietaire((String) dataPiege.get(i + 3));
+                mine.setActif((boolean) dataPiege.get(i + 4));
+                mine.collision();
+                if (personnage == "loup"){
+                    g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
+                    g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
+                }
+
+        }}
 
         //Affichage des Goats
         for (int i = 0; i < dataGoat.size(); i = i + 5) {
