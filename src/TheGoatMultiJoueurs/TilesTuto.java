@@ -63,7 +63,7 @@ public class TilesTuto {
         }
 
         try {
-            tileSet = ImageIO.read(getClass().getResource("/images/tileSet2.png"));
+            tileSet = ImageIO.read(getClass().getResource("/images/tileSet.png"));
         } catch (IOException ex) {
             Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }

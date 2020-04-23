@@ -33,7 +33,7 @@ public class Ravin extends Piege {
 
             //*****Zone de detection carré*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-                    + "WHERE goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
+                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'ravin' AND goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
            
             //*****Zone de detection ronde*****//
 //            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "

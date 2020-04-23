@@ -30,7 +30,7 @@ public class Chrono implements Runnable {
             try {
                 Thread.sleep(PAUSE);
             } catch (InterruptedException ex) {
-                Logger.getLogger(TheGoatTuto.Chrono.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TheGoatMultiJoueurs.Chrono.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
