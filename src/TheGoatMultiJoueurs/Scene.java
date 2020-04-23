@@ -48,9 +48,11 @@ public class Scene extends JPanel {
     private Bombe bombe;
     private Ravin ravin;
     private Mine mine;
-    
+
     private int indice;
-    
+
+    private int xDynamique;
+
     //Constructeur
     public Scene(String pseudo, String personnage, String skin) {
         super();
@@ -93,10 +95,10 @@ public class Scene extends JPanel {
         }
 
         this.bombe = new Bombe(0, 0, ""); //Création de l'objet bombe
-        this.ravin = new Ravin(0, 0 , ""); //Création de l'objet ravin
+        this.ravin = new Ravin(0, 0, ""); //Création de l'objet ravin
         this.mine = new Mine(0, 0, ""); //Création de l'objet mine
-        
-        this.tileMap = new TilesTuto(33, 16); //Création de la map
+
+        this.tileMap = new TilesTuto(35, 16); //Création de la map
 
         this.iconRealGoat = new ImageIcon(getClass().getResource("/images/RealGoat.png"));
         this.imageRealGoat = this.iconRealGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
@@ -110,7 +112,7 @@ public class Scene extends JPanel {
         this.imageJauneGoat = this.iconJauneGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
         this.iconBlancheGoat = new ImageIcon(getClass().getResource("/images/GoatBlanche.png"));
         this.imageBlancheGoat = this.iconBlancheGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
-        
+
         this.imageMap = new HashMap<String, Image>();
         imageMap.put("RealGoat", imageRealGoat);
         imageMap.put("GoatRouge", imageRougeGoat);
@@ -118,7 +120,7 @@ public class Scene extends JPanel {
         imageMap.put("GoatVerte", imageVerteGoat);
         imageMap.put("GoatJaune", imageJauneGoat);
         imageMap.put("GoatBlanche", imageBlancheGoat);
-        
+
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier()); //Listener clavier
@@ -140,18 +142,16 @@ public class Scene extends JPanel {
 //        System.out.println(dataGoat);
 //        System.out.println(dataPiege);
 
-
         //Affichage de la barre des pièges
-        if(personnage == "loup"){
+        if (personnage == "loup") {
             ImageIcon iconBarrePiege = new ImageIcon(getClass().getResource("/images/barrePiege1.0.png"));
             Image imageBarrePiege = iconBarrePiege.getImage();
             g.drawImage(imageBarrePiege, 400, 440, null);
-            
+
             ImageIcon iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
             Image imageSelectionPiege = iconSelectionPiege.getImage();
-            g.drawImage(imageSelectionPiege, (401 + 46*this.indice), 440, this);
+            g.drawImage(imageSelectionPiege, (401 + 46 * this.indice), 440, this);
         }
-        
 
         //Affichage des pieges
         for (int i = 0; i < dataPiege.size(); i = i + 5) {
@@ -164,7 +164,7 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
-            }else if (dataPiege.get(i).equals("ravin")){
+            } else if (dataPiege.get(i).equals("ravin")) {
                 ravin.setX((int) dataPiege.get(i + 1));
                 ravin.setY((int) dataPiege.get(i + 2));
                 ravin.setProprietaire((String) dataPiege.get(i + 3));
@@ -172,23 +172,21 @@ public class Scene extends JPanel {
                 ravin.collision();
                 g.drawString(ravin.getProprietaire(), ravin.getX(), ravin.getY());
                 g.drawImage(ravin.getImage(), ravin.getX(), ravin.getY(), null);
-            }else if(dataPiege.get(i).equals("mine")){
+            } else if (dataPiege.get(i).equals("mine")) {
                 mine.setX((int) dataPiege.get(i + 1));
                 mine.setY((int) dataPiege.get(i + 2));
                 mine.setProprietaire((String) dataPiege.get(i + 3));
                 mine.setActif((boolean) dataPiege.get(i + 4));
                 mine.collision();
-                if (personnage == "loup"){
+                if (personnage == "loup") {
                     g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
                     g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
-                } else {
-                    if (mine.isActif()== false){
-                        g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
-                        g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);                        
-                    }
+                } else if (personnage == "goat" && mine.isActif() == false) {
+                    g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
+                    g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
                 }
-
-        }}
+            }
+        }
 
         //Affichage des Goats
         for (int i = 0; i < dataGoat.size(); i = i + 5) {
@@ -200,9 +198,10 @@ public class Scene extends JPanel {
         }
     }
 
-    //Méthodes annexes appelées toutes les 3ms
-    public void runMethodes() {
+    //Méthodes annexes appelées toutes les x ms
+    public void slowRefreshMethodes() {
         win();
+        defilement();
     }
 
     //Getters
@@ -216,6 +215,10 @@ public class Scene extends JPanel {
 
     public int getIndice() {
         return indice;
+    }
+
+    public int getxDynamique() {
+        return xDynamique;
     }
 
     //Setters
@@ -269,13 +272,37 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
+    public void defilement() {
+
+        try {
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                    "UPDATE suivi SET x_dynamique = x_dynamique + 1");
+            requete.executeUpdate();
+            requete.close();
+
+            PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
+            ResultSet resultat = requete1.executeQuery();
+            while (resultat.next()) {
+                xDynamique = resultat.getInt("x_dynamique");
+            }
+            requete1.close();
+
+            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET x = x - 1");
+            requete2.executeUpdate();
+            requete2.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     //Méthode d'annonce de victoire
     public void win() {
 
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo FROM goat WHERE pseudo = ? AND x > ?");
             requete.setString(1, pseudo);
-            requete.setInt(2, tileMap.getWidth() - 40);
+            requete.setInt(2, tileMap.getWidth() - xDynamique);
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 System.out.println("You Won The Game!!");

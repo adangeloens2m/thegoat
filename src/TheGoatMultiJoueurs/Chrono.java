@@ -22,7 +22,11 @@ public class Chrono implements Runnable {
         int i = 0;
         while (true) {
             Main.scene.repaint();
-            Main.scene.runMethodes();
+            if(i == 100){
+                Main.scene.slowRefreshMethodes();
+                i = 0;
+            }
+            i++;
             try {
                 Thread.sleep(PAUSE);
             } catch (InterruptedException ex) {

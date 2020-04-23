@@ -30,10 +30,7 @@ public class TilesTuto {
     private int[][] mat;
     private BufferedImage tileSet;
 
-    private int xDynamique;
-
     public TilesTuto(int longueurChamp, int largeurChamp) {
-        xDynamique = 0;
         this.largeurChamp = largeurChamp;
         this.longueurChamp = longueurChamp;
         
@@ -80,9 +77,9 @@ public class TilesTuto {
                 int ligneTileSet = mat[j][i] / TILES_PER_ROW;
 
                 g.drawImage(tileSet,
-                        i * TILE_WIDTH - xDynamique,
+                        i * TILE_WIDTH - Main.scene.getxDynamique(),
                         j * TILE_HEIGHT,
-                        i * TILE_WIDTH + TILE_WIDTH - xDynamique,
+                        i * TILE_WIDTH + TILE_WIDTH - Main.scene.getxDynamique(),
                         j * TILE_HEIGHT + TILE_HEIGHT,
                         colonneTileSet * TILE_WIDTH + 1,
                         ligneTileSet * TILE_HEIGHT + 1,
@@ -91,15 +88,6 @@ public class TilesTuto {
                         null);
             }
         }
-    }
-
-    public void move() {
-        xDynamique++;
-    }
-
-    //Getters
-    public int getxDynamique() {
-        return xDynamique;
     }
     
     public int getWidth(){

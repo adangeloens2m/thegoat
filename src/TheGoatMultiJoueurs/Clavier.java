@@ -95,6 +95,12 @@ public class Clavier extends KeyAdapter {
                 requete2.executeUpdate();
 
                 requete2.close();
+                
+                PreparedStatement requete3 = ConnexionBDD.getInstance().prepareStatement("UPDATE suivi SET x_dynamique = 0");
+
+                requete3.executeUpdate();
+
+                requete3.close();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();

@@ -6,6 +6,7 @@
 package Pieges;
 
 import TheGoatMultiJoueurs.ConnexionBDD;
+import TheGoatMultiJoueurs.Main;
 import java.awt.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
