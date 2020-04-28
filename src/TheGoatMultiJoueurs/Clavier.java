@@ -68,7 +68,10 @@ public class Clavier extends KeyAdapter {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        } else if (Main.scene.getPersonnage() == "loup") {
+        }
+        
+        
+        else if (Main.scene.getPersonnage() == "loup") {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) { //&& indice <= nombre de piege possible){
 //                System.out.println(Main.scene.getIndice());
                 Main.scene.setIndice((Main.scene.getIndice() + 1) % 6);

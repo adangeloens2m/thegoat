@@ -6,6 +6,7 @@
 package TheGoatMultiJoueurs;
 
 import Pieges.Bombe;
+import Pieges.ExplosifTC;
 import Pieges.Mine;
 import Pieges.Ravin;
 import java.awt.Graphics;
@@ -48,6 +49,7 @@ public class Scene extends JPanel {
     private Bombe bombe;
     private Ravin ravin;
     private Mine mine;
+    private ExplosifTC explosifTC;
 
     private int indice;
 
@@ -97,6 +99,7 @@ public class Scene extends JPanel {
         this.bombe = new Bombe(0, 0, ""); //Création de l'objet bombe
         this.ravin = new Ravin(0, 0, ""); //Création de l'objet ravin
         this.mine = new Mine(0, 0, ""); //Création de l'objet mine
+        this.explosifTC = new ExplosifTC(0, 0, ""); //Création de l'objet explosif télécommandé
 
         this.tileMap = new TilesTuto(35, 16); //Création de la map
 
@@ -164,6 +167,7 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
+            //Affichage des ravins
             } else if (dataPiege.get(i).equals("ravin")) {
                 ravin.setX((int) dataPiege.get(i + 1));
                 ravin.setY((int) dataPiege.get(i + 2));
@@ -172,6 +176,7 @@ public class Scene extends JPanel {
                 ravin.collision();
                 g.drawString(ravin.getProprietaire(), ravin.getX(), ravin.getY());
                 g.drawImage(ravin.getImage(), ravin.getX(), ravin.getY(), null);
+            //Affichage des mines
             } else if (dataPiege.get(i).equals("mine")) {
                 mine.setX((int) dataPiege.get(i + 1));
                 mine.setY((int) dataPiege.get(i + 2));
@@ -185,6 +190,20 @@ public class Scene extends JPanel {
                     g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
                     g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
                 }
+            //Affichage des explosifs télécommandés
+            }else if (dataPiege.get(i).equals("ExplosifTC")) {
+                explosifTC.setX((int) dataPiege.get(i + 1));
+                explosifTC.setY((int) dataPiege.get(i + 2));
+                explosifTC.setProprietaire((String) dataPiege.get(i + 3));
+                explosifTC.setActif((boolean) dataPiege.get(i + 4));
+                explosifTC.collision();
+                g.drawString(explosifTC.getProprietaire(), explosifTC.getX(), explosifTC.getY()+10);
+                if (dataPiege.get(5) == "true" && personnage == "loup"){
+                    g.drawString("Actif", explosifTC.getX(), explosifTC.getY()+70);
+                }else if(dataPiege.get(5) == "false" && personnage == "loup") {
+                    g.drawString("Inactif", explosifTC.getX(), explosifTC.getY()+70);
+                }
+                g.drawImage(explosifTC.getImage(), explosifTC.getX(), explosifTC.getY(), null);
             }
         }
 
