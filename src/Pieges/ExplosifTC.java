@@ -44,7 +44,7 @@ public class ExplosifTC extends Piege {
 
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
-                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'ExplosifTC' AND piege.actif "
+                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'explosifTC' AND piege.actif "
                     + "AND SQRT((goat.x + 40 - piege.x - 30)*(goat.x + 40 - piege.x - 30)+(goat.y + 40 - piege.y - 40)*(goat.y + 40 - piege.y - 40)) < 40");
             ResultSet resultat = requete.executeQuery();
 
@@ -60,7 +60,7 @@ public class ExplosifTC extends Piege {
 
                 requete1.close();
                 
-                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'ExplosifTC' AND proprietaire = ? AND x = ? AND y = ?");
+                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'explosifTC' AND proprietaire = ? AND x = ? AND y = ?");
                 requete2.setString(1, proprietaire);
                 requete2.setInt(2, coorx);
                 requete2.setInt(3, coory);
@@ -78,8 +78,6 @@ public class ExplosifTC extends Piege {
         }
     }
    
-    
-
     public Image getImage() {
         if(this.isActif()){
             return image;

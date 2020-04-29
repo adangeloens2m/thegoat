@@ -55,12 +55,15 @@ public class Scene extends JPanel {
 
     private int xDynamique;
 
+    private boolean defilHost;
+
     //Constructeur
     public Scene(String pseudo, String personnage, String skin) {
         super();
         this.pseudo = pseudo;
         this.personnage = personnage;
         this.skin = skin;
+        this.defilHost = false;
 
         //Entrer le joueur dans la BDD
         if (personnage == "goat") {
@@ -167,7 +170,7 @@ public class Scene extends JPanel {
                 bombe.collision();
                 g.drawString(bombe.getProprietaire(), bombe.getX(), bombe.getY());
                 g.drawImage(bombe.getImage(), bombe.getX(), bombe.getY(), null);
-            //Affichage des ravins
+                //Affichage des ravins
             } else if (dataPiege.get(i).equals("ravin")) {
                 ravin.setX((int) dataPiege.get(i + 1));
                 ravin.setY((int) dataPiege.get(i + 2));
@@ -176,7 +179,7 @@ public class Scene extends JPanel {
                 ravin.collision();
                 g.drawString(ravin.getProprietaire(), ravin.getX(), ravin.getY());
                 g.drawImage(ravin.getImage(), ravin.getX(), ravin.getY(), null);
-            //Affichage des mines
+                //Affichage des mines
             } else if (dataPiege.get(i).equals("mine")) {
                 mine.setX((int) dataPiege.get(i + 1));
                 mine.setY((int) dataPiege.get(i + 2));
@@ -190,8 +193,8 @@ public class Scene extends JPanel {
                     g.drawString(mine.getProprietaire(), mine.getX(), mine.getY());
                     g.drawImage(mine.getImage(), mine.getX(), mine.getY(), null);
                 }
-            //Affichage des explosifs télécommandés
-            }else if (dataPiege.get(i).equals("ExplosifTC")) {
+                //Affichage des explosifs télécommandés
+            } else if (dataPiege.get(i).equals("explosifTC")) {
                 explosifTC.setX((int) dataPiege.get(i + 1));
                 explosifTC.setY((int) dataPiege.get(i + 2));
                 explosifTC.setProprietaire((String) dataPiege.get(i + 3));
@@ -236,13 +239,16 @@ public class Scene extends JPanel {
     public ExplosifTC getExplosifTC() {
         return explosifTC;
     }
-    
 
     //Setters
     public void setIndice(int indice) {
         this.indice = indice;
     }
 
+    public void setDefilHost(boolean defilHost) {
+        this.defilHost = defilHost;
+    }
+    
     /////////////////SQL//////////////////
     //Méthode de récupération des données des goats dans une ArrayList
     public ArrayList dataGoat() {
@@ -292,10 +298,16 @@ public class Scene extends JPanel {
     public void defilement() {
 
         try {
+            if(defilHost){
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
                     "UPDATE suivi SET x_dynamique = x_dynamique + 1");
             requete.executeUpdate();
             requete.close();
+            
+            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET x = x - 1");
+            requete2.executeUpdate();
+            requete2.close();
+            }
 
             PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
             ResultSet resultat = requete1.executeQuery();
@@ -303,11 +315,7 @@ public class Scene extends JPanel {
                 xDynamique = resultat.getInt("x_dynamique");
             }
             requete1.close();
-
-            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET x = x - 1");
-            requete2.executeUpdate();
-            requete2.close();
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -98,7 +98,7 @@ public class Souris extends MouseAdapter {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
                         requete.setInt(1, 3);
-                        requete.setString(2, "ExplosifTC");
+                        requete.setString(2, "explosifTC");
                         requete.setInt(3, e.getX() - 20);
                         requete.setInt(4, e.getY() - 30);
                         requete.setString(5, Main.scene.getPseudo());
@@ -115,20 +115,25 @@ public class Souris extends MouseAdapter {
 
             if (e.getButton() == MouseEvent.BUTTON3) {
                 try {
-                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM piege WHERE piege.actif AND type = 'ExplosifTC'");
-                    ResultSet resultat = requete.executeQuery();
-                    
-                    while (resultat.next()) {
-                        int coorx = resultat.getInt("x");
-                        int coory = resultat.getInt("y");
+//                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM piege WHERE piege.actif AND type = 'explosifTC'");
+//                    ResultSet resultat = requete.executeQuery();
+//                    
+//                    while (resultat.next()) {
+//                        int coorx = resultat.getInt("x");
+//                        int coory = resultat.getInt("y");
+//
+//                        //if ((e.getX() - coorx) < 60 && (e.getX() - coorx) > 0 && (e.getX() - coory) < 60 && (e.getX() - coory) > 0) {
+//                            Main.scene.getExplosifTC().collision();
+//                            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false");
+//                            requete2.executeUpdate();
+//                            requete2.close();
+//                        //}
+//                    }
+//                    requete.close();
 
-                        //if ((e.getX() - coorx) < 60 && (e.getX() - coorx) > 0 && (e.getX() - coory) < 60 && (e.getX() - coory) > 0) {
-                            Main.scene.getExplosifTC().collision();
-                            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false");
-                            requete2.executeUpdate();
-                            requete2.close();
-                        //}
-                    }
+                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'explosifTC' and proprietaire = '" + Main.scene.getPseudo() + "'");
+                    Main.scene.getExplosifTC().collision();
+                    requete.executeUpdate();
                     requete.close();
 
                 } catch (SQLException ex) {

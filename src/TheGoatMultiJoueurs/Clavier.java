@@ -27,7 +27,7 @@ public class Clavier extends KeyAdapter {
 
             int currentX = 0;
             int currentY = 0;
-            
+
             try {
                 PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT x, y FROM goat WHERE pseudo = '" + Main.scene.getPseudo() + "'");
                 ResultSet resultat = requete1.executeQuery();
@@ -68,10 +68,7 @@ public class Clavier extends KeyAdapter {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-        }
-        
-        
-        else if (Main.scene.getPersonnage() == "loup") {
+        } else if (Main.scene.getPersonnage() == "loup") {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) { //&& indice <= nombre de piege possible){
 //                System.out.println(Main.scene.getIndice());
                 Main.scene.setIndice((Main.scene.getIndice() + 1) % 6);
@@ -113,8 +110,29 @@ public class Clavier extends KeyAdapter {
                 PreparedStatement requete3 = ConnexionBDD.getInstance().prepareStatement("UPDATE suivi SET x_dynamique = 0");
 
                 requete3.executeUpdate();
+                Main.scene.setDefilHost(false);
 
                 requete3.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        if (/*Main.scene.getPersonnage() == "admin" &&*/e.getKeyCode() == KeyEvent.VK_S) {
+
+            try {
+
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()) {
+                    int xDynamique = resultat.getInt("x_dynamique");
+
+                    if (xDynamique == 0) {
+                        Main.scene.setDefilHost(true);
+                    }
+                }
+                requete.close();
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
