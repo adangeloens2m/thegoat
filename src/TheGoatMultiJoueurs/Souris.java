@@ -9,6 +9,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -101,7 +102,7 @@ public class Souris extends MouseAdapter {
                         requete.setInt(3, e.getX() - 20);
                         requete.setInt(4, e.getY() - 30);
                         requete.setString(5, Main.scene.getPseudo());
-                        requete.setBoolean(6, false);
+                        requete.setBoolean(6, true);
                         requete.executeUpdate();
 
                         requete.close();
@@ -111,6 +112,50 @@ public class Souris extends MouseAdapter {
                     }
                 }
             }
+
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                try {
+                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM piege WHERE piege.actif AND type = 'ExplosifTC'");
+                    ResultSet resultat = requete.executeQuery();
+                    
+                    while (resultat.next()) {
+                        int coorx = resultat.getInt("x");
+                        int coory = resultat.getInt("y");
+
+                        //if ((e.getX() - coorx) < 60 && (e.getX() - coorx) > 0 && (e.getX() - coory) < 60 && (e.getX() - coory) > 0) {
+                            Main.scene.getExplosifTC().collision();
+                            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false");
+                            requete2.executeUpdate();
+                            requete2.close();
+                        //}
+                    }
+                    requete.close();
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+
         }
     }
+    
+//    public static boolean explosion() {
+//        MouseEvent e = null;
+//        boolean explosion;
+//        if (e.getButton() == MouseEvent.BUTTON3) {
+//            try {
+//                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y FROM piege WHERE actif = 'true' AND type = 'ExplosifTC");
+//                ResultSet resultat = requete.executeQuery();
+//
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//            explosion = true;
+//        }
+//        else{
+//            explosion = false;
+//        }
+//        return explosion;
+//    }
 }

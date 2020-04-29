@@ -41,7 +41,7 @@ public class ExplosifTC extends Piege {
             //*****Zone de detection carrée*****//
 //            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
 //                    + "WHERE goat.x + 40 >= piege.x AND goat.x + 40 <= piege.x + 90 AND goat.y + 40 >= piege.y AND goat.y + 40 <= piege.y + 100");
-           
+
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
                     + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'ExplosifTC' AND piege.actif "
@@ -77,10 +77,7 @@ public class ExplosifTC extends Piege {
             ex.printStackTrace();
         }
     }
-    
-    public void explosion() {
-
-    }
+   
     
 
     public Image getImage() {
