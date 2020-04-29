@@ -139,23 +139,5 @@ public class Souris extends MouseAdapter {
 
         }
     }
-    
-//    public static boolean explosion() {
-//        MouseEvent e = null;
-//        boolean explosion;
-//        if (e.getButton() == MouseEvent.BUTTON3) {
-//            try {
-//                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y FROM piege WHERE actif = 'true' AND type = 'ExplosifTC");
-//                ResultSet resultat = requete.executeQuery();
-//
-//            } catch (SQLException ex) {
-//                ex.printStackTrace();
-//            }
-//            explosion = true;
-//        }
-//        else{
-//            explosion = false;
-//        }
-//        return explosion;
-//    }
+
 }

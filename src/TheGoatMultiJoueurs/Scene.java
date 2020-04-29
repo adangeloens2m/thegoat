@@ -196,14 +196,6 @@ public class Scene extends JPanel {
                 explosifTC.setY((int) dataPiege.get(i + 2));
                 explosifTC.setProprietaire((String) dataPiege.get(i + 3));
                 explosifTC.setActif((boolean) dataPiege.get(i + 4));
-//                if(Souris.explosion() == true)
-//                explosifTC.collision();
-//                g.drawString(explosifTC.getProprietaire(), explosifTC.getX(), explosifTC.getY()+10);
-//                if (dataPiege.get(5) == "true" && personnage == "loup"){
-//                    g.drawString("Actif", explosifTC.getX(), explosifTC.getY()+70);
-//                }else if(dataPiege.get(5) == "false" && personnage == "loup") {
-//                    g.drawString("Inactif", explosifTC.getX(), explosifTC.getY()+70);
-//                }
                 g.drawImage(explosifTC.getImage(), explosifTC.getX(), explosifTC.getY(), null);
             }
         }
