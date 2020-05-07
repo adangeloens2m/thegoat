@@ -69,10 +69,12 @@ public class ExplosifTC extends Piege {
                 requete2.close();
 
                 System.out.println(pseudo + " killed by " + proprietaire);
+                
+                this.payDay(proprietaire);
             }
 
             requete.close();
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

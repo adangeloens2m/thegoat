@@ -30,13 +30,12 @@ public class Souris extends MouseAdapter {
 
                     try {
 
-                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
-                        requete.setInt(1, 3);
-                        requete.setString(2, "bombe");
-                        requete.setInt(3, e.getX() - 20);
-                        requete.setInt(4, e.getY() - 30);
-                        requete.setString(5, Main.scene.getPseudo());
-                        requete.setBoolean(6, true);
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
+                        requete.setString(1, "bombe");
+                        requete.setInt(2, e.getX() - 20);
+                        requete.setInt(3, e.getY() - 30);
+                        requete.setString(4, Main.scene.getPseudo());
+                        requete.setBoolean(5, true);
                         requete.executeUpdate();
 
                         requete.close();
@@ -51,13 +50,12 @@ public class Souris extends MouseAdapter {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     try {
 
-                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
-                        requete.setInt(1, 3);
-                        requete.setString(2, "ravin");
-                        requete.setInt(3, e.getX() - 45);
-                        requete.setInt(4, e.getY() - 45);
-                        requete.setString(5, Main.scene.getPseudo());
-                        requete.setBoolean(6, true);
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
+                        requete.setString(1, "ravin");
+                        requete.setInt(2, e.getX() - 45);
+                        requete.setInt(3, e.getY() - 45);
+                        requete.setString(4, Main.scene.getPseudo());
+                        requete.setBoolean(5, true);
                         requete.executeUpdate();
 
                         requete.close();
@@ -73,13 +71,12 @@ public class Souris extends MouseAdapter {
 
                     try {
 
-                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
-                        requete.setInt(1, 3);
-                        requete.setString(2, "mine");
-                        requete.setInt(3, e.getX() - 20);
-                        requete.setInt(4, e.getY() - 30);
-                        requete.setString(5, Main.scene.getPseudo());
-                        requete.setBoolean(6, true);
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
+                        requete.setString(1, "mine");
+                        requete.setInt(2, e.getX() - 20);
+                        requete.setInt(3, e.getY() - 30);
+                        requete.setString(4, Main.scene.getPseudo());
+                        requete.setBoolean(5, true);
                         requete.executeUpdate();
 
                         requete.close();
@@ -96,13 +93,12 @@ public class Souris extends MouseAdapter {
 
                     try {
 
-                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?,?)");
-                        requete.setInt(1, 3);
-                        requete.setString(2, "explosifTC");
-                        requete.setInt(3, e.getX() - 20);
-                        requete.setInt(4, e.getY() - 30);
-                        requete.setString(5, Main.scene.getPseudo());
-                        requete.setBoolean(6, true);
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
+                        requete.setString(1, "explosifTC");
+                        requete.setInt(2, e.getX() - 20);
+                        requete.setInt(3, e.getY() - 30);
+                        requete.setString(4, Main.scene.getPseudo());
+                        requete.setBoolean(5, true);
                         requete.executeUpdate();
 
                         requete.close();

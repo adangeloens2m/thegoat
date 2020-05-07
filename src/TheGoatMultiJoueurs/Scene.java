@@ -68,13 +68,12 @@ public class Scene extends JPanel {
         //Entrer le joueur dans la BDD
         if (personnage == "goat") {
             try {
-                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?,?)");
-                requete.setInt(1, 1);
-                requete.setString(2, pseudo);
-                requete.setInt(3, 0);
-                requete.setInt(4, 200);
-                requete.setInt(5, 5);
-                requete.setString(6, skin);
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?)");
+                requete.setString(1, pseudo);
+                requete.setInt(2, 0);
+                requete.setInt(3, 200);
+                requete.setInt(4, 5);
+                requete.setString(5, skin);
                 requete.executeUpdate();
 
                 requete.close();
@@ -84,12 +83,9 @@ public class Scene extends JPanel {
             }
         } else {
             try {
-                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO loup VALUES (?,?,?,?,?)");
-                requete.setInt(1, 1);
-                requete.setString(2, pseudo);
-                requete.setInt(3, 0);
-                requete.setInt(4, 0);
-                requete.setInt(5, 0);
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO loup VALUES (?,?)");
+                requete.setString(1, pseudo);
+                requete.setInt(2, 5);
                 requete.executeUpdate();
 
                 requete.close();

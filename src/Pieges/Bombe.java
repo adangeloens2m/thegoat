@@ -67,10 +67,13 @@ public class Bombe extends Piege {
                 requete2.executeUpdate();
 
                 requete2.close();
+                
+                this.payDay(proprietaire);
+
             }
 
             requete.close();
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

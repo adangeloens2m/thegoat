@@ -24,7 +24,6 @@ public class Main {
         fenetre.setSize(1100, 560);
         fenetre.setLocationRelativeTo(null);
         fenetre.setResizable(false);
-        fenetre.setAlwaysOnTop(true);
 
         //Boite de dialogue
         String pseudo = JOptionPane.showInputDialog(fenetre, "Entrez votre pseudo", "The Goat", JOptionPane.QUESTION_MESSAGE);

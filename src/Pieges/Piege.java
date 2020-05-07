@@ -5,6 +5,12 @@
  */
 package Pieges;
 
+import TheGoatMultiJoueurs.ConnexionBDD;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author achen
@@ -76,5 +82,19 @@ public class Piege {
 
     public void setY(int y) {
         this.y = y;
+    }
+    
+    public void payDay(String proprietaire){
+        try {
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                    "UPDATE loup SET coin = coin + 1 WHERE pseudo = '" + proprietaire + "'");
+            requete.executeUpdate();
+            
+            requete.close();
+            
+            System.out.println("ok");
+        } catch (SQLException ex) {
+            Logger.getLogger(Piege.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

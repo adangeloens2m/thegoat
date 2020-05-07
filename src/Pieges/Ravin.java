@@ -50,12 +50,14 @@ public class Ravin extends Piege {
                 requete1.executeUpdate();
 
                 requete1.close();
+                
+                this.payDay(proprietaire);
 
                 System.out.println(pseudo + " killed by " + proprietaire);
             }
 
             requete.close();
-
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
