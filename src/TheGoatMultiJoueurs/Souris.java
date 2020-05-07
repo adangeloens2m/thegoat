@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,9 +26,24 @@ public class Souris extends MouseAdapter {
         // commande pour insérer l'utilisation d'un nouveau piège dans la table
         if (Main.scene.getPersonnage() == "loup") {
 
+            int coin = 5;
+
+            try {
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT coin FROM loup WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+                ResultSet resultat = requete.executeQuery();
+                while (resultat.next()) {
+                    coin = resultat.getInt("coin");
+                }
+
+                requete.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
             if (Main.scene.getIndice() == 0) {
 
-                if (e.getButton() == MouseEvent.BUTTON1) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > 4) {
 
                     try {
 
@@ -43,11 +60,21 @@ public class Souris extends MouseAdapter {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+
+                    try {
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                                "UPDATE loup SET coin = coin - 5 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+
+                        requete.executeUpdate();
+                        requete.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             if (Main.scene.getIndice() == 1) {
 
-                if (e.getButton() == MouseEvent.BUTTON1) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > 9) {
                     try {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
@@ -63,11 +90,22 @@ public class Souris extends MouseAdapter {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+
+                    try {
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                                "UPDATE loup SET coin = coin - 10 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+
+                        requete.executeUpdate();
+                        requete.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
+
             if (Main.scene.getIndice() == 2) {
 
-                if (e.getButton() == MouseEvent.BUTTON1) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > 19) {
 
                     try {
 
@@ -84,12 +122,22 @@ public class Souris extends MouseAdapter {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+
+                    try {
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                                "UPDATE loup SET coin = coin - 20 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+
+                        requete.executeUpdate();
+                        requete.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
 
             if (Main.scene.getIndice() == 3) {
 
-                if (e.getButton() == MouseEvent.BUTTON1) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > 14) {
 
                     try {
 
@@ -105,6 +153,16 @@ public class Souris extends MouseAdapter {
 
                     } catch (SQLException ex) {
                         ex.printStackTrace();
+                    }
+
+                    try {
+                        PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                                "UPDATE loup SET coin = coin - 15 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+
+                        requete.executeUpdate();
+                        requete.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -140,5 +198,4 @@ public class Souris extends MouseAdapter {
 
         }
     }
-
 }

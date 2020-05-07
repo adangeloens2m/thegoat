@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -141,8 +143,7 @@ public class Scene extends JPanel {
 
         ArrayList dataGoat = dataGoat();
         ArrayList dataPiege = dataPiege();
-//        System.out.println(dataGoat);
-//        System.out.println(dataPiege);
+        ArrayList dataLoup = dataLoup();
 
         //Affichage de la barre des pièges
         if (personnage == "loup") {
@@ -153,6 +154,17 @@ public class Scene extends JPanel {
             ImageIcon iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
             Image imageSelectionPiege = iconSelectionPiege.getImage();
             g.drawImage(imageSelectionPiege, (401 + 46 * this.indice), 440, this);
+
+            for (int i = 0; i < dataLoup.size(); i += 2) {
+                if (dataLoup.get(i).equals(pseudo)) {
+                    int coin = (int) dataLoup.get(i + 1);
+                    g.drawString("Coin : " + coin, 400, 435);
+                    g.drawString(Integer.toString(coin / 5), 440, 486);
+                    g.drawString(Integer.toString(coin / 10), 486, 486);
+                    g.drawString(Integer.toString(coin / 20), 530, 486);
+                    g.drawString(Integer.toString(coin / 15), 576, 486);
+                }
+            }
         }
 
         //Affichage des pieges
@@ -213,6 +225,7 @@ public class Scene extends JPanel {
     public void slowRefreshMethodes() {
         win();
         defilement();
+        freeCoin();
     }
 
     //Getters
@@ -244,7 +257,7 @@ public class Scene extends JPanel {
     public void setDefilHost(boolean defilHost) {
         this.defilHost = defilHost;
     }
-    
+
     /////////////////SQL//////////////////
     //Méthode de récupération des données des goats dans une ArrayList
     public ArrayList dataGoat() {
@@ -268,12 +281,31 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
+    //Méthode de récupération des données des loups dans une ArrayList
+    public ArrayList dataLoup() {
+        ArrayList sqlResult = new ArrayList();
+
+        try {
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM loup");
+            ResultSet resultat = requete.executeQuery();
+            while (resultat.next()) {
+                sqlResult.add(resultat.getString("pseudo"));
+                sqlResult.add(resultat.getInt("coin"));
+            }
+            requete.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sqlResult;
+    }
+
     //Méthode de récupération des données des pièges dans une ArrayList
     public ArrayList dataPiege() {
         ArrayList sqlResult = new ArrayList();
 
         try {
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT x, y, proprietaire, type, actif FROM piege");
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM piege");
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
                 sqlResult.add(resultat.getString("type"));
@@ -294,15 +326,15 @@ public class Scene extends JPanel {
     public void defilement() {
 
         try {
-            if(defilHost){
-            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                    "UPDATE suivi SET x_dynamique = x_dynamique + 1");
-            requete.executeUpdate();
-            requete.close();
-            
-            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET x = x - 1");
-            requete2.executeUpdate();
-            requete2.close();
+            if (defilHost) {
+                PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                        "UPDATE suivi SET x_dynamique = x_dynamique + 1");
+                requete.executeUpdate();
+                requete.close();
+
+                PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET x = x - 1");
+                requete2.executeUpdate();
+                requete2.close();
             }
 
             PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
@@ -311,7 +343,7 @@ public class Scene extends JPanel {
                 xDynamique = resultat.getInt("x_dynamique");
             }
             requete1.close();
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -333,6 +365,19 @@ public class Scene extends JPanel {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void freeCoin() {
+
+        try {
+            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
+                    "UPDATE loup SET coin = coin + 1 WHERE pseudo = '" + pseudo + "'");
+
+            requete.executeUpdate();
+            requete.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Scene.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -88,11 +88,10 @@ public class Piege {
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
                     "UPDATE loup SET coin = coin + 1 WHERE pseudo = '" + proprietaire + "'");
+            
             requete.executeUpdate();
-            
             requete.close();
-            
-            System.out.println("ok");
+
         } catch (SQLException ex) {
             Logger.getLogger(Piege.class.getName()).log(Level.SEVERE, null, ex);
         }
