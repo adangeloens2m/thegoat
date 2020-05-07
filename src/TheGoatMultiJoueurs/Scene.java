@@ -159,10 +159,10 @@ public class Scene extends JPanel {
                 if (dataLoup.get(i).equals(pseudo)) {
                     int coin = (int) dataLoup.get(i + 1);
                     g.drawString("Coin : " + coin, 400, 435);
-                    g.drawString(Integer.toString(coin / 5), 440, 486);
-                    g.drawString(Integer.toString(coin / 10), 486, 486);
-                    g.drawString(Integer.toString(coin / 20), 530, 486);
-                    g.drawString(Integer.toString(coin / 15), 576, 486);
+                    g.drawString(Integer.toString(coin / bombe.getCost()), 440, 486);
+                    g.drawString(Integer.toString(coin / ravin.getCost()), 486, 486);
+                    g.drawString(Integer.toString(coin / mine.getCost()), 530, 486);
+                    g.drawString(Integer.toString(coin / explosifTC.getCost()), 576, 486);
                 }
             }
         }
@@ -207,6 +207,7 @@ public class Scene extends JPanel {
                 explosifTC.setY((int) dataPiege.get(i + 2));
                 explosifTC.setProprietaire((String) dataPiege.get(i + 3));
                 explosifTC.setActif((boolean) dataPiege.get(i + 4));
+                g.drawString(explosifTC.getProprietaire(), explosifTC.getX(), explosifTC.getY());
                 g.drawImage(explosifTC.getImage(), explosifTC.getX(), explosifTC.getY(), null);
             }
         }
@@ -249,6 +250,18 @@ public class Scene extends JPanel {
         return explosifTC;
     }
 
+    public Bombe getBombe() {
+        return bombe;
+    }
+
+    public Ravin getRavin() {
+        return ravin;
+    }
+
+    public Mine getMine() {
+        return mine;
+    }
+    
     //Setters
     public void setIndice(int indice) {
         this.indice = indice;

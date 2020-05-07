@@ -22,7 +22,7 @@ public class Ravin extends Piege {
     private Image image;
     
     public Ravin(int x, int y, String proprietaire) {
-        super(x, y, 100, 100, proprietaire, true);
+        super(x, y, 100, 100, proprietaire, true, 20);
         
         this.icon = new ImageIcon(getClass().getResource("/images/trou.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);

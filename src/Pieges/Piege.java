@@ -22,18 +22,20 @@ public class Piege {
 
     private int largeur;
     private int hauteur;
+    private int cost;
 
     String proprietaire;
 
     private boolean actif;
 
-    public Piege(int x, int y, int largeur, int hauteur, String proprietaire, boolean actif) {
+    public Piege(int x, int y, int largeur, int hauteur, String proprietaire, boolean actif, int cost) {
         this.x = x;
         this.y = y;
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.proprietaire = proprietaire;
         this.actif = actif;
+        this.cost = cost;
     }
 
     public int getLargeur() {
@@ -83,7 +85,11 @@ public class Piege {
     public void setY(int y) {
         this.y = y;
     }
-    
+
+    public int getCost() {
+        return cost;
+    }
+       
     public void payDay(String proprietaire){
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(

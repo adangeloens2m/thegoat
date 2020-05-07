@@ -43,7 +43,7 @@ public class Souris extends MouseAdapter {
 
             if (Main.scene.getIndice() == 0) {
 
-                if (e.getButton() == MouseEvent.BUTTON1 && coin > 4) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getBombe().getCost() - 1) {
 
                     try {
 
@@ -63,7 +63,7 @@ public class Souris extends MouseAdapter {
 
                     try {
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                                "UPDATE loup SET coin = coin - 5 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+                                "UPDATE loup SET coin = coin - '" + Main.scene.getBombe().getCost() + "' WHERE pseudo = '" + Main.scene.getPseudo() + "'");
 
                         requete.executeUpdate();
                         requete.close();
@@ -74,7 +74,7 @@ public class Souris extends MouseAdapter {
             }
             if (Main.scene.getIndice() == 1) {
 
-                if (e.getButton() == MouseEvent.BUTTON1 && coin > 9) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getRavin().getCost() - 1) {
                     try {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
@@ -93,7 +93,7 @@ public class Souris extends MouseAdapter {
 
                     try {
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                                "UPDATE loup SET coin = coin - 10 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+                                "UPDATE loup SET coin = coin - '" + Main.scene.getRavin().getCost() + "' WHERE pseudo = '" + Main.scene.getPseudo() + "'");
 
                         requete.executeUpdate();
                         requete.close();
@@ -105,7 +105,7 @@ public class Souris extends MouseAdapter {
 
             if (Main.scene.getIndice() == 2) {
 
-                if (e.getButton() == MouseEvent.BUTTON1 && coin > 19) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getMine().getCost() - 1) {
 
                     try {
 
@@ -125,7 +125,7 @@ public class Souris extends MouseAdapter {
 
                     try {
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                                "UPDATE loup SET coin = coin - 20 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+                                "UPDATE loup SET coin = coin - '" + Main.scene.getMine().getCost() + "' WHERE pseudo = '" + Main.scene.getPseudo() + "'");
 
                         requete.executeUpdate();
                         requete.close();
@@ -137,7 +137,7 @@ public class Souris extends MouseAdapter {
 
             if (Main.scene.getIndice() == 3) {
 
-                if (e.getButton() == MouseEvent.BUTTON1 && coin > 14) {
+                if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getExplosifTC().getCost() - 1) {
 
                     try {
 
@@ -157,7 +157,7 @@ public class Souris extends MouseAdapter {
 
                     try {
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                                "UPDATE loup SET coin = coin - 15 WHERE pseudo = '" + Main.scene.getPseudo() + "'");
+                                "UPDATE loup SET coin = coin - '" + Main.scene.getExplosifTC().getCost() + "' WHERE pseudo = '" + Main.scene.getPseudo() + "'");
 
                         requete.executeUpdate();
                         requete.close();
