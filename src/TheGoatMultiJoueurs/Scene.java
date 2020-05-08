@@ -102,7 +102,7 @@ public class Scene extends JPanel {
         this.mine = new Mine(0, 0, ""); //Création de l'objet mine
         this.explosifTC = new ExplosifTC(0, 0, ""); //Création de l'objet explosif télécommandé
 
-        this.tileMap = new TilesTuto(35, 16); //Création de la map
+        this.tileMap = new TilesTuto(); //Création de la map
 
         this.iconRealGoat = new ImageIcon(getClass().getResource("/images/RealGoat.png"));
         this.imageRealGoat = this.iconRealGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
@@ -353,7 +353,7 @@ public class Scene extends JPanel {
             PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
             ResultSet resultat = requete1.executeQuery();
             while (resultat.next()) {
-                xDynamique = resultat.getInt("x_dynamique");
+                xDynamique = Math.min(resultat.getInt("x_dynamique"), tileMap.getWidth() + 4*33 - Main.scene.getWidth());
             }
             requete1.close();
 

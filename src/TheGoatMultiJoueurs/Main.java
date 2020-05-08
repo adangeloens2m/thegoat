@@ -21,7 +21,7 @@ public class Main {
         //Fenetre du jeu
         JFrame fenetre = new JFrame("TheGoatMultiJoueurs");
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(1100, 560);
+        fenetre.setSize(1100, 565);
         fenetre.setLocationRelativeTo(null);
         fenetre.setResizable(false);
 

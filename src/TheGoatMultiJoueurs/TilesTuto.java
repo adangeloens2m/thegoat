@@ -23,41 +23,76 @@ public class TilesTuto {
 
     private int TILES_PER_ROW = 20;
     private int TILES_PER_COL = 20;
-    
-    private int longueurChamp;
-    private int largeurChamp;
+
+    private int longueurChamp = 100;
+    private int largeurChamp = 16;
 
     private int[][] mat;
     private BufferedImage tileSet;
 
-    public TilesTuto(int longueurChamp, int largeurChamp) {
-        this.largeurChamp = largeurChamp;
-        this.longueurChamp = longueurChamp;
-        
+    public TilesTuto() {
+
         //Création de la matrice
         mat = new int[largeurChamp][longueurChamp];
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {
+                //Ligne de départ
                 if (j == 0) {
                     mat[i][j] = 191;
-                } else if (j == longueurChamp - 1) {
+                } //**FORÊT**
+                else if (j < longueurChamp / 3) {
+                    //Barrière forêt
+                    if (i == 0 || i == largeurChamp - 1) {
+                        mat[i][j] = 184;
+                    } else if (i == 10 && j == 28) {
+                        mat[i][j] = 15;
+                    } else if (i == 8 && j == 15) {
+                        mat[i][j] = 16;
+                    } else if (i == 2 && j == 26) {
+                        mat[i][j] = 35;
+                    } else if (i == 2 && j == 27) {
+                        mat[i][j] = 36;
+                    } else if (i == 3 && j == 26) {
+                        mat[i][j] = 55;
+                    } else if (i == 3 && j == 27) {
+                        mat[i][j] = 56;
+                    } else {
+                        mat[i][j] = 21;
+                    }
+                  //**DESERT**
+                } else if (j >= longueurChamp / 3 && j < 2 * (longueurChamp / 3)) {
+                    //Bordures du désert
+                    if (i == 0 && j == longueurChamp / 3) {
+                        mat[i][j] = 220;
+                    } else if (i == largeurChamp - 1 && j == longueurChamp / 3) {
+                        mat[i][j] = 260;
+                    } else if (j == longueurChamp / 3) {
+                        mat[i][j] = 240;
+                    } else if (i == 0) {
+                        mat[i][j] = 221;
+                    } else if (i == largeurChamp - 1) {
+                        mat[i][j] = 261;
+                    //Désert
+                    } else {
+                        mat[i][j] = 241;
+                    }
+                //**Jetée**
+                } else if (j >= 2 * (longueurChamp / 3)) {
+                    //Bordures jetée
+                    if (j == 2 * (longueurChamp / 3)) {
+                        mat[i][j] = 242;
+                    } else if (i == largeurChamp - 1) {
+                        mat[i][j] = 88;
+                    //Planches
+                    } else {
+                        mat[i][j] = 30;
+                    }
+                //Ligne d'arrivée
+                } if (j == longueurChamp - 5 && i != largeurChamp - 1) {
                     mat[i][j] = 69;
-                } else if (i == 0 || i == largeurChamp - 1) {
-                    mat[i][j] = 184;
-                } else if (i == 10 && j == 28) {
-                    mat[i][j] = 15;
-                } else if (i == 8 && j == 15) {
-                    mat[i][j] = 16;
-                } else if (i == 3 && j == 26) {
-                    mat[i][j] = 35;
-                } else if (i ==3 && j == 27){
-                    mat[i][j] = 36;
-                } else if (mat[i-1][j] == 35){
-                    mat[i][j] = 55;
-                }else if (mat[i-1][j] == 36){
-                    mat[i][j] = 56;
-                }else {
-                    mat[i][j] = 21;
+                //Eau après ligne d'arrivée
+                } if (j > longueurChamp - 5) {
+                    mat[i][j] = 150;
                 }
             }
         }
@@ -68,7 +103,7 @@ public class TilesTuto {
             Logger.getLogger(TilesTuto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //Disposition des tiles
     public void DrawLayer(Graphics g) {
         for (int j = 0; j < mat.length; j++) {
@@ -89,8 +124,8 @@ public class TilesTuto {
             }
         }
     }
-    
-    public int getWidth(){
-        return (longueurChamp - 1)* TILE_WIDTH;
+
+    public int getWidth() {
+        return (longueurChamp - 5) * TILE_WIDTH;
     }
 }
