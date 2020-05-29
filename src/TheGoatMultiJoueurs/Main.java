@@ -30,7 +30,7 @@ public class Main {
         String personnage = (String) JOptionPane.showInputDialog(fenetre, "Choisissez un rôle", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"goat", "loup"}, "goat");
         String skin = "";
         if(personnage == "goat"){
-            skin = (String) JOptionPane.showInputDialog(fenetre, "Choisissez une goat", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"GoatBleue", "GoatBlanche", "GoatRouge", "GoatJaune", "GoatVerte","RealGoat"}, "RealGoat");
+            skin = (String) JOptionPane.showInputDialog(fenetre, "Choisissez une goat", "The Goat", JOptionPane.QUESTION_MESSAGE, null, new String[]{"GoatBleue", "GoatBlanche", "GoatRouge", "GoatJaune", "GoatVerte","RealGoat","GoatCharlie"}, "RealGoat");
         }
          if (pseudo.isBlank()) {
             System.exit(0);

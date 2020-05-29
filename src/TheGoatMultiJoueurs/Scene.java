@@ -43,6 +43,8 @@ public class Scene extends JPanel {
     private ImageIcon iconBlancheGoat;
     private Image imageBlancheGoat;
     private Map<String, Image> imageMap;
+    private ImageIcon iconCharlieGoat;
+    private Image imageCharlieGoat;
 
     private String pseudo;
     private String personnage;
@@ -116,6 +118,8 @@ public class Scene extends JPanel {
         this.imageJauneGoat = this.iconJauneGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
         this.iconBlancheGoat = new ImageIcon(getClass().getResource("/images/GoatBlanche.png"));
         this.imageBlancheGoat = this.iconBlancheGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
+        this.iconCharlieGoat = new ImageIcon(getClass().getResource("/images/GoatCharlie.png"));
+        this.imageCharlieGoat = this.iconCharlieGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
 
         this.imageMap = new HashMap<String, Image>();
         imageMap.put("RealGoat", imageRealGoat);
@@ -124,6 +128,7 @@ public class Scene extends JPanel {
         imageMap.put("GoatVerte", imageVerteGoat);
         imageMap.put("GoatJaune", imageJauneGoat);
         imageMap.put("GoatBlanche", imageBlancheGoat);
+        imageMap.put("GoatCharlie", imageCharlieGoat);
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -226,7 +231,6 @@ public class Scene extends JPanel {
     public void slowRefreshMethodes() {
         win();
         defilement();
-        freeCoin();
     }
 
     //Getters
@@ -340,6 +344,7 @@ public class Scene extends JPanel {
 
         try {
             if (defilHost) {
+                freeCoin();
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
                         "UPDATE suivi SET x_dynamique = x_dynamique + 1");
                 requete.executeUpdate();
@@ -385,7 +390,7 @@ public class Scene extends JPanel {
 
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                    "UPDATE loup SET coin = coin + 1 WHERE pseudo = '" + pseudo + "'");
+                    "UPDATE loup SET coin = coin + 1");
 
             requete.executeUpdate();
             requete.close();
