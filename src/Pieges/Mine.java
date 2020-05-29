@@ -25,7 +25,7 @@ public class Mine extends Piege{
     
     
     public Mine(int x, int y, String proprietaire) {
-        super(x, y, 60, 60, proprietaire, true, 20);
+        super(x, y, 60, 60, proprietaire, true, 200);
         
         this.icon = new ImageIcon(getClass().getResource("/images/Mine.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);

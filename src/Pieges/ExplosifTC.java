@@ -26,7 +26,7 @@ public class ExplosifTC extends Piege {
     
     
     public ExplosifTC(int x, int y, String proprietaire) {
-        super(x, y, 60, 60, proprietaire, true, 15);
+        super(x, y, 60, 60, proprietaire, true, 150);
         
         this.icon = new ImageIcon(getClass().getResource("/images/ExplosifTC.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
