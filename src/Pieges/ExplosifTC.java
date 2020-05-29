@@ -44,7 +44,7 @@ public class ExplosifTC extends Piege {
 
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
-                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'explosifTC' AND piege.actif "
+                    + "WHERE type = 'explosifTC' AND piege.actif "
                     + "AND SQRT((goat.x + 40 - piege.x - 30)*(goat.x + 40 - piege.x - 30)+(goat.y + 40 - piege.y - 40)*(goat.y + 40 - piege.y - 40)) < 40");
             ResultSet resultat = requete.executeQuery();
 
