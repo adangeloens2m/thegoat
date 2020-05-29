@@ -22,7 +22,7 @@ public class Chrono implements Runnable {
         int i = 0;
         while (true) {
             Main.scene.repaint();
-            if(i == 200){
+            if(i == 50){
                 Main.scene.slowRefreshMethodes();
                 i = 0;
             }
