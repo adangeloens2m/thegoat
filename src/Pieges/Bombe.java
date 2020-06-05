@@ -43,7 +43,7 @@ public class Bombe extends Piege {
 
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
-                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'bombe' AND piege.actif AND SQRT((goat.x + 40 - piege.x - 5)*(goat.x + 40 - piege.x - 5)+(goat.y + 40 - piege.y - 20)*(goat.y + 40 - piege.y - 20)) < 25");
+                    + "WHERE pseudo = '" + Main.scene.getPseudo() + "' AND type = 'bombe' AND piege.actif AND SQRT((goat.x + 40 - piege.x - 30)*(goat.x + 40 - piege.x - 30)+(goat.y + 40 - piege.y - 30)*(goat.y + 40 - piege.y - 30)) < 70");
             ResultSet resultat = requete.executeQuery();
 
             while (resultat.next()) {

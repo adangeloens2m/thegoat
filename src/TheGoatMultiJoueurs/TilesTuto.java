@@ -24,7 +24,7 @@ public class TilesTuto {
     private int TILES_PER_ROW = 20;
     private int TILES_PER_COL = 20;
 
-    private int longueurChamp = 100;
+    private int longueurChamp = 50;
     private int largeurChamp = 16;
 
     private int[][] mat;
