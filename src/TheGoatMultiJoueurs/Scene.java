@@ -89,7 +89,7 @@ public class Scene extends JPanel {
             try {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO loup VALUES (?,?)");
                 requete.setString(1, pseudo);
-                requete.setInt(2, 200);
+                requete.setInt(2, 500);
                 requete.executeUpdate();
 
                 requete.close();
