@@ -143,8 +143,18 @@ public class Scene extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+//------- lignes à décommenter pour enregistrer le tilemap en .PNG ------
+//        BufferedImage image = new BufferedImage(tileMap.getLongueurChamp()*33, tileMap.getLargeurChamp()*33, BufferedImage.TYPE_INT_ARGB);
+//        g = image.createGraphics();
 
         tileMap.DrawLayer(g);
+           
+//         try {
+//            ImageIO.write(image, "png", new File("image.png"));
+//        } catch (IOException ex) {
+//            Logger.getLogger(Scene.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         ArrayList dataGoat = dataGoat();
         ArrayList dataPiege = dataPiege();
@@ -265,7 +275,7 @@ public class Scene extends JPanel {
     public Mine getMine() {
         return mine;
     }
-    
+
     //Setters
     public void setIndice(int indice) {
         this.indice = indice;
@@ -358,7 +368,7 @@ public class Scene extends JPanel {
             PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
             ResultSet resultat = requete1.executeQuery();
             while (resultat.next()) {
-                xDynamique = Math.min(resultat.getInt("x_dynamique"), tileMap.getWidth() + 4*33 - Main.scene.getWidth());
+                xDynamique = Math.min(resultat.getInt("x_dynamique"), tileMap.getWidth() + 4 * 33 - Main.scene.getWidth());
             }
             requete1.close();
 

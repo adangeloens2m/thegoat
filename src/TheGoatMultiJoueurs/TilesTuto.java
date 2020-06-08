@@ -128,4 +128,12 @@ public class TilesTuto {
     public int getWidth() {
         return (longueurChamp - 5) * TILE_WIDTH;
     }
+
+    public int getLongueurChamp() {
+        return longueurChamp;
+    }
+
+    public int getLargeurChamp() {
+        return largeurChamp;
+    }
 }
