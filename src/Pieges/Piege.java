@@ -93,7 +93,7 @@ public class Piege {
     public void payDay(String proprietaire){
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
-                    "UPDATE loup SET coin = coin + 200 WHERE pseudo = '" + proprietaire + "'");
+                    "UPDATE loup SET coin = coin + 50 WHERE pseudo = '" + proprietaire + "'");
             
             requete.executeUpdate();
             requete.close();
