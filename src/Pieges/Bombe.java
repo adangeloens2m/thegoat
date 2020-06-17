@@ -26,7 +26,8 @@ public class Bombe extends Piege {
 
     public Bombe(int x, int y, String proprietaire) {
         super(x, y, 60, 60, proprietaire, true, 50);
-        
+
+        //Initiatlisation de l'image du piège
         this.icon = new ImageIcon(getClass().getResource("/images/bombe.png"));
         this.icon2 = new ImageIcon(getClass().getResource("/images/bombe2.png"));
         this.image = this.icon.getImage().getScaledInstance(this.getLargeur(), this.getHauteur(), Image.SCALE_SMOOTH);
@@ -35,11 +36,6 @@ public class Bombe extends Piege {
 
     public void collision() {
         try {
-
-            //*****Zone de detection carrée*****//
-//            PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire FROM goat, piege "
-//                    + "WHERE goat.x + 40 >= piege.x - 35 AND goat.x + 40 <= piege.x + 35 AND goat.y + 50 >= piege.y - 20 AND goat.y + 50 <= piege.y + 50");
-            
 
             //*****Zone de detection ronde*****//
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT pseudo, proprietaire, piege.x, piege.y FROM goat, piege "
@@ -52,14 +48,14 @@ public class Bombe extends Piege {
                 int coorx = resultat.getInt("x");
                 int coory = resultat.getInt("y");
 
+                //Mort de la goat + réaparition au début de la fenetre
                 PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("UPDATE goat SET nbVie = nbVie - 1, x = 0 WHERE pseudo = ? AND nbVie > 0");
                 requete1.setString(1, pseudo);
                 requete1.executeUpdate();
 
                 requete1.close();
 
-                System.out.println(pseudo + " killed by " + proprietaire);
-
+                //Desactivation du piège
                 PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'bombe' AND proprietaire = ? AND x = ? AND y = ?");
                 requete2.setString(1, proprietaire);
                 requete2.setInt(2, coorx);
@@ -67,20 +63,23 @@ public class Bombe extends Piege {
                 requete2.executeUpdate();
 
                 requete2.close();
+
+                System.out.println(pseudo + " killed by " + proprietaire);
                 
                 this.payDay(proprietaire);
 
+                //DECLENCHEMENT D'UN BRUITAGE
             }
 
             requete.close();
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
     public Image getImage() {
-        if(this.isActif()){
+        if (this.isActif()) {
             return image;
         } else {
             return image2;

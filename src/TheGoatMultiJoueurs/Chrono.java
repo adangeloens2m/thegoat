@@ -21,12 +21,16 @@ public class Chrono implements Runnable {
     public void run() {
         int i = 0;
         while (true) {
-            Main.scene.repaint();
-            if(i == 50){
+            //Rafraishiment des composants graphiques
+            Main.scene.repaint();  
+            
+            //Rafraishissement des méthodes annexes
+            if (i == 50) {
                 Main.scene.slowRefreshMethodes();
                 i = 0;
             }
             i++;
+            
             try {
                 Thread.sleep(PAUSE);
             } catch (InterruptedException ex) {

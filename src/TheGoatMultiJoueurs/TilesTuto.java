@@ -24,7 +24,7 @@ public class TilesTuto {
     private int TILES_PER_ROW = 20;
     private int TILES_PER_COL = 20;
 
-    private int longueurChamp = 50;
+    private int longueurChamp = 100; //A changer pour régler la longueur
     private int largeurChamp = 16;
 
     private int[][] mat;
@@ -59,7 +59,7 @@ public class TilesTuto {
                     } else {
                         mat[i][j] = 21;
                     }
-                  //**DESERT**
+                    //**DESERT**
                 } else if (j >= longueurChamp / 3 && j < 2 * (longueurChamp / 3)) {
                     //Bordures du désert
                     if (i == 0 && j == longueurChamp / 3) {
@@ -72,31 +72,34 @@ public class TilesTuto {
                         mat[i][j] = 221;
                     } else if (i == largeurChamp - 1) {
                         mat[i][j] = 261;
-                    //Désert
+                        //Désert
                     } else {
                         mat[i][j] = 241;
                     }
-                //**Jetée**
+                    //**Jetée**
                 } else if (j >= 2 * (longueurChamp / 3)) {
                     //Bordures jetée
                     if (j == 2 * (longueurChamp / 3)) {
                         mat[i][j] = 242;
                     } else if (i == largeurChamp - 1) {
                         mat[i][j] = 88;
-                    //Planches
+                        //Planches
                     } else {
                         mat[i][j] = 30;
                     }
-                //Ligne d'arrivée
-                } if (j == longueurChamp - 5 && i != largeurChamp - 1) {
+                    //Ligne d'arrivée
+                }
+                if (j == longueurChamp - 2 && i != largeurChamp - 1) {
                     mat[i][j] = 69;
-                //Eau après ligne d'arrivée
-                } if (j > longueurChamp - 5) {
+                    //Eau après ligne d'arrivée
+                }
+                if (j > longueurChamp - 2) {
                     mat[i][j] = 150;
                 }
             }
         }
 
+        //Initialisation du tile set
         try {
             tileSet = ImageIO.read(getClass().getResource("/images/tileSet.png"));
         } catch (IOException ex) {
@@ -125,6 +128,7 @@ public class TilesTuto {
         }
     }
 
+    //Getters
     public int getWidth() {
         return (longueurChamp - 5) * TILE_WIDTH;
     }

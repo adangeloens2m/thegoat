@@ -22,11 +22,11 @@ public class Souris extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        // commande pour insérer l'utilisation d'un nouveau piège dans la table
+        // commande pour insérer un nouveau piège dans la table
         if (Main.scene.getPersonnage() == "loup") {
 
-            int coin = 5;
-
+            //Récupération de coin du joueur
+            int coin = 0;
             try {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT coin FROM loup WHERE pseudo = '" + Main.scene.getPseudo() + "'");
                 ResultSet resultat = requete.executeQuery();
@@ -40,6 +40,7 @@ public class Souris extends MouseAdapter {
                 ex.printStackTrace();
             }
 
+            //Posage de la bombe
             if (Main.scene.getIndice() == 0) {
 
                 if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getBombe().getCost() - 1) {
@@ -47,11 +48,11 @@ public class Souris extends MouseAdapter {
                     try {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
-                        requete.setString(1, "bombe");
-                        requete.setInt(2, e.getX() - 20);
-                        requete.setInt(3, e.getY() - 30);
-                        requete.setString(4, Main.scene.getPseudo());
-                        requete.setBoolean(5, true);
+                        requete.setString(1, "bombe");                  //Type de piège
+                        requete.setInt(2, e.getX() - 30);               //Position x
+                        requete.setInt(3, e.getY() - 30);               //Position y
+                        requete.setString(4, Main.scene.getPseudo());   //Pseudo proprietaire
+                        requete.setBoolean(5, true);                    //Statut actif
                         requete.executeUpdate();
 
                         requete.close();
@@ -60,6 +61,7 @@ public class Souris extends MouseAdapter {
                         ex.printStackTrace();
                     }
 
+                    //Decompte des coins
                     try {
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
                                 "UPDATE loup SET coin = coin - '" + Main.scene.getBombe().getCost() + "' WHERE pseudo = '" + Main.scene.getPseudo() + "'");
@@ -69,8 +71,12 @@ public class Souris extends MouseAdapter {
                     } catch (SQLException ex) {
                         Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
+                    //DECLENCHEMENT D'UN BRUITAGE
                 }
             }
+
+            //Posage ravin
             if (Main.scene.getIndice() == 1) {
 
                 if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getRavin().getCost() - 1) {
@@ -78,8 +84,8 @@ public class Souris extends MouseAdapter {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
                         requete.setString(1, "ravin");
-                        requete.setInt(2, e.getX() - 45);
-                        requete.setInt(3, e.getY() - 45);
+                        requete.setInt(2, e.getX() - 50);
+                        requete.setInt(3, e.getY() - 50);
                         requete.setString(4, Main.scene.getPseudo());
                         requete.setBoolean(5, true);
                         requete.executeUpdate();
@@ -100,8 +106,11 @@ public class Souris extends MouseAdapter {
                         Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+
+                //DECLENCHEMENT D'UN BRUITAGE
             }
 
+            //Posage mine
             if (Main.scene.getIndice() == 2) {
 
                 if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getMine().getCost() - 1) {
@@ -110,8 +119,8 @@ public class Souris extends MouseAdapter {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
                         requete.setString(1, "mine");
-                        requete.setInt(2, e.getX() - 20);
-                        requete.setInt(3, e.getY() - 30);
+                        requete.setInt(2, e.getX() - 25);
+                        requete.setInt(3, e.getY() - 25);
                         requete.setString(4, Main.scene.getPseudo());
                         requete.setBoolean(5, true);
                         requete.executeUpdate();
@@ -132,8 +141,11 @@ public class Souris extends MouseAdapter {
                         Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+
+                //DECLENCHEMENT D'UN BRUITAGE
             }
 
+            //Posage explosifTC
             if (Main.scene.getIndice() == 3) {
 
                 if (e.getButton() == MouseEvent.BUTTON1 && coin > Main.scene.getExplosifTC().getCost() - 1) {
@@ -142,7 +154,7 @@ public class Souris extends MouseAdapter {
 
                         PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO piege VALUES (?,?,?,?,?)");
                         requete.setString(1, "explosifTC");
-                        requete.setInt(2, e.getX() - 20);
+                        requete.setInt(2, e.getX() - 30);
                         requete.setInt(3, e.getY() - 30);
                         requete.setString(4, Main.scene.getPseudo());
                         requete.setBoolean(5, true);
@@ -164,25 +176,15 @@ public class Souris extends MouseAdapter {
                         Logger.getLogger(Souris.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+
+                //DECLENCHEMENT D'UN BRUITAGE
             }
 
+            //Déclenchement explosifTC
             if (e.getButton() == MouseEvent.BUTTON3) {
                 try {
-//                    PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM piege WHERE piege.actif AND type = 'explosifTC'");
-//                    ResultSet resultat = requete.executeQuery();
-//                    
-//                    while (resultat.next()) {
-//                        int coorx = resultat.getInt("x");
-//                        int coory = resultat.getInt("y");
-//
-//                        //if ((e.getX() - coorx) < 60 && (e.getX() - coorx) > 0 && (e.getX() - coory) < 60 && (e.getX() - coory) > 0) {
-//                            Main.scene.getExplosifTC().collision();
-//                            PreparedStatement requete2 = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false");
-//                            requete2.executeUpdate();
-//                            requete2.close();
-//                        //}
-//                    }
-//                    requete.close();
+                    //Piste pour déclencher l'explosif au bout du pointeur de la souris :   
+                    //if ((e.getX() - coorx) < 60 && (e.getX() - coorx) > 0 && (e.getX() - coory) < 60 && (e.getX() - coory) > 0) {
 
                     PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("UPDATE piege SET actif = false WHERE type = 'explosifTC' and proprietaire = '" + Main.scene.getPseudo() + "'");
                     Main.scene.getExplosifTC().collision();
@@ -193,8 +195,8 @@ public class Souris extends MouseAdapter {
                     ex.printStackTrace();
                 }
 
+                //DECLENCHEMENT D'UN BRUITAGE
             }
-
         }
     }
 }

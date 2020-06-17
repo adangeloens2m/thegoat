@@ -42,9 +42,14 @@ public class Scene extends JPanel {
     private Image imageJauneGoat;
     private ImageIcon iconBlancheGoat;
     private Image imageBlancheGoat;
-    private Map<String, Image> imageMap;
     private ImageIcon iconCharlieGoat;
     private Image imageCharlieGoat;
+    private Map<String, Image> imageMap;
+
+    private ImageIcon iconBarrePiege;
+    private Image imageBarrePiege;
+    private ImageIcon iconSelectionPiege;
+    private Image imageSelectionPiege;
 
     private String pseudo;
     private String personnage;
@@ -73,11 +78,11 @@ public class Scene extends JPanel {
         if (personnage == "goat") {
             try {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO goat VALUES (?,?,?,?,?)");
-                requete.setString(1, pseudo);
-                requete.setInt(2, 0);
-                requete.setInt(3, 200);
-                requete.setInt(4, 5);
-                requete.setString(5, skin);
+                requete.setString(1, pseudo);  //Pseudo
+                requete.setInt(2, 0);          //Position x
+                requete.setInt(3, 200);        //Position y
+                requete.setInt(4, 5);          //Nombre de vies
+                requete.setString(5, skin);    //Nom skin
                 requete.executeUpdate();
 
                 requete.close();
@@ -88,8 +93,8 @@ public class Scene extends JPanel {
         } else {
             try {
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement("INSERT INTO loup VALUES (?,?)");
-                requete.setString(1, pseudo);
-                requete.setInt(2, 200);
+                requete.setString(1, pseudo);   //Pseudo
+                requete.setInt(2, 200);         //Nombre de coin
                 requete.executeUpdate();
 
                 requete.close();
@@ -99,6 +104,7 @@ public class Scene extends JPanel {
             }
         }
 
+        //Création des pièges
         this.bombe = new Bombe(0, 0, ""); //Création de l'objet bombe
         this.ravin = new Ravin(0, 0, ""); //Création de l'objet ravin
         this.mine = new Mine(0, 0, ""); //Création de l'objet mine
@@ -106,6 +112,7 @@ public class Scene extends JPanel {
 
         this.tileMap = new TilesTuto(); //Création de la map
 
+        //Initialisation des skins
         this.iconRealGoat = new ImageIcon(getClass().getResource("/images/RealGoat.png"));
         this.imageRealGoat = this.iconRealGoat.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH); //Image goat
         this.iconRougeGoat = new ImageIcon(getClass().getResource("/images/GoatRouge.png"));
@@ -130,11 +137,18 @@ public class Scene extends JPanel {
         imageMap.put("GoatBlanche", imageBlancheGoat);
         imageMap.put("GoatCharlie", imageCharlieGoat);
 
+        //Initialisation de la barre de pièges
+        this.iconBarrePiege = new ImageIcon(getClass().getResource("/images/barrePiege1.1.png"));
+        this.imageBarrePiege = iconBarrePiege.getImage();
+        this.iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
+        this.imageSelectionPiege = iconSelectionPiege.getImage();
+
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier()); //Listener clavier
         this.addMouseListener(new Souris()); //Listener souris
 
+        //TIMER
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start(); //Boucle qui s'éxécute toutes les 3ms pour rafraichir le jeu
     }
@@ -143,33 +157,28 @@ public class Scene extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-//------- lignes à décommenter pour enregistrer le tilemap en .PNG ------
-//        BufferedImage image = new BufferedImage(tileMap.getLongueurChamp()*33, tileMap.getLargeurChamp()*33, BufferedImage.TYPE_INT_ARGB);
-//        g = image.createGraphics();
 
+//------- lignes à décommenter pour enregistrer le tilemap en .PNG ------
+//        BufferedImage image = new BufferedImage(tileMap.getLongueurChamp() * 33, tileMap.getLargeurChamp() * 33, BufferedImage.TYPE_INT_ARGB);
+//        g = image.createGraphics();
         tileMap.DrawLayer(g);
-           
-//         try {
+
+//        try {
 //            ImageIO.write(image, "png", new File("image.png"));
 //        } catch (IOException ex) {
 //            Logger.getLogger(Scene.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
+        //Récupération des données de la BDD
         ArrayList dataGoat = dataGoat();
         ArrayList dataPiege = dataPiege();
         ArrayList dataLoup = dataLoup();
 
         //Affichage de la barre des pièges
         if (personnage == "loup") {
-            ImageIcon iconBarrePiege = new ImageIcon(getClass().getResource("/images/barrePiege1.1.png"));
-            Image imageBarrePiege = iconBarrePiege.getImage();
             g.drawImage(imageBarrePiege, 400, 440, null);
-
-            ImageIcon iconSelectionPiege = new ImageIcon(getClass().getResource("/images/SelectionPiege.png"));
-            Image imageSelectionPiege = iconSelectionPiege.getImage();
             g.drawImage(imageSelectionPiege, (401 + 46 * this.indice), 440, this);
 
+            //Affichage du crédit des pièges
             for (int i = 0; i < dataLoup.size(); i += 2) {
                 if (dataLoup.get(i).equals(pseudo)) {
                     int coin = (int) dataLoup.get(i + 1);
@@ -350,9 +359,11 @@ public class Scene extends JPanel {
         return sqlResult;
     }
 
+    //Méthode de défilement de la map
     public void defilement() {
 
         try {
+            //SI hôte de défilement : incrémentation du xDynamique + suivi des pièges + incrémentation des coin loup
             if (defilHost) {
                 freeCoin();
                 PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
@@ -365,6 +376,7 @@ public class Scene extends JPanel {
                 requete2.close();
             }
 
+            //Affichage du défilement pour tous
             PreparedStatement requete1 = ConnexionBDD.getInstance().prepareStatement("SELECT * FROM suivi");
             ResultSet resultat = requete1.executeQuery();
             while (resultat.next()) {
@@ -386,6 +398,7 @@ public class Scene extends JPanel {
             requete.setInt(2, tileMap.getWidth() - xDynamique);
             ResultSet resultat = requete.executeQuery();
             while (resultat.next()) {
+                //Utiliser un pop-up
                 System.out.println("You Won The Game!!");
             }
 
@@ -396,6 +409,7 @@ public class Scene extends JPanel {
         }
     }
 
+    //Méthode d'incrémentation des coin loup
     public void freeCoin() {
 
         try {

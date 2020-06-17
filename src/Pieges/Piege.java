@@ -24,7 +24,7 @@ public class Piege {
     private int hauteur;
     private int cost;
 
-    String proprietaire;
+    private String proprietaire;
 
     private boolean actif;
 
@@ -89,12 +89,13 @@ public class Piege {
     public int getCost() {
         return cost;
     }
-       
-    public void payDay(String proprietaire){
+
+    //Méthode d'attribution de coin lors de la mort d'une goat
+    public void payDay(String proprietaire) {
         try {
             PreparedStatement requete = ConnexionBDD.getInstance().prepareStatement(
                     "UPDATE loup SET coin = coin + 50 WHERE pseudo = '" + proprietaire + "'");
-            
+
             requete.executeUpdate();
             requete.close();
 
